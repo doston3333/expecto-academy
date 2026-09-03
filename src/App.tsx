@@ -1,0 +1,86 @@
+import { ActFilm } from "@/components/film/ActFilm";
+import { ChapterRail } from "@/components/film/ChapterRail";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { SkipLink } from "@/components/layout/SkipLink";
+import { ChapterBreak } from "@/components/sections/ChapterBreak";
+import { Closer } from "@/components/sections/Closer";
+import { Faq } from "@/components/sections/FaqSection";
+import { Hero } from "@/components/sections/Hero";
+import { Houses } from "@/components/sections/Houses";
+import { HouseCup } from "@/components/sections/HouseCup";
+import { HouseMarquee } from "@/components/sections/HouseMarquee";
+import { Letters } from "@/components/sections/Letters";
+import { Method } from "@/components/sections/Method";
+import { Oath } from "@/components/sections/Oath";
+import { Tuition } from "@/components/sections/Tuition";
+import { Universities } from "@/components/sections/Universities";
+import { useAllowSmoothScroll, useWideDesktop } from "@/hooks/useMedia";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { WandSparks } from "@/components/ui/WandSparks";
+import { getHouse } from "@/lib/houses";
+import { ReactLenis } from "lenis/react";
+import type { ReactNode } from "react";
+
+function SmoothScroll({ children }: { children: ReactNode }) {
+  const reduced = usePrefersReducedMotion();
+  const allowSmooth = useAllowSmoothScroll();
+  // Native touch scroll on phones. ?qa=1 also disables smoothing for captures.
+  if (reduced || !allowSmooth || new URLSearchParams(window.location.search).has("qa")) {
+    return children;
+  }
+  return (
+    <ReactLenis root options={{ lerp: 0.06, duration: 1.3, smoothWheel: true }}>
+      {children}
+    </ReactLenis>
+  );
+}
+
+export default function App() {
+  const reduced = usePrefersReducedMotion();
+  const showRail = useWideDesktop();
+  return (
+    <SmoothScroll>
+      <SkipLink />
+      <ScrollProgress />
+      <WandSparks />
+      <Navbar />
+      {reduced || !showRail ? null : <ChapterRail />}
+      <main id="main">
+        <Hero />
+        <ActFilm />
+        <ChapterBreak
+          numeral="Chapter II · the method"
+          line="The exam is the easy part."
+          quad
+          tint={getHouse("veridian").hex}
+        />
+        <Method />
+        <ChapterBreak
+          numeral="Chapter III · the sorting"
+          line="One school. Four doors."
+          sub="Your diagnostic opens one of them. What happens next is the house's business."
+          quad
+          tint={getHouse("aurelion").hex}
+        />
+        <Houses />
+        <HouseMarquee />
+        <HouseCup />
+        <Oath />
+        <Universities />
+        <Letters />
+        <ChapterBreak
+          numeral="Chapter VI · tuition"
+          line="Tuition is a number. So is the scholarship."
+          quad
+          tint={getHouse("noctis").hex}
+        />
+        <Tuition />
+        <Faq />
+        <Closer />
+      </main>
+      <Footer />
+    </SmoothScroll>
+  );
+}
