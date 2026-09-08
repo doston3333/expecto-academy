@@ -189,16 +189,6 @@ footer a:visited {
   }
 }
 
-/* Infinite house-scarf procession */
-@keyframes marquee-x {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
 /* Wand sparks — born at the cursor, drift up, die fast */
 @keyframes spark-fade {
   0% {
@@ -225,10 +215,6 @@ footer a:visited {
   box-shadow: var(--shadow-window);
 }
 
-.house-marquee {
-  animation: marquee-x 46s linear infinite;
-}
-
 /* Paper grain — one inline turbulence tile over the whole page, no image assets */
 body::after {
   content: "";
@@ -253,10 +239,6 @@ body::after {
     mask-image: none;
     height: calc(4.5rem + env(safe-area-inset-top));
     background: var(--color-cream);
-  }
-
-  .house-marquee {
-    animation-duration: 72s;
   }
 }
 

@@ -107,7 +107,7 @@ export function Tuition() {
             </h2>
           </div>
           <p className="max-w-xs text-[0.85rem] leading-relaxed text-muted">
-            Every plan starts with the diagnostic and the sorting. The pact lives on Scholar and
+            Every plan starts with the diagnostic. The pact lives on Scholar and
             above.
           </p>
         </div>
@@ -117,8 +117,8 @@ export function Tuition() {
           ))}
         </div>
         <p className="mt-8 text-[0.78rem] text-muted">
-          Score pact: miss the agreed gain after doing the work, and four extra weeks of house
-          classes are on us. Withdraw within 7 days of sorting for a refund minus the diagnostic
+          Score pact: miss the agreed gain after doing the work, and four extra weeks of
+          classes are on us. Withdraw within 7 days of enrollment for a refund minus the diagnostic
           fee.
         </p>
       </div>

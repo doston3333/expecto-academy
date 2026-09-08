@@ -170,7 +170,7 @@ function OathMotion() {
         <div className="mx-auto grid w-full max-w-[1240px] items-center gap-8 px-5 pt-24 pb-8 md:grid-cols-12 md:gap-10 md:px-8 md:py-16">
           <div className="md:col-span-4">
             <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">
-              Chapter IV · The oath
+              Chapter III · The oath
             </p>
             <span className="mt-4 block overflow-hidden">
               <motion.h2
@@ -205,7 +205,7 @@ function OathStatic() {
       <div className="mx-auto grid max-w-[1240px] items-center gap-10 px-5 md:grid-cols-12 md:px-8">
         <div className="md:col-span-4">
           <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">
-            Chapter IV · The oath
+            Chapter III · The oath
           </p>
           <h2 className="mt-4 text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-4xl">
             We sign it in wax, not in asterisks.

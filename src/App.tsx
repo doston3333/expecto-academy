@@ -7,9 +7,6 @@ import { ChapterBreak } from "@/components/sections/ChapterBreak";
 import { Closer } from "@/components/sections/Closer";
 import { Faq } from "@/components/sections/FaqSection";
 import { Hero } from "@/components/sections/Hero";
-import { Houses } from "@/components/sections/Houses";
-import { HouseCup } from "@/components/sections/HouseCup";
-import { HouseMarquee } from "@/components/sections/HouseMarquee";
 import { Letters } from "@/components/sections/Letters";
 import { Method } from "@/components/sections/Method";
 import { Oath } from "@/components/sections/Oath";
@@ -19,7 +16,7 @@ import { useAllowSmoothScroll, useWideDesktop } from "@/hooks/useMedia";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { WandSparks } from "@/components/ui/WandSparks";
-import { getHouse } from "@/lib/houses";
+import { FOREST } from "@/lib/palette";
 import { ReactLenis } from "lenis/react";
 import type { ReactNode } from "react";
 
@@ -53,28 +50,15 @@ export default function App() {
         <ChapterBreak
           numeral="Chapter II · the method"
           line="The exam is the easy part."
-          quad
-          tint={getHouse("veridian").hex}
+          tint={FOREST}
         />
         <Method />
-        <ChapterBreak
-          numeral="Chapter III · the sorting"
-          line="One school. Four doors."
-          sub="Your diagnostic opens one of them. What happens next is the house's business."
-          quad
-          tint={getHouse("aurelion").hex}
-        />
-        <Houses />
-        <HouseMarquee />
-        <HouseCup />
         <Oath />
         <Universities />
         <Letters />
         <ChapterBreak
-          numeral="Chapter VI · tuition"
+          numeral="Chapter V · tuition"
           line="Tuition is a number. So is the scholarship."
-          quad
-          tint={getHouse("noctis").hex}
         />
         <Tuition />
         <Faq />

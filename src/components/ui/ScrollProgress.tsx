@@ -1,6 +1,6 @@
 import { motion, useScroll, useSpring } from "motion/react";
 
-/** A quad-color reading progress hairline across the top of the page. */
+/** A gold-to-forest reading progress hairline across the top of the page. */
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.6 });
@@ -11,8 +11,7 @@ export function ScrollProgress() {
       className="fixed inset-x-0 top-0 z-[70] h-[3px] origin-left"
       style={{
         scaleX,
-        background:
-          "linear-gradient(90deg, var(--color-aurelion), var(--color-veridian), var(--color-noctis), var(--color-amberfell))",
+        background: "linear-gradient(90deg, #8a6a28, #e8d08a, var(--color-forest))",
       }}
     />
   );

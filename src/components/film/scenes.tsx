@@ -287,7 +287,7 @@ export function SceneDiagnostic({ t }: SceneProps) {
           className="hidden items-center gap-1.5 rounded-full px-2 py-0.5 text-[0.58rem] font-medium sm:inline-flex"
           style={{ backgroundColor: `${veridian.hex}1f`, color: veridian.ink }}
         >
-          Prediction · {veridian.name} — Math wall
+          Prediction · Math wall
         </span>
         <span className="shrink-0 font-medium text-forest-deep">Back · Next</span>
       </SceneStatusBar>
@@ -365,7 +365,7 @@ export function SceneTrap({ t }: SceneProps) {
         })}
         <div className="rounded-xl border border-forest/12 bg-cream-2/50 px-3 py-2 sm:px-3.5 sm:py-2.5">
           <p className="text-[0.6rem] font-medium tracking-[0.1em] text-moss uppercase sm:text-[0.62rem]">
-            House note · Noctis
+            Coach note
           </p>
           <SlideUp t={t} at={0.7} className="mt-1">
             <p className="text-[0.62rem] leading-snug text-forest-deep/85 sm:text-[0.7rem]">
@@ -626,7 +626,7 @@ export function SceneReport({ t }: SceneProps) {
   );
 }
 
-/* Scene 6 — the sorting message ---------------------------------------- */
+/* Scene 6 — the enrollment message ------------------------------------- */
 
 export function SceneTelegram({ t }: SceneProps) {
   const aurelion = getHouse("aurelion");
@@ -637,17 +637,14 @@ export function SceneTelegram({ t }: SceneProps) {
           className="grid size-6 place-items-center rounded-full text-[0.6rem] font-semibold text-cream sm:size-7"
           style={{ backgroundColor: aurelion.hex }}
         >
-          A
+          E
         </span>
         <div className="min-w-0 flex-1">
           <p className="truncate text-[0.68rem] font-semibold text-forest-deep sm:text-[0.74rem]">
-            House hall ·{" "}
-            <span className="font-display italic" style={{ color: aurelion.ink }}>
-              {aurelion.name}
-            </span>
+            Expecto Academy
           </p>
           <p className="text-[0.56rem] text-muted sm:text-[0.6rem]">
-            14 members online · Tashkent time
+            Mentors online · Tashkent time
           </p>
         </div>
       </div>
@@ -658,7 +655,7 @@ export function SceneTelegram({ t }: SceneProps) {
       </div>
       <div className="flex items-center gap-2 border-t border-forest/10 px-3 py-2 sm:px-5 sm:py-2.5">
         <span className="flex-1 rounded-full border border-forest/12 bg-cream px-3 py-1.5 text-[0.6rem] text-muted sm:text-[0.66rem]">
-          Message your house…
+          Message Expecto…
         </span>
         <span className="grid size-7 place-items-center rounded-full bg-forest text-cream sm:size-8">
           <Send className="size-3 sm:size-3.5" />

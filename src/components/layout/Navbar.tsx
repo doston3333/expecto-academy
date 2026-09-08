@@ -1,7 +1,6 @@
-import { Crest } from "@/components/ui/Crest";
+import { Logo } from "@/components/ui/Logo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { NAV_LINKS, TELEGRAM_URL } from "@/lib/content";
-import { HOUSES } from "@/lib/houses";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
@@ -31,10 +30,10 @@ export function Navbar() {
         <div className="relative z-[60] mx-auto flex h-[4.5rem] w-full max-w-[1240px] items-center justify-between px-5 md:px-8">
           <a
             href="#top"
-            aria-label="Expecto home"
+            aria-label="Expecto Academy home"
             className="group relative z-10 flex min-h-11 items-center gap-2.5"
           >
-            <Crest className="size-9 transition-transform duration-500 ease-out group-hover:-rotate-6 group-hover:scale-105" />
+            <Logo className="h-10 transition-transform duration-500 ease-out group-hover:scale-105 sm:h-11" />
             <span className="text-[0.95rem] font-medium tracking-[-0.02em] text-forest-deep">
               Expecto
             </span>
@@ -107,31 +106,6 @@ export function Navbar() {
                   >
                     Get Sorted
                   </MagneticButton>
-                  <div className="mt-5 border-t border-forest/10 pt-4">
-                    <p className="text-[0.66rem] font-medium tracking-[0.14em] text-moss uppercase">
-                      Houses
-                    </p>
-                    <div className="mt-1 grid grid-cols-2 gap-x-3">
-                      {HOUSES.map((house) => (
-                        <a
-                          key={house.id}
-                          href="#houses"
-                          className="flex min-h-11 items-center gap-2.5 text-sm"
-                          onClick={() => setOpen(false)}
-                        >
-                          <span
-                            className="size-2.5 shrink-0 rounded-full"
-                            style={{ backgroundColor: house.hex }}
-                            aria-hidden="true"
-                          />
-                          <span className="font-display italic" style={{ color: house.ink }}>
-                            {house.name}
-                          </span>
-                          <span className="text-[0.72rem] text-muted">{house.duration}</span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </motion.nav>
             </motion.div>

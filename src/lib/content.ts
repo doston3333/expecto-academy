@@ -5,7 +5,6 @@ export const NEXT_COHORT = new Date("2026-09-08T09:00:00+05:00");
 export const NAV_LINKS = [
   { href: "#film", label: "The film" },
   { href: "#method", label: "Method" },
-  { href: "#houses", label: "Houses" },
   { href: "#stories", label: "Letters home" },
   { href: "#pricing", label: "Tuition" },
   { href: "#faq", label: "FAQ" },
@@ -18,7 +17,7 @@ export const HERO_PLATES = [
   { houseId: "amberfell" as const, score: "1360", school: "INHA", award: "Merit band" },
 ] as const;
 
-export const PROOF = "1,200+ students sorted · +210 average gain · 340+ scholarships";
+export const PROOF = "1,200+ students taught · +210 average gain · 340+ scholarships";
 
 /* ------------------------------------------------------------------ */
 /* The film — beats keyed to the sticky Bluebook window                */
@@ -51,13 +50,13 @@ export const FILM_BEATS: readonly FilmBeat[] = [
     index: "03",
     kicker: "Spellwork",
     title: "Tonight's homework is built from your misses",
-    body: "The error log turns into the assignment. Command of evidence, transitions, boundaries — drilled in house colours until they stop appearing.",
+    body: "The error log turns into the assignment. Command of evidence, transitions, boundaries — drilled until they stop appearing.",
     breadcrumb: "Error log · Week 3",
   },
   {
     index: "04",
     kicker: "The gauntlet",
-    title: "Three full exams. Test-day rules.",
+    title: "Three full exams. Test-day rules",
     body: "Timed, adaptive, no pause button. By the third morning the real exam is the quietest room you have sat in all year.",
     breadcrumb: "Gauntlet week · Mocks 09–11",
   },
@@ -70,10 +69,10 @@ export const FILM_BEATS: readonly FilmBeat[] = [
   },
   {
     index: "06",
-    kicker: "Sorted",
-    title: "Your house writes to you",
-    body: "Aurelion. Fast-Track. First class 8 September, 19:00 Tashkent time. Bring your diagnostic — we start where you are weakest.",
-    breadcrumb: "Telegram · House hall",
+    kicker: "Enrolled",
+    title: "Your place is waiting",
+    body: "First class 8 September, 19:00 Tashkent time. Bring your diagnostic — we start where you are weakest.",
+    breadcrumb: "Telegram · Expecto",
   },
 ];
 
@@ -113,8 +112,8 @@ export const SCHOLARSHIP_ROWS = [
 
 export const TELEGRAM_MESSAGES = [
   {
-    from: "Expecto Sorting Office",
-    text: "Sorted: Aurelion · Fast-Track (8 weeks). First class 8 Sep, 19:00 Tashkent.",
+    from: "Expecto Academy",
+    text: "You're in. First class 8 Sep, 19:00 Tashkent.",
     time: "18:42",
     mine: false,
   },
@@ -125,8 +124,8 @@ export const TELEGRAM_MESSAGES = [
     mine: true,
   },
   {
-    from: "Expecto Sorting Office",
-    text: "It is the house average. Bring the diagnostic. We start where you are weakest.",
+    from: "Expecto Academy",
+    text: "It is the cohort average. Bring the diagnostic. We start where you are weakest.",
     time: "18:45",
     mine: false,
   },
@@ -147,7 +146,7 @@ export const OATH_TERMS = [
   },
   {
     n: "III",
-    term: "Miss the agreed gain after doing the work, and four further weeks of house classes are on us.",
+    term: "Miss the agreed gain after doing the work, and four further weeks of classes are on us.",
   },
 ] as const;
 
@@ -179,11 +178,10 @@ export const CHAPTERS = [
   { numeral: "0", label: "The door", href: "#top" },
   { numeral: "I", label: "The film", href: "#film" },
   { numeral: "II", label: "Method", href: "#method" },
-  { numeral: "III", label: "Houses", href: "#houses" },
-  { numeral: "IV", label: "The oath", href: "#oath" },
-  { numeral: "V", label: "Letters", href: "#stories" },
-  { numeral: "VI", label: "Tuition", href: "#pricing" },
-  { numeral: "VII", label: "Enroll", href: "#enroll" },
+  { numeral: "III", label: "The oath", href: "#oath" },
+  { numeral: "IV", label: "Letters", href: "#stories" },
+  { numeral: "V", label: "Tuition", href: "#pricing" },
+  { numeral: "VI", label: "Enroll", href: "#enroll" },
 ] as const;
 
 /* ------------------------------------------------------------------ */
@@ -193,8 +191,8 @@ export const CHAPTERS = [
 export const METHOD_PILLARS = [
   {
     n: "01",
-    title: "Live house classes",
-    body: "Small evening cohorts in Tashkent time. You sit with your house, not a 200-person webinar.",
+    title: "Live evening classes",
+    body: "Small evening cohorts in Tashkent time. You sit with a named group, not a 200-person webinar.",
   },
   {
     n: "02",
@@ -228,7 +226,7 @@ export const TESTIMONIALS = [
     school: "AKFA University",
     award: "Full tuition",
     quote:
-      "I had one summer. Aurelion treated that like a vow. The mocks felt cruel until test day felt quiet.",
+      "I had one summer. Expecto treated that like a vow. The mocks felt cruel until test day felt quiet.",
   },
   {
     name: "Timur K.",
@@ -238,7 +236,7 @@ export const TESTIMONIALS = [
     after: 1520,
     school: "New Uzbekistan University",
     award: "100% scholarship",
-    quote: "Math was the only thing between me and a funded seat. Veridian did not cheer. It drilled.",
+    quote: "Math was the only thing between me and a funded seat. They did not cheer. They drilled.",
   },
   {
     name: "Malika A.",
@@ -249,7 +247,7 @@ export const TESTIMONIALS = [
     school: "Webster University Tashkent",
     award: "Presidential grant",
     quote:
-      "English is my second language. Noctis taught me to read the exam, not translate every sentence.",
+      "English is my second language. They taught me to read the exam, not translate every sentence.",
   },
   {
     name: "Javlon S.",
@@ -260,7 +258,7 @@ export const TESTIMONIALS = [
     school: "INHA University in Tashkent",
     award: "Merit scholarship",
     quote:
-      "I was not ready for an eight-week sprint. Amberfell gave me a longer hallway and made me walk it every night.",
+      "I was not ready for an eight-week sprint. They gave me a longer runway and made me walk it every night.",
   },
 ] as const;
 
@@ -277,11 +275,11 @@ export const PLANS = [
     blurb: "Self-paced mocks and homework if you already know how to study.",
     featured: false,
     includes: [
-      "House placement from diagnostic",
+      "Diagnostic placement from your first mock",
       "6 full Digital SAT mocks",
       "Adaptive homework bank",
       "Score reports & error logs",
-      "Community hall (Telegram)",
+      "Community (Telegram)",
     ],
   },
   {
@@ -289,7 +287,7 @@ export const PLANS = [
     name: "Scholar",
     priceUzs: "5,900,000",
     priceUsd: 465,
-    blurb: "The standard oath: live house classes, a mentor, and the score pact.",
+    blurb: "The standard oath: live evening classes, a mentor, and the score pact.",
     featured: true,
     includes: [
       "Everything in Apprentice",
@@ -311,52 +309,46 @@ export const PLANS = [
       "Twice-weekly 1-on-1 sessions",
       "Scholarship shortlist for Uzbek universities",
       "Essay and counselor packet review",
-      "Priority sorting for the next cohort",
+      "Priority seat for the next cohort",
     ],
   },
 ] as const;
 
 /* ------------------------------------------------------------------ */
-/* The house cup — standings this term                                 */
+/* FAQ                                                                 */
 /* ------------------------------------------------------------------ */
 
-export const HOUSE_POINTS = [
-  { houseId: "veridian" as const, points: 517, note: "Gauntlet discipline" },
-  { houseId: "amberfell" as const, points: 495, note: "Spellwork streaks" },
-  { houseId: "aurelion" as const, points: 482, note: "Mock gains" },
-  { houseId: "noctis" as const, points: 466, note: "Trap clearance" },
-] as const;
-
-export const FAQS = [  {
+export const FAQS = [
+  {
     q: "Do universities in Uzbekistan still want the SAT?",
-    a: "Yes. AKFA, Webster Tashkent, New Uzbekistan University, INHA, Turin Polytechnic, and several others use SAT scores for admission and, more importantly, for scholarship bands. A 1400+ is often the difference between paying and not paying.",
+    a: "Yes. AKFA, Webster Tashkent, New Uzbekistan University, INHA, Turin Polytechnic, and several others use SAT scores for admission and scholarships. A 1400+ is often the difference between paying and not paying.",
   },
   {
     q: "Is this the Digital SAT?",
-    a: "Only the Digital SAT. Classes, homework, and mocks follow the adaptive two-module format you will sit in Bluebook. We do not train you for a paper exam that no longer exists.",
+    a: "Only the Digital SAT. Classes, homework, and mocks follow the adaptive two-module format you will sit in Bluebook. No paper nostalgia.",
   },
   {
     q: "How fast can I raise my score?",
-    a: "Aurelion is eight weeks for students who already have a foundation. Veridian and Noctis run ten. Amberfell is sixteen for a full rebuild. Average gain across houses is +210. Your diagnostic decides the house, not a sales script.",
+    a: "Fast-track is eight weeks for students who already have a foundation. Math and verbal intensives run ten. Average gain is +210. Your diagnostic decides the plan, not a sales script.",
   },
   {
     q: "What language are classes in?",
-    a: "English. The SAT is in English. Mentors can clarify in Uzbek or Russian when a concept snags, but the exam voice stays English on purpose.",
+    a: "English. The SAT is in English. Mentors can clarify in Uzbek or Russian when a concept snags, but the exam voice stays English.",
   },
   {
     q: "What is the score pact?",
-    a: "On Scholar and Headmaster's Circle we agree a target gain from your diagnostic. If you complete the homework and mocks and miss that gain, we add four weeks of house classes at no extra tuition. It is not a cash refund of a score — it is more work, on us.",
+    a: "On Scholar and Headmaster's Circle we agree a target gain from your diagnostic. If you complete the homework and mocks and miss that gain, we add four weeks of classes at no extra tuition.",
   },
   {
     q: "I am not in Tashkent. Can I still join?",
-    a: "Yes. Expecto is built as an online school. Live classes run on Tashkent evenings so the rest of Uzbekistan can sit them after school. You need a laptop, a quiet room, and the will to keep the oath.",
+    a: "Yes. Expecto runs online. Live classes run on Tashkent evenings so the rest of the country can join after school. You need a laptop, a quiet room, and the discipline.",
   },
   {
     q: "How do scholarships actually work?",
-    a: "Each university publishes SAT thresholds for partial and full awards. After your gauntlet we map your score to those bands and help you file on time. We do not control admissions. We make the number they cannot ignore.",
+    a: "Each university publishes SAT thresholds for partial and full awards. After your gauntlet we map your score to those bands and help you file on time. We make the number they cannot ignore.",
   },
   {
     q: "What is the refund policy?",
-    a: "You may withdraw within 7 days of sorting, before the second live class, for a full refund minus the diagnostic fee. After that, tuition converts to house credit for the following cohort.",
+    a: "Withdraw within 7 days of enrollment, before the second live class, for a full refund minus the diagnostic fee. After that, tuition converts to credit for the following cohort.",
   },
 ] as const;

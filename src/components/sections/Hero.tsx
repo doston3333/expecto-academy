@@ -1,5 +1,5 @@
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { Crest } from "@/components/ui/Crest";
+import { Logo } from "@/components/ui/Logo";
 import { Candle } from "@/components/ui/Candle";
 import { Embers } from "@/components/ui/Embers";
 import { OwlPost } from "@/components/ui/OwlPost";
@@ -82,10 +82,10 @@ function Plate({
         {index === HERO_PLATES.length - 1 ? (
           <span
             aria-hidden="true"
-            className="absolute -top-2.5 right-4 grid size-6 rotate-[-8deg] place-items-center rounded-full text-[0.42rem] font-bold tracking-[0.08em] text-cream sm:size-7"
-            style={{ backgroundColor: house.hex, boxShadow: "0 1px 3px rgb(12 36 28 / 0.3)" }}
+            className="absolute -top-2.5 right-4 grid size-6 rotate-[-8deg] place-items-center rounded-full text-[0.7rem] text-[#e8d08a] sm:size-7 sm:text-[0.8rem]"
+            style={{ backgroundColor: "#1a2430", boxShadow: "0 1px 3px rgb(12 36 28 / 0.3)" }}
           >
-            EA
+            ✦
           </span>
         ) : null}
         <div className="flex items-center justify-between">
@@ -102,12 +102,6 @@ function Plate({
         </p>
         <p className="mt-1 text-[0.66rem] font-medium text-forest-deep sm:text-[0.7rem]">
           {plate.school} · {plate.award}
-        </p>
-        <p
-          className="font-display text-[0.72rem] italic sm:text-[0.8rem]"
-          style={{ color: house.ink }}
-        >
-          {house.name}
         </p>
         <div className="mt-2.5 space-y-1" aria-hidden="true">
           <div className="h-[3px] w-full rounded-full bg-forest/8" />
@@ -213,9 +207,6 @@ function CompactPlate({
         <p className="mt-1 text-[0.62rem] font-medium text-forest-deep">
           {plate.school} · {plate.award}
         </p>
-        <p className="font-display text-[0.72rem] italic" style={{ color: house.ink }}>
-          {house.name}
-        </p>
       </div>
     </motion.div>
   );
@@ -282,7 +273,7 @@ export function Hero() {
       <div className="mx-auto grid w-full max-w-[1240px] flex-1 items-center gap-10 px-5 pt-24 pb-10 sm:gap-12 md:grid-cols-12 md:pt-36 md:pb-16">
         <div className="relative z-10 md:col-span-7">
           <MaskedLine delay={0.0}>
-            <Crest className="size-12 sm:size-16" />
+            <Logo className="h-16 sm:h-20" />
           </MaskedLine>
           <MaskedLine delay={0.02}>
             <span className="font-display text-sm italic tracking-[0.1em] text-moss">
@@ -307,7 +298,7 @@ export function Hero() {
           <MaskedLine delay={0.36} className="mt-6 max-w-lg">
             <span className="text-[1.02rem] leading-[1.55] text-muted sm:text-lg">
               An English-language Digital SAT school for students who need scholarship-ready
-              scores. Four houses, one method, trained on the same interface you will sit.
+              scores. One method, trained on the exact interface you will sit.
             </span>
           </MaskedLine>
           <MaskedLine delay={0.46} className="mt-8">
@@ -322,15 +313,10 @@ export function Hero() {
           </MaskedLine>
           <MaskedLine delay={0.56} className="mt-8">
             <span className="flex items-center gap-3">
-              <span className="flex h-1 w-24 overflow-hidden rounded-full" aria-hidden="true">
-                {HOUSES.map((house) => (
-                  <span
-                    key={house.id}
-                    className="flex-1"
-                    style={{ backgroundColor: house.hex }}
-                  />
-                ))}
-              </span>
+              <span
+                className="h-1 w-24 overflow-hidden rounded-full bg-[linear-gradient(90deg,#8a6a28,#e8d08a,#c9a056)]"
+                aria-hidden="true"
+              />
               <span className="text-xs font-medium tracking-[0.08em] text-moss uppercase">
                 {PROOF}
               </span>

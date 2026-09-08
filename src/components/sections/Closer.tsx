@@ -1,5 +1,5 @@
 import { Candle } from "@/components/ui/Candle";
-import { Crest } from "@/components/ui/Crest";
+import { Logo } from "@/components/ui/Logo";
 import { Embers } from "@/components/ui/Embers";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Stars } from "@/components/ui/Stars";
@@ -170,12 +170,11 @@ function CloserInner({
 
   return (
     <motion.div style={{ scale, y }} className="relative flex flex-col items-center text-center">
-      <Crest className="mb-6 size-16 sm:size-20" ink={CREAM} />
-      <div className="mb-6 flex h-1 w-28 overflow-hidden rounded-full" aria-hidden="true">
-        {HOUSES.map((house) => (
-          <span key={house.id} className="flex-1" style={{ backgroundColor: house.hex }} />
-        ))}
-      </div>
+      <Logo className="mb-6 h-16 sm:h-20" />
+      <div
+        className="mb-6 h-1 w-28 overflow-hidden rounded-full bg-[linear-gradient(90deg,#8a6a28,#e8d08a,#c9a056)]"
+        aria-hidden="true"
+      />
       <p className="text-[0.7rem] font-medium tracking-[0.16em] text-sage uppercase">
         Cohort of 8 September 2026
       </p>

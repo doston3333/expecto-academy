@@ -44,14 +44,10 @@ function ScoreTrack({ story, progress, index }: { story: Story; progress: Motion
 }
 
 function StoryMeta({ story }: { story: Story }) {
-  const house = getHouse(story.houseId);
   return (
     <p className="mt-6 text-[0.78rem] text-muted">
       <span className="font-medium text-forest-deep">{story.name}</span> · {story.city} ·{" "}
-      <span className="font-display italic" style={{ color: house.ink }}>
-        {house.name}
-      </span>{" "}
-      · {story.school} — <span className="font-medium text-forest-deep">{story.award}</span>
+      {story.school} — <span className="font-medium text-forest-deep">{story.award}</span>
     </p>
   );
 }
@@ -134,10 +130,7 @@ function ArchivePlate({
           {story.school} · {story.award}
         </p>
         <p className="text-[0.6rem] text-muted sm:text-[0.64rem]">
-          {story.name} · {story.city} ·{" "}
-          <span className="font-display italic" style={{ color: house.ink }}>
-            {house.name}
-          </span>
+          {story.name} · {story.city}
         </p>
       </div>
     </motion.article>
@@ -156,7 +149,7 @@ function Archive() {
       <div className="cinema-stage sticky top-0 flex min-h-svh flex-col items-center justify-center overflow-hidden">
         <div className="relative z-10 text-center">
           <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">
-            Chapter V · The archive
+            Chapter IV · The archive
           </p>
           <span className="mt-4 block overflow-hidden">
             <motion.h2
@@ -170,7 +163,7 @@ function Archive() {
             style={{ opacity: subOpacity }}
             className="mx-auto mt-4 max-w-md text-[0.9rem] leading-relaxed text-muted"
           >
-            Four graduates, four houses, four funded seats. The drawer is real — the stories are
+            Four graduates, four funded seats. The drawer is real — the stories are
             below it.
           </motion.p>
         </div>
@@ -195,7 +188,7 @@ function ArchiveStatic() {
     <section aria-label="The archive of results" className="py-16 sm:py-24">
       <div className="mx-auto max-w-[1240px] px-5 text-center md:px-8">
         <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">
-          Chapter V · The archive
+          Chapter IV · The archive
         </p>
         <h2 className="mt-4 text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
           Proof, on paper.
@@ -220,7 +213,7 @@ function ArchiveStatic() {
                     {story.school} · {story.award}
                   </p>
                   <p className="text-[0.62rem] text-muted">
-                    {story.name} · {story.city} · {house.name}
+                    {story.name} · {story.city}
                   </p>
                 </div>
               </article>

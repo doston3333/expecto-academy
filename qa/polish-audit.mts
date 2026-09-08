@@ -60,7 +60,7 @@ async function audit(width: number, height: number, label: string) {
   if (errors.length) console.log("ERRORS", errors);
 
   const total = await page.evaluate(() => document.body.scrollHeight - window.innerHeight);
-  for (const [name, stop] of [["film", 0.12], ["houses", 0.42], ["oath", 0.52], ["archive", 0.62], ["tuition", 0.82], ["closer", 0.97]]) {
+  for (const [name, stop] of [["film", 0.12], ["method", 0.32], ["oath", 0.48], ["archive", 0.62], ["tuition", 0.82], ["closer", 0.97]]) {
     await page.evaluate(`window.scrollTo({top: ${Math.round(total * stop)}, behavior: "instant"})`);
     await page.waitForTimeout(700);
     await page.screenshot({ path: `${OUT}${label}-${name}.png` });
