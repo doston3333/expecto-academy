@@ -174,10 +174,10 @@ function FilmMotion() {
 
   return (
     <section ref={ref} id="film" aria-label="How a score is built" className="relative h-[460svh] md:h-[680svh]">
-      <div className="cinema-stage sticky top-0 flex min-h-svh flex-col overflow-hidden pt-[4.6rem] pb-5 md:block md:pt-0 md:pb-0">
+      <div className="cinema-stage sticky top-0 flex h-svh min-h-svh flex-col justify-center overflow-hidden pt-[4.6rem] pb-5 md:pt-0 md:pb-0">
         <Candle className="absolute top-[18%] left-[1.5%] hidden xl:block" height={88} delay={0.9} />
         <Candle className="absolute right-[1.5%] bottom-[16%] hidden xl:block" height={72} delay={2.7} />
-        <div className="mx-auto grid w-full max-w-[1240px] flex-1 grid-rows-[auto_minmax(0,1fr)] items-start gap-3 px-5 md:grid-cols-12 md:grid-rows-none md:items-center md:gap-12 md:px-8 md:py-10">
+        <div className="mx-auto grid w-full max-w-[1240px] min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] items-start gap-3 px-5 md:flex-none md:grid-cols-12 md:grid-rows-none md:items-center md:gap-12 md:px-8">
           <div className="md:col-span-5">
             <BeatCopy progress={scrollYProgress} />
           </div>
