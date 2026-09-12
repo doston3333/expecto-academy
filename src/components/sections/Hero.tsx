@@ -289,16 +289,17 @@ export function Hero() {
           </MaskedLine>
           <h1 className="mt-7 text-[clamp(2.35rem,11vw,6.4rem)] leading-[1.02] tracking-[-0.04em] sm:mt-7 sm:text-[clamp(2.7rem,8.2vw,6.4rem)] sm:leading-[0.98]">
             <MaskedLine delay={0.14}>
-              <span className="font-medium text-forest-deep">Master the SAT.</span>
+              <span className="font-medium text-forest-deep">Raise your SAT score.</span>
             </MaskedLine>
             <MaskedLine delay={0.24}>
-              <span className="text-moss">Earn the seat.</span>
+              <span className="text-moss">Lower your tuition.</span>
             </MaskedLine>
           </h1>
           <MaskedLine delay={0.36} className="mt-6 max-w-lg">
             <span className="text-[1.02rem] leading-[1.55] text-muted sm:text-lg">
-              An English-language Digital SAT school for students who need scholarship-ready
-              scores. One method, trained on the exact interface you will sit.
+              An English-language Digital SAT school for students across Uzbekistan — small
+              evening classes, real mocks, and a target score we put in writing. The right
+              number doesn't just get you in. It gets you funded.
             </span>
           </MaskedLine>
           <MaskedLine delay={0.46} className="mt-8">
@@ -306,8 +307,8 @@ export function Hero() {
               <MagneticButton href={TELEGRAM_URL} external className="w-full min-w-0 sm:w-auto">
                 Get Sorted
               </MagneticButton>
-              <MagneticButton href="#method" variant="ghost" className="w-full min-w-0 sm:w-auto">
-                Read the method
+              <MagneticButton href="#film" variant="ghost" className="w-full min-w-0 sm:w-auto">
+                See how it works
               </MagneticButton>
             </span>
           </MaskedLine>

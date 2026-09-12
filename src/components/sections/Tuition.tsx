@@ -32,7 +32,7 @@ function PlanCard({
             className="shrink-0 rounded-full px-2.5 py-1 text-[0.6rem] font-semibold tracking-[0.1em] uppercase"
             style={{ backgroundColor: HOUSES[3].hex, color: onHouseType(HOUSES[3]) }}
           >
-            The oath
+            Most popular
           </span>
         ) : null}
       </div>
@@ -103,12 +103,12 @@ export function Tuition() {
           <div>
             <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">Tuition</p>
             <h2 className="mt-4 max-w-xl text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
-              Pay for the score, not the theatre.
+              Choose how much help you want.
             </h2>
           </div>
           <p className="max-w-xs text-[0.85rem] leading-relaxed text-muted">
-            Every plan starts with the diagnostic. The pact lives on Scholar and
-            above.
+            Every plan starts with the diagnostic. The score pact applies from
+            Scholar up.
           </p>
         </div>
         <div className="mt-10 grid gap-6 lg:mt-12 lg:grid-cols-3 lg:gap-5">
@@ -117,9 +117,8 @@ export function Tuition() {
           ))}
         </div>
         <p className="mt-8 text-[0.78rem] text-muted">
-          Score pact: miss the agreed gain after doing the work, and four extra weeks of
-          classes are on us. Withdraw within 7 days of enrollment for a refund minus the diagnostic
-          fee.
+          The score pact: do the work, miss your agreed gain, and four more weeks are on us.
+          Withdraw within 7 days of enrollment for a refund minus the diagnostic fee.
         </p>
       </div>
     </section>

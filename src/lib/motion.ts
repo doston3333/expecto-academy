@@ -80,3 +80,32 @@ export function useRack(progress: MotionValue<number>, index: number, count: num
   const opacity = useTransform(progress, [start, end], [1, isLast ? 1 : 0.4], { clamp: true });
   return { scale, opacity };
 }
+
+let scrollTween = 0;
+
+/**
+ * Eased scroll glide for contexts where Lenis is off (phones, reduced data, QA).
+ * Native `behavior: "smooth"` is skipped — it's quick-and-linear on iOS and
+ * silently no-ops in some environments. Any user scroll input cancels the tween.
+ */
+export function smoothScrollToY(target: number): void {
+  cancelAnimationFrame(scrollTween);
+  const start = window.scrollY;
+  const delta = target - start;
+  if (delta === 0) return;
+  const duration = Math.min(1050, 450 + Math.abs(delta) * 0.025);
+  const t0 = performance.now();
+  const cancel = () => cancelAnimationFrame(scrollTween);
+  const events = ["wheel", "touchstart", "keydown"] as const;
+  events.forEach((name) => window.addEventListener(name, cancel, { once: true, passive: true }));
+  const tick = (now: number) => {
+    const t = Math.min(1, (now - t0) / duration);
+    window.scrollTo(0, start + delta * (1 - Math.pow(1 - t, 4)));
+    if (t < 1) {
+      scrollTween = requestAnimationFrame(tick);
+    } else {
+      events.forEach((name) => window.removeEventListener(name, cancel));
+    }
+  };
+  scrollTween = requestAnimationFrame(tick);
+}

@@ -176,7 +176,7 @@ function CloserInner({
         aria-hidden="true"
       />
       <p className="text-[0.7rem] font-medium tracking-[0.16em] text-sage uppercase">
-        Cohort of 8 September 2026
+        Next cohort · 8 September 2026
       </p>
           <h2 className="mt-6 text-[clamp(2.6rem,14vw,9.5rem)] leading-[1.02] tracking-[-0.045em] sm:text-[clamp(3.4rem,11vw,9.5rem)] sm:leading-[0.94]">
         {progress ? (
@@ -191,7 +191,7 @@ function CloserInner({
       <div className="mt-8 flex items-start gap-5 sm:mt-10 sm:gap-10" aria-live="off">
         {countdown.passed ? (
           <p className="text-lg font-medium text-cream">
-            The cohort has begun — write to us for the next one.
+            This cohort has started — message us about the next one.
           </p>
         ) : (
           <>

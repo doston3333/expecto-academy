@@ -369,8 +369,8 @@ export function SceneTrap({ t }: SceneProps) {
           </p>
           <SlideUp t={t} at={0.7} className="mt-1">
             <p className="text-[0.62rem] leading-snug text-forest-deep/85 sm:text-[0.7rem]">
-              Traps of this shape cost you 4 questions on the diagnostic. Tonight's spellwork:
-              twelve "main purpose" stems, timed at 75 seconds each.
+              This trap shape cost you 4 questions on the diagnostic. Tonight's spellwork:
+              twelve "main purpose" stems, 75 seconds each.
             </p>
           </SlideUp>
         </div>

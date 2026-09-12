@@ -49,7 +49,7 @@ export default function App() {
         <ActFilm />
         <ChapterBreak
           numeral="Chapter II · the method"
-          line="The exam is the easy part."
+          line="The test doesn't change. Your score can."
           tint={FOREST}
         />
         <Method />
@@ -58,7 +58,7 @@ export default function App() {
         <Letters />
         <ChapterBreak
           numeral="Chapter V · tuition"
-          line="Tuition is a number. So is the scholarship."
+          line="Do the math."
         />
         <Tuition />
         <Faq />

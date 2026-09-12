@@ -14,10 +14,10 @@ export function Faq() {
       <div className="mx-auto max-w-[880px] px-5 md:px-8">
         <p className="flex items-center gap-2 text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">
           <OwlPost className="size-4.5" />
-          Common questions
+          FAQ
         </p>
         <h2 className="mt-4 text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
-          Asked before you ask.
+          Questions we hear every week.
         </h2>
         <div className="mt-12 border-t border-forest/12">
           {FAQS.map((faq, i) => {

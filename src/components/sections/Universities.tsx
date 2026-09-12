@@ -82,15 +82,15 @@ export function Universities() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">
-              Where the number spends
+              The scholarship index
             </p>
             <h2 className="mt-4 max-w-xl text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
-              The scholarship index
+              What a score is worth.
             </h2>
           </div>
           <p className="max-w-xs text-[0.85rem] leading-relaxed text-muted">
-            Thresholds each university publishes for SAT-based awards. We map your gauntlet score
-            to the band before you file.
+            Every university here publishes SAT thresholds for merit awards. After your final
+            mocks, we map your score to a band and help you apply before the deadline.
           </p>
         </div>
         <div className="mt-12">
@@ -139,8 +139,8 @@ export function Universities() {
           <div className="border-t border-forest/15" />
         </div>
         <p className="mt-6 text-[0.78rem] text-muted">
-          Bands shift each admissions cycle; we confirm the current table with every cohort before
-          filing. 340+ scholarships won across these institutions.
+          Thresholds shift each admissions cycle — we verify this table with every cohort.
+          340+ scholarships won at these institutions so far.
         </p>
       </div>
     </section>

@@ -14,12 +14,12 @@ export function Footer() {
         <div className="md:col-span-5">
           <p className="text-lg font-medium tracking-[-0.03em]">Expecto Academy</p>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/65">
-            An SAT school in Tashkent for students who need a funded seat. One method. Taught in
-            English.
+            An English-language Digital SAT school for students across Uzbekistan. A higher score
+            means lower tuition.
           </p>
         </div>
         <div className="md:col-span-3">
-          <p className="text-[0.72rem] tracking-[0.14em] text-sage uppercase">Product</p>
+          <p className="text-[0.72rem] tracking-[0.14em] text-sage uppercase">Explore</p>
           <ul className="mt-4 space-y-1">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>

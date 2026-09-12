@@ -140,7 +140,7 @@ function MethodDocument({ reduced }: { reduced: boolean }) {
       <div className="mx-auto max-w-[1240px] px-5 md:px-8">
         <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">The method</p>
         <h2 className="mt-4 max-w-2xl text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
-          Three commitments. Nothing decorative.
+          Three things that move a score.
         </h2>
         <div className="mt-12 sm:mt-16">
           {reduced

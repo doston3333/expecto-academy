@@ -3,9 +3,9 @@ export const EMAIL = "hello@expecto.academy";
 export const NEXT_COHORT = new Date("2026-09-08T09:00:00+05:00");
 
 export const NAV_LINKS = [
-  { href: "#film", label: "The film" },
+  { href: "#film", label: "How it works" },
   { href: "#method", label: "Method" },
-  { href: "#stories", label: "Letters home" },
+  { href: "#stories", label: "Results" },
   { href: "#pricing", label: "Tuition" },
   { href: "#faq", label: "FAQ" },
 ] as const;
@@ -17,7 +17,7 @@ export const HERO_PLATES = [
   { houseId: "amberfell" as const, score: "1360", school: "INHA", award: "Merit band" },
 ] as const;
 
-export const PROOF = "1,200+ students taught · +210 average gain · 340+ scholarships";
+export const PROOF = "1,200+ students taught · +210 average gain · 340+ scholarships won";
 
 /* ------------------------------------------------------------------ */
 /* The film — beats keyed to the sticky Bluebook window                */
@@ -34,43 +34,43 @@ export interface FilmBeat {
 export const FILM_BEATS: readonly FilmBeat[] = [
   {
     index: "01",
-    kicker: "Week 0 · Diagnostic",
-    title: "Sit the exam before you swear the oath",
-    body: "A full adaptive Digital SAT on the interface you will actually sit. Timer running, module two waiting. We score it the same night and name every leak.",
+    kicker: "Week 0 · The diagnostic",
+    title: "First, you sit the real thing",
+    body: "A full adaptive Digital SAT inside the actual Bluebook interface — same timer, same second module. We score it that night and show you exactly where the points went.",
     breadcrumb: "Bluebook · Practice Exam 1",
   },
   {
     index: "02",
     kicker: "The trap",
     title: "Every wrong answer has a design",
-    body: "B was almost right — that is the point of B. Mark schemes show why the tempting choice fails, until the pattern stops costing you points.",
+    body: "Choice B was almost right — that is what it was built to do. We walk the mark scheme until the trap stops costing you points.",
     breadcrumb: "Bluebook · Review · Question 7",
   },
   {
     index: "03",
     kicker: "Spellwork",
-    title: "Tonight's homework is built from your misses",
-    body: "The error log turns into the assignment. Command of evidence, transitions, boundaries — drilled until they stop appearing.",
+    title: "Tonight's homework comes from your own misses",
+    body: "Your error log becomes the assignment — command of evidence, transitions, boundaries, drilled until they stop showing up.",
     breadcrumb: "Error log · Week 3",
   },
   {
     index: "04",
     kicker: "The gauntlet",
-    title: "Three full exams. Test-day rules",
-    body: "Timed, adaptive, no pause button. By the third morning the real exam is the quietest room you have sat in all year.",
+    title: "Three full exams, test-day rules",
+    body: "Timed, adaptive, no pause button. By the third mock, test day is a room you have already sat in.",
     breadcrumb: "Gauntlet week · Mocks 09–11",
   },
   {
     index: "05",
     kicker: "The letter",
     title: "A number that funds a seat",
-    body: "1480. +300 from the diagnostic, 98th percentile. Then the part that matters: which Uzbek universities turn that number into tuition.",
+    body: "1480 — up 300 from the diagnostic, 98th percentile. Then the part that matters: which universities in Uzbekistan turn that number into tuition.",
     breadcrumb: "Score report · 14 Aug 2026",
   },
   {
     index: "06",
     kicker: "Enrolled",
-    title: "Your place is waiting",
+    title: "Your seat is waiting",
     body: "First class 8 September, 19:00 Tashkent time. Bring your diagnostic — we start where you are weakest.",
     breadcrumb: "Telegram · Expecto",
   },
@@ -138,20 +138,20 @@ export const TELEGRAM_MESSAGES = [
 export const OATH_TERMS = [
   {
     n: "I",
-    term: "We agree a target gain from your diagnostic, in writing, before the first class.",
+    term: "Before your first class, we agree a target score gain — in writing.",
   },
   {
     n: "II",
-    term: "You complete the homework and sit every mock. The work is yours; the plan is ours.",
+    term: "You do the homework and sit every mock. The work is yours; the plan is ours.",
   },
   {
     n: "III",
-    term: "Miss the agreed gain after doing the work, and four further weeks of classes are on us.",
+    term: "Do the work and still miss the gain, and your next four weeks are on us.",
   },
 ] as const;
 
 export const OATH_RIDER =
-  "It is not a cash refund of a score. It is more work, on us — until the number lands.";
+  "This is not a refund policy. If you do the work and still miss the target, we keep teaching you — free — until the number lands.";
 
 /* ------------------------------------------------------------------ */
 /* Universities — the scholarship index                                */
@@ -192,24 +192,24 @@ export const METHOD_PILLARS = [
   {
     n: "01",
     title: "Live evening classes",
-    body: "Small evening cohorts in Tashkent time. You sit with a named group, not a 200-person webinar.",
+    body: "Small evening groups on Tashkent time. You know your classmates — this is not a 200-person webinar.",
   },
   {
     n: "02",
     title: "10+ Digital SAT mocks",
-    body: "Full adaptive exams that behave like Bluebook — module difficulty, timer, and score report included.",
+    body: "Full adaptive exams that behave like the real Bluebook test — same module logic, same timer, same score report.",
   },
   {
     n: "03",
     title: "A named mentor",
-    body: "One person reviews your mocks, rewrites your week, and stays until the score lands.",
+    body: "One person reads your mocks, rewrites your week, and stays until the score lands.",
   },
 ] as const;
 
 export const METHOD_SUPPORT = [
-  "Adaptive homework from your own error log",
-  "Bluebook-style interface only — no paper nostalgia",
-  "Score pact: miss the agreed gain, get four extra weeks free",
+  "Homework built from your own error log",
+  "Bluebook format only — we do not teach the old paper test",
+  "Score pact: miss your agreed gain and four extra weeks are on us",
 ] as const;
 
 /* ------------------------------------------------------------------ */
@@ -272,14 +272,14 @@ export const PLANS = [
     name: "Apprentice",
     priceUzs: "2,900,000",
     priceUsd: 230,
-    blurb: "Self-paced mocks and homework if you already know how to study.",
+    blurb: "Self-paced mocks and homework for students who already know how to study.",
     featured: false,
     includes: [
-      "Diagnostic placement from your first mock",
+      "Diagnostic test and placement",
       "6 full Digital SAT mocks",
-      "Adaptive homework bank",
-      "Score reports & error logs",
-      "Community (Telegram)",
+      "Homework that adapts to your misses",
+      "Score reports and error logs",
+      "Student community on Telegram",
     ],
   },
   {
@@ -287,14 +287,14 @@ export const PLANS = [
     name: "Scholar",
     priceUzs: "5,900,000",
     priceUsd: 465,
-    blurb: "The standard oath: live evening classes, a mentor, and the score pact.",
+    blurb: "The full program: live evening classes, a named mentor, and the score pact.",
     featured: true,
     includes: [
       "Everything in Apprentice",
-      "Live evening classes (Tashkent time)",
-      "10+ full mocks + gauntlet week",
-      "Named mentor, weekly review",
-      "+150 score pact — 4 extra weeks if missed",
+      "Live evening classes, Tashkent time",
+      "10+ full mocks, including gauntlet week",
+      "A named mentor and weekly reviews",
+      "+150 score pact — miss it, get 4 weeks free",
     ],
   },
   {
@@ -302,13 +302,13 @@ export const PLANS = [
     name: "Headmaster's Circle",
     priceUzs: "9,900,000",
     priceUsd: 780,
-    blurb: "Private tutoring, application mapping, and a seat at the high table.",
+    blurb: "Private tutoring plus hands-on help turning your score into a funded application.",
     featured: false,
     includes: [
       "Everything in Scholar",
-      "Twice-weekly 1-on-1 sessions",
-      "Scholarship shortlist for Uzbek universities",
-      "Essay and counselor packet review",
+      "One-on-one sessions twice a week",
+      "Scholarship shortlist matched to your score",
+      "Essay and application review",
       "Priority seat for the next cohort",
     ],
   },
@@ -321,11 +321,11 @@ export const PLANS = [
 export const FAQS = [
   {
     q: "Do universities in Uzbekistan still want the SAT?",
-    a: "Yes. AKFA, Webster Tashkent, New Uzbekistan University, INHA, Turin Polytechnic, and several others use SAT scores for admission and scholarships. A 1400+ is often the difference between paying and not paying.",
+    a: "Yes. AKFA, Webster Tashkent, New Uzbekistan University, INHA, Turin Polytechnic, and several others use SAT scores for admission and scholarships. A 1400+ is often the difference between paying full price and paying nothing.",
   },
   {
     q: "Is this the Digital SAT?",
-    a: "Only the Digital SAT. Classes, homework, and mocks follow the adaptive two-module format you will sit in Bluebook. No paper nostalgia.",
+    a: "Only the Digital SAT. Classes, homework, and mocks all follow the adaptive two-module format you will sit in Bluebook. We do not teach the old paper test.",
   },
   {
     q: "How fast can I raise my score?",
@@ -337,7 +337,7 @@ export const FAQS = [
   },
   {
     q: "What is the score pact?",
-    a: "On Scholar and Headmaster's Circle we agree a target gain from your diagnostic. If you complete the homework and mocks and miss that gain, we add four weeks of classes at no extra tuition.",
+    a: "On Scholar and Headmaster's Circle we set a target gain from your diagnostic, in writing. If you do the homework, sit the mocks, and still miss it, you get four more weeks of classes free.",
   },
   {
     q: "I am not in Tashkent. Can I still join?",
@@ -345,7 +345,7 @@ export const FAQS = [
   },
   {
     q: "How do scholarships actually work?",
-    a: "Each university publishes SAT thresholds for partial and full awards. After your gauntlet we map your score to those bands and help you file on time. We make the number they cannot ignore.",
+    a: "Each university publishes its SAT thresholds for partial and full awards. After your final mocks, we map your score to the right band and help you get the paperwork in before the deadline.",
   },
   {
     q: "What is the refund policy?",

@@ -234,8 +234,8 @@ function FilmStatic() {
               A number that funds a seat
             </h2>
             <p className="mt-4 max-w-md leading-relaxed text-muted">
-              1480. +300 from the diagnostic, 98th percentile. Then the part that matters: which
-              Uzbek universities turn that number into tuition.
+              1480 — up 300 from the diagnostic, 98th percentile. Then the part that matters:
+              which universities in Uzbekistan turn that number into tuition.
             </p>
           </div>
           <div className="md:col-span-7">

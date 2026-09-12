@@ -163,8 +163,7 @@ function Archive() {
             style={{ opacity: subOpacity }}
             className="mx-auto mt-4 max-w-md text-[0.9rem] leading-relaxed text-muted"
           >
-            Four graduates, four funded seats. The drawer is real — the stories are
-            below it.
+            Four graduates, four funded seats. Their own words are below.
           </motion.p>
         </div>
         <div className="relative mt-8 h-[260px] w-full max-w-[900px] sm:mt-10 sm:h-[340px]">

@@ -178,7 +178,7 @@ function OathMotion() {
                 transition={{ ease: easeCinematic }}
                 className="text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-4xl"
               >
-                We sign it in wax, not in asterisks.
+                A promise with a signature on it.
               </motion.h2>
             </span>
             {compact ? null : (
@@ -208,7 +208,7 @@ function OathStatic() {
             Chapter III · The oath
           </p>
           <h2 className="mt-4 text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-4xl">
-            We sign it in wax, not in asterisks.
+            A promise with a signature on it.
           </h2>
           <p className="mt-4 max-w-sm text-[0.92rem] leading-relaxed text-muted">{OATH_RIDER}</p>
         </div>

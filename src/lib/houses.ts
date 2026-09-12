@@ -33,9 +33,9 @@ export const HOUSES: House[] = [
     ink: HOUSE_PALETTE.aurelion.ink,
     onHouse: "cream",
     description:
-      "For students with a deadline breathing down their neck. Aurelion compresses a full SAT campaign into eight intense weeks — diagnostic, drills, mocks, and a scholarship-ready score before this year's round.",
+      "For students with a deadline breathing down their neck. Aurelion compresses the whole prep into eight intense weeks — diagnostic, drills, mocks — so the score lands before this year's application round.",
     bestFor: "Current 11th–12th years applying this cycle",
-    outcome: "A 150-point jump on a clock that does not wait",
+    outcome: "+150 points before this year's deadlines",
   },
   {
     id: "veridian",
@@ -50,9 +50,9 @@ export const HOUSES: House[] = [
     ink: HOUSE_PALETTE.veridian.ink,
     onHouse: "cream",
     description:
-      "When Reading is fine and Math is the wall. Veridian rebuilds algebra, advanced math, and Digital SAT calculator strategy until every grid-in feels inevitable.",
+      "For students whose Reading is fine and whose Math is the wall. Veridian rebuilds algebra, advanced math, and Desmos strategy until the hard questions stop feeling like guesses.",
     bestFor: "Students stuck below 700 on Math",
-    outcome: "Clean modules, fewer traps, a Math score that funds tuition",
+    outcome: "A Math score that finally pulls its weight",
   },
   {
     id: "noctis",
@@ -67,9 +67,9 @@ export const HOUSES: House[] = [
     ink: HOUSE_PALETTE.noctis.ink,
     onHouse: "cream",
     description:
-      "Craft Reading & Writing like a scholar. Noctis trains evidence, rhetoric, and grammar against the Digital SAT's adaptive modules — in English, for students who will sit the exam in English.",
+      "For students who lose their points in the passages. Noctis trains evidence, rhetoric, and grammar against the Digital SAT's adaptive modules — in English, the way you will sit it.",
     bestFor: "Strong math students who lose points in passages",
-    outcome: "A verbal score that reads like a native exam-taker",
+    outcome: "A verbal score that finally matches your math",
   },
   {
     id: "amberfell",
@@ -84,9 +84,9 @@ export const HOUSES: House[] = [
     ink: HOUSE_PALETTE.amberfell.ink,
     onHouse: "forest",
     description:
-      "Start lower. Finish certain. Amberfell is the long hall: fundamentals, then strategy, then mock gauntlets, with a mentor who will not let a week go quiet.",
+      "Start lower. Finish certain. Amberfell is the long runway: fundamentals first, then strategy, then the mock gauntlet — with a mentor who will not let a week go quiet.",
     bestFor: "Students beginning below 1100 who want a full rebuild",
-    outcome: "A patient climb to a scholarship band, not a crash course",
+    outcome: "A patient climb into a scholarship band — not a crash course",
   },
 ];
 
