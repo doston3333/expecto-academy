@@ -1,6 +1,7 @@
 import { Logo } from "@/components/ui/Logo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { useDesktopNav } from "@/hooks/useMedia";
+import { useOverDark } from "@/hooks/useOverDark";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { EMAIL, NAV_LINKS, TELEGRAM_URL } from "@/lib/content";
 import { cn } from "@/lib/cn";
@@ -42,9 +43,13 @@ function useActiveLink(): number {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    // Layout shifts (e.g. the animation switch) move every anchor — recompute.
+    const observer = "ResizeObserver" in window ? new ResizeObserver(onScroll) : undefined;
+    observer?.observe(document.body);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      observer?.disconnect();
     };
   }, []);
   return active;
@@ -54,6 +59,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const scrolled = useScrolled();
   const active = useActiveLink();
+  const dark = useOverDark();
   const desktop = useDesktopNav();
   const reduced = usePrefersReducedMotion();
   const lenis = useLenis();
@@ -153,10 +159,19 @@ export function Navbar() {
   return (
     <>
       <div
-        className={cn("site-nav-backdrop", scrolled && "site-nav-backdrop--compact")}
+        className={cn(
+          "site-nav-backdrop",
+          scrolled && "site-nav-backdrop--compact",
+          dark && "site-nav-backdrop--dark",
+        )}
         aria-hidden="true"
       />
-      <header className="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]",
+          dark && "site-nav--dark",
+        )}
+      >
         <div
           className={cn(
             "relative z-[60] mx-auto flex w-full max-w-[1240px] items-center justify-between px-5 transition-[height] duration-500 ease-[cubic-bezier(0.22,0.68,0.35,1)] md:px-8",
@@ -170,7 +185,12 @@ export function Navbar() {
             onClick={(event) => onNavClick(event, "#top")}
           >
             <Logo className="h-10 transition-transform duration-500 ease-out group-hover:scale-105 sm:h-11" />
-            <span className="text-[0.95rem] font-medium tracking-[-0.02em] text-forest-deep">
+            <span
+              className={cn(
+                "text-[0.95rem] font-medium tracking-[-0.02em] transition-colors duration-500",
+                dark ? "text-cream" : "text-forest-deep",
+              )}
+            >
               Expecto
             </span>
           </a>
@@ -186,21 +206,33 @@ export function Navbar() {
                 aria-current={i === active ? "true" : undefined}
                 onClick={(event) => onNavClick(event, link.href)}
                 className={cn(
-                  "relative rounded-full px-4 py-2 text-[0.84rem] font-medium tracking-[0.01em] transition-colors duration-300",
-                  i === active ? "text-forest-deep" : "text-forest/55 hover:text-forest-deep",
+                  "relative inline-flex min-h-11 items-center rounded-full px-4 text-[0.84rem] font-medium tracking-[0.01em] transition-colors duration-300",
+                  dark
+                    ? i === active
+                      ? "text-cream"
+                      : "text-cream/60 hover:text-cream"
+                    : i === active
+                      ? "text-forest-deep"
+                      : "text-forest/55 hover:text-forest-deep",
                 )}
               >
                 {i === active ? (
                   reduced ? (
                     <span
                       aria-hidden="true"
-                      className="absolute inset-0 rounded-full border border-forest/10 bg-forest/[0.07]"
+                      className={cn(
+                        "absolute inset-0 rounded-full border",
+                        dark ? "border-cream/15 bg-cream/10" : "border-forest/10 bg-forest/[0.07]",
+                      )}
                     />
                   ) : (
                     <motion.span
                       aria-hidden="true"
                       layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full border border-forest/10 bg-forest/[0.07]"
+                      className={cn(
+                        "absolute inset-0 rounded-full border",
+                        dark ? "border-cream/15 bg-cream/10" : "border-forest/10 bg-forest/[0.07]",
+                      )}
                       transition={{ type: "spring", stiffness: 400, damping: 32 }}
                     />
                   )
@@ -234,7 +266,8 @@ export function Navbar() {
         <span
           aria-hidden="true"
           className={cn(
-            "pointer-events-none absolute inset-x-0 bottom-0 h-px bg-forest/10 transition-opacity duration-500",
+            "pointer-events-none absolute inset-x-0 bottom-0 h-px transition-[opacity,background-color] duration-500",
+            dark ? "bg-cream/15" : "bg-forest/10",
             scrolled ? "opacity-100" : "opacity-0",
           )}
         />

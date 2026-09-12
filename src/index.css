@@ -5,6 +5,7 @@
 @import "@fontsource/instrument-sans/600.css";
 @import "@fontsource/instrument-sans/400-italic.css";
 @import "tailwindcss";
+@import "./cinema.css";
 
 @theme {
   --font-display: "Cormorant Garamond", Palatino, "Iowan Old Style", serif;
@@ -211,6 +212,21 @@ footer a:visited {
   }
 }
 
+/* Fanned hero plates — a slow idle breath on an inner wrapper so it never
+   fights the scroll-driven transforms on the plate itself. */
+@keyframes plate-breathe {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+.plate-breathe {
+  animation: plate-breathe 7.5s ease-in-out infinite;
+}
+
 .window-lift {
   box-shadow: var(--shadow-window);
 }
@@ -238,7 +254,10 @@ body::after {
   backdrop-filter: blur(20px) saturate(1.08);
   -webkit-backdrop-filter: blur(20px) saturate(1.08);
   mask-image: linear-gradient(180deg, #000 0, rgb(0 0 0 / 0.92) 38%, transparent);
-  transition: height 0.5s var(--ease-space);
+  transition: height 0.5s var(--ease-space), background-color 0.5s ease;
+}
+.site-nav-backdrop--dark {
+  background: color-mix(in srgb, var(--color-hall) 42%, transparent);
 }
 
 .site-nav-backdrop--compact {
@@ -258,6 +277,10 @@ body::after {
     mask-image: none;
     height: calc(4.5rem + env(safe-area-inset-top));
     background: var(--color-cream);
+  }
+
+  .site-nav-backdrop--dark {
+    background: color-mix(in srgb, var(--color-hall) 94%, var(--color-cream) 6%);
   }
 
   .site-nav-backdrop--compact {

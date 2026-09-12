@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react";
+import { useMotionEnabled } from "./motionPreference";
 
+/**
+ * True when the page should render settled, non-animated frames —
+ * either the OS asks for reduced motion or the visitor switched the
+ * page animation off in the footer.
+ */
 export function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-
-  return reduced;
+  return !useMotionEnabled();
 }

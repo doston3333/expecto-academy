@@ -28,6 +28,10 @@ import { useRef, useState, type ComponentType } from "react";
 import type { MotionValue } from "motion/react";
 
 const COUNT = FILM_BEATS.length;
+/** Each beat spills a faint house tint across the stage — the ambient light of the scene. */
+const FILM_TONES = FILM_BEATS.map(
+  (_, i) => `color-mix(in srgb, ${HOUSES[i % HOUSES.length].hex} 8%, var(--color-cream))`,
+);
 const FILM_SCENES = [
   SceneDiagnostic,
   SceneTrap,
@@ -69,13 +73,23 @@ function WipedScene({
   const topLeft = useTransform(progress, [start, end], [100, -12], { clamp: true });
   const clipPath = useMotionTemplate`polygon(0% ${topLeft}%, 100% ${topRight}%, 100% 100%, 0% 100%)`;
   const y = useCoverY(progress, index, COUNT);
+  // House-colored glow riding the wipe's slanted edge — the cut carries the
+  // incoming scene's tint the way Eden's iris carried the next chapter.
+  const house = HOUSES[index % HOUSES.length].hex;
+  const edge = useTransform(progress, [start, mid, end], [`${house}00`, `${house}8c`, `${house}00`]);
+  const filter = useMotionTemplate`drop-shadow(0 -10px 22px ${edge})`;
   return (
     <motion.div
       className="absolute inset-0"
-      style={cover ? { y, zIndex: index + 1 } : { clipPath, zIndex: index + 1 }}
+      style={{ zIndex: index + 1, filter: cover ? undefined : filter }}
     >
-      <motion.div className="absolute inset-0" style={{ scale: rack.scale, opacity: rack.opacity }}>
-        <Scene t={t} />
+      <motion.div
+        className="absolute inset-0"
+        style={cover ? { y } : { clipPath }}
+      >
+        <motion.div className="absolute inset-0" style={{ scale: rack.scale, opacity: rack.opacity }}>
+          <Scene t={t} />
+        </motion.div>
       </motion.div>
     </motion.div>
   );
@@ -173,11 +187,16 @@ function FilmMotion() {
   });
 
   return (
-    <section ref={ref} id="film" aria-label="How a score is built" className="relative h-[460svh] md:h-[680svh]">
+    <section ref={ref} id="film" aria-label="How a score is built" className="relative h-[460svh] md:h-[680svh]" data-scene>
       <div className="cinema-stage sticky top-0 flex h-svh min-h-svh flex-col justify-center overflow-hidden pt-[4.6rem] pb-5 md:pt-0 md:pb-0">
+        <div
+          aria-hidden="true"
+          className="xc-film-ambient"
+          style={{ backgroundColor: FILM_TONES[index] }}
+        />
         <Candle className="absolute top-[18%] left-[1.5%] hidden xl:block" height={88} delay={0.9} />
         <Candle className="absolute right-[1.5%] bottom-[16%] hidden xl:block" height={72} delay={2.7} />
-        <div className="mx-auto grid w-full max-w-[1240px] min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] items-start gap-3 px-5 md:flex-none md:grid-cols-12 md:grid-rows-none md:items-center md:gap-12 md:px-8">
+        <div className="relative z-10 mx-auto grid w-full max-w-[1240px] min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] items-start gap-3 px-5 md:flex-none md:grid-cols-12 md:grid-rows-none md:items-center md:gap-12 md:px-8">
           <div className="md:col-span-5">
             <BeatCopy progress={scrollYProgress} />
           </div>
@@ -215,6 +234,21 @@ function FilmMotion() {
               </WindowChrome>
             </motion.div>
           </div>
+        </div>
+        <div className="xc-film-notes absolute inset-x-8 bottom-6 z-10">
+          <p>
+            A window into a real week at Expecto — the diagnostic, the trap,
+            the log, the gauntlet, the report, the sort.
+          </p>
+          <details>
+            <summary>Read the film's transcript</summary>
+            {FILM_BEATS.map((beat) => (
+              <p key={beat.index}>
+                <strong className="text-forest-deep">{beat.index} · {beat.title}.</strong>{" "}
+                {beat.body}
+              </p>
+            ))}
+          </details>
         </div>
       </div>
     </section>

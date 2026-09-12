@@ -63,7 +63,7 @@ function MethodFilm() {
   const supportOpacity = useTransform(scrollYProgress, [0.68, 0.9], [0, 1], { clamp: true });
 
   return (
-    <section ref={ref} id="method" aria-label="The method" className="relative h-[240svh]">
+    <section ref={ref} id="method" aria-label="The method" className="relative h-[240svh]" data-scene>
       <div className="cinema-stage sticky top-0 flex min-h-svh flex-col justify-center overflow-hidden px-5 pt-24 pb-10">
         <div className="flex items-center justify-between">
           <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">The method</p>
@@ -136,12 +136,14 @@ function MethodDocument({ reduced }: { reduced: boolean }) {
   });
 
   return (
-    <section ref={ref} id="method" aria-label="The method" className="py-16 sm:py-28">
+    <section ref={ref} id="method" aria-label="The method" className="py-16 sm:py-28" data-scene>
       <div className="mx-auto max-w-[1240px] px-5 md:px-8">
-        <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">The method</p>
-        <h2 className="mt-4 max-w-2xl text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
-          Three things that move a score.
-        </h2>
+        <div data-reveal>
+          <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">The method</p>
+          <h2 className="mt-4 max-w-2xl text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
+            Three things that move a score.
+          </h2>
+        </div>
         <div className="mt-12 sm:mt-16">
           {reduced
             ? METHOD_PILLARS.map((pillar, i) => (
@@ -167,7 +169,7 @@ function MethodDocument({ reduced }: { reduced: boolean }) {
                 <PillarRow key={pillar.n} pillar={pillar} progress={scrollYProgress} index={i} />
               ))}
         </div>
-        <div className="flex flex-wrap gap-x-8 gap-y-2 border-t border-forest/12 pt-6">
+        <div className="flex flex-wrap gap-x-8 gap-y-2 border-t border-forest/12 pt-6" data-reveal>
           {METHOD_SUPPORT.map((line) => (
             <p key={line} className="text-[0.8rem] text-muted">
               {line}

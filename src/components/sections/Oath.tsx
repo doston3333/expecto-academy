@@ -165,6 +165,7 @@ function OathMotion() {
       id="oath"
       aria-label="The score pact"
       className="relative h-[210svh] md:h-[300svh]"
+      data-scene
     >
       <div className="cinema-stage sticky top-0 flex min-h-svh items-center overflow-hidden">
         <div className="mx-auto grid w-full max-w-[1240px] items-center gap-8 px-5 pt-24 pb-8 md:grid-cols-12 md:gap-10 md:px-8 md:py-16">

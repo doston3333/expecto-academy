@@ -94,7 +94,8 @@ function ArchivePlate({
       style={{ x, y, rotate, zIndex: index + 1 }}
       aria-label={`Score report — ${story.school}`}
     >
-      <div className="h-1.5 rounded-t-2xl" style={{ backgroundColor: house.hex }} />
+      <div className="plate-breathe" style={{ animationDelay: `${index * -2.3}s` }}>
+        <div className="h-1.5 rounded-t-2xl" style={{ backgroundColor: house.hex }} />
       <div className="px-4 py-3.5 sm:px-5">
         <div className="flex items-center justify-between">
           <p className="text-[0.6rem] font-medium tracking-[0.14em] text-moss uppercase sm:text-[0.62rem]">
@@ -133,6 +134,7 @@ function ArchivePlate({
           {story.name} · {story.city}
         </p>
       </div>
+      </div>
     </motion.article>
   );
 }
@@ -141,32 +143,12 @@ function Archive() {
   const compact = useCompactLayout();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const headY = useTransform(scrollYProgress, [0.02, 0.2], ["112%", "0%"], { clamp: true });
   const subOpacity = useTransform(scrollYProgress, [0.55, 0.75], [0, 1], { clamp: true });
 
   return (
-    <section ref={ref} aria-label="The archive of results" className="relative h-[170svh] md:h-[220svh]">
+    <section ref={ref} aria-label="The archive of results" className="relative h-[170svh] md:h-[220svh]" data-scene>
       <div className="cinema-stage sticky top-0 flex min-h-svh flex-col items-center justify-center overflow-hidden">
-        <div className="relative z-10 text-center">
-          <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">
-            Chapter IV · The archive
-          </p>
-          <span className="mt-4 block overflow-hidden">
-            <motion.h2
-              style={{ y: headY }}
-              className="text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl"
-            >
-              Proof, on paper.
-            </motion.h2>
-          </span>
-          <motion.p
-            style={{ opacity: subOpacity }}
-            className="mx-auto mt-4 max-w-md text-[0.9rem] leading-relaxed text-muted"
-          >
-            Four graduates, four funded seats. Their own words are below.
-          </motion.p>
-        </div>
-        <div className="relative mt-8 h-[260px] w-full max-w-[900px] sm:mt-10 sm:h-[340px]">
+        <div className="relative h-[260px] w-full max-w-[900px] sm:h-[340px]">
           {TESTIMONIALS.map((story, i) => (
             <ArchivePlate
               key={story.name}
@@ -177,6 +159,12 @@ function Archive() {
             />
           ))}
         </div>
+        <motion.p
+          style={{ opacity: subOpacity }}
+          className="mx-auto mt-8 max-w-md text-center text-[0.85rem] leading-relaxed text-muted sm:mt-10"
+        >
+          Their own words are below.
+        </motion.p>
       </div>
     </section>
   );
@@ -186,13 +174,7 @@ function ArchiveStatic() {
   return (
     <section aria-label="The archive of results" className="py-16 sm:py-24">
       <div className="mx-auto max-w-[1240px] px-5 text-center md:px-8">
-        <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">
-          Chapter IV · The archive
-        </p>
-        <h2 className="mt-4 text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
-          Proof, on paper.
-        </h2>
-        <div className="mt-10 grid gap-6 text-left sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+        <div className="grid gap-6 text-left sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {TESTIMONIALS.map((story) => {
             const house = getHouse(story.houseId);
             return (
@@ -235,7 +217,7 @@ function LettersMotion() {
   const story = TESTIMONIALS[index];
 
   return (
-    <section ref={ref} id="stories" aria-label="Letters home" className="relative h-[280svh] md:h-[420svh]">
+    <section ref={ref} id="stories" aria-label="Letters home" className="relative h-[280svh] md:h-[420svh]" data-scene>
       <div className="cinema-stage sticky top-0 flex min-h-svh items-center overflow-hidden">
         <motion.div
           aria-hidden="true"
@@ -276,10 +258,17 @@ function LettersMotion() {
               >
                 <ScoreTrack story={story} progress={scrollYProgress} index={index} />
                 <StoryMeta story={story} />
-                <WaxStamp
-                  house={getHouse(story.houseId)}
-                  className="mt-6 size-14 -rotate-6 drop-shadow-md"
-                />
+                <motion.div
+                  className="mt-6 inline-block"
+                  initial={{ scale: 1.7, rotate: -26, opacity: 0 }}
+                  animate={{ scale: 1, rotate: -6, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.3 }}
+                >
+                  <WaxStamp
+                    house={getHouse(story.houseId)}
+                    className="size-14 drop-shadow-md"
+                  />
+                </motion.div>
               </motion.figcaption>
             </motion.figure>
           </AnimatePresence>

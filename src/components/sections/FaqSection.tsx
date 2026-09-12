@@ -10,16 +10,18 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" aria-label="Common questions" className="py-16 sm:py-28">
+    <section id="faq" aria-label="Common questions" className="py-16 sm:py-28" data-scene>
       <div className="mx-auto max-w-[880px] px-5 md:px-8">
-        <p className="flex items-center gap-2 text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">
-          <OwlPost className="size-4.5" />
-          FAQ
-        </p>
-        <h2 className="mt-4 text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
-          Questions we hear every week.
-        </h2>
-        <div className="mt-12 border-t border-forest/12">
+        <div data-reveal>
+          <p className="flex items-center gap-2 text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">
+            <OwlPost className="size-4.5" />
+            FAQ
+          </p>
+          <h2 className="mt-4 text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
+            Questions we hear every week.
+          </h2>
+        </div>
+        <div className="mt-12 border-t border-forest/12" data-stagger>
           {FAQS.map((faq, i) => {
             const isOpen = open === i;
             const house = HOUSES[i % HOUSES.length];

@@ -41,3 +41,54 @@ a person could sit in.
 - Hero right side = fanned document plates (score reports on paper), not metric tiles.
 - Cream/forest prospectus palette; Space's grammar, not their skin.
 - Reduced motion: no Lenis, no sticky traps; show the final honest frame (the report).
+
+---
+
+## Implemented: the cinema chapter layer (current state)
+
+On top of the per-section `useScroll` scenes, the page now has one global
+scroll driver — `src/hooks/usePageCinema.ts`. One rAF loop smooths
+`window.scrollY` (exp-decay ~75ms), reads layout once per frame, and writes
+CSS custom properties. Scenery is pure CSS keyed to those vars — no React
+re-render per frame, everything reversible.
+
+**Vars written per element**
+
+- `[data-chapter]` (the six inter-section transitions): `--xc-chapter` plus
+  per-scene vars (`--xc-iris*`, `--xc-curtain`, `--xc-panorama`, `--xc-release`,
+  `--xc-words-*`, `--xc-clock-*`, `--xc-horizon`, `--xc-panel-0..6`,
+  `--xc-scene-title`, …) computed in `paintChapter`.
+- `[data-scene]` (every major section): `--xc-enter` (0→1 entrance),
+  `--xc-travel` (-1→1 while crossing the viewport) and
+  `data-scene-visible` — offscreen scenery pauses its CSS animations.
+- `[data-reveal]` / `[data-stagger]` children: monotonic `--xc-reveal`
+  (never un-reveals), staggered by `--i`. Focus inside a hidden element
+  forces it visible.
+
+Inside the film, each beat's wipe carries a house-colored glow along its
+slanted clip edge (`drop-shadow` on a wrapper around the clipped scene).
+
+**Chapter scenes** (`src/components/cinema/`): `FilmOverture` (page
+condenses into the seal card → Chapter I title), `CurtainChapter` (split
+sentence panels part — vertical seam on phones), `DeskClearing`
+(panorama opens, task papers scatter off), `WordsChapter` (three giant
+lines converge into the owl-post card), `HorizonChapter` (week dial
+recedes, cream dome rises over the tint), `CanopyChapter` (seven
+house-edged panels lift to reveal the lit hall — hands off to Closer,
+same `--color-hall`).
+
+**Adaptive chrome**: `useOverDark` flips the navbar + chapter rail to cream
+ink whenever a `[data-nav-dark]` region (the lit hall, the footer) sits
+under the bar. The canopy's `data-peek` flag gates its dark surface so the
+flip lands only once the panels actually expose the hall; a MutationObserver
+on that flag keeps the theme in step with the rAF paint.
+
+**Kill switch**: `MotionPreferenceProvider` + `usePrefersReducedMotion`
+merge OS preference with the footer "Page animation" switch. When off,
+`data-cinema="off"` hides `.xc-art` entirely, settles all copy, drops the
+runway spacers, pauses every decorative animation, and Lenis never mounts —
+the page is an honest document.
+
+**File map**: `src/cinema.css` is imported once from `index.css`; every
+`.xc-*` rule lives there. Chapter markup is `data-chapter` + `.xc-chapter-stage`
++ `.xc-art` (scenery, aria-hidden) + `.xc-scene-copy` (the real heading).

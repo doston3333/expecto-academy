@@ -97,9 +97,9 @@ export function Tuition() {
   const progress = reduced ? staticProgress : scrollYProgress;
 
   return (
-    <section ref={ref} id="pricing" aria-label="Tuition" className="py-16 sm:py-28">
+    <section ref={ref} id="pricing" aria-label="Tuition" className="py-16 sm:py-28" data-scene>
       <div className="mx-auto max-w-[1240px] px-5 md:px-8">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="flex flex-wrap items-end justify-between gap-4" data-reveal>
           <div>
             <p className="text-[0.7rem] font-medium tracking-[0.16em] text-moss uppercase">Tuition</p>
             <h2 className="mt-4 max-w-xl text-3xl leading-[1.05] font-medium tracking-[-0.03em] text-forest-deep sm:text-5xl">
@@ -116,7 +116,7 @@ export function Tuition() {
             <PlanCard key={plan.id} plan={plan} index={i} progress={progress} />
           ))}
         </div>
-        <p className="mt-8 text-[0.78rem] text-muted">
+        <p className="mt-8 text-[0.78rem] text-muted" data-reveal>
           The score pact: do the work, miss your agreed gain, and four more weeks are on us.
           Withdraw within 7 days of enrollment for a refund minus the diagnostic fee.
         </p>

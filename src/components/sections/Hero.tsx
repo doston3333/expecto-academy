@@ -8,9 +8,10 @@ import { HERO_PLATES, PROOF, TELEGRAM_URL } from "@/lib/content";
 import { getHouse, HOUSES } from "@/lib/houses";
 import { FOREST } from "@/lib/palette";
 import { easeSpace } from "@/lib/motion";
-import { motion, useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
-import { useRef } from "react";
+import { motion, useInView, useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
+import { Check, Sparkles } from "lucide-react";
 
 function MaskedLine({
   children,
@@ -77,7 +78,8 @@ function Plate({
       animate={{ opacity: 1 }}
       transition={{ duration: 1, ease: easeSpace, delay: 0.35 + index * 0.1 }}
     >
-      <div className="h-1.5 rounded-t-2xl" style={{ backgroundColor: house.hex }} />
+      <div className="plate-breathe" style={{ animationDelay: `${index * -1.9}s` }}>
+        <div className="h-1.5 rounded-t-2xl" style={{ backgroundColor: house.hex }} />
       <div className="relative px-3.5 py-3 sm:px-4 sm:py-3.5">
         {index === HERO_PLATES.length - 1 ? (
           <span
@@ -108,6 +110,7 @@ function Plate({
           <div className="h-[3px] w-4/5 rounded-full bg-forest/8" />
           <div className="h-[3px] w-3/5 rounded-full bg-forest/8" />
         </div>
+      </div>
       </div>
     </motion.div>
   );
@@ -212,6 +215,60 @@ function CompactPlate({
   );
 }
 
+const VIGNETTE_PROMPT = "I need a 1450 by December — Math is the wall.";
+
+/**
+ * A tiny request card writing itself among the score plates — the
+ * student's ask, answered by the pact line underneath.
+ */
+function HeroVignette() {
+  const reduced = usePrefersReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { margin: "-12% 0px -12% 0px" });
+  const [chars, setChars] = useState(reduced ? VIGNETTE_PROMPT.length : 0);
+  const [answered, setAnswered] = useState(reduced);
+
+  useEffect(() => {
+    if (reduced || !inView) return;
+    if (chars < VIGNETTE_PROMPT.length) {
+      const id = window.setTimeout(() => setChars((c) => c + 1), chars === 0 ? 500 : 26);
+      return () => window.clearTimeout(id);
+    }
+    if (!answered) {
+      const id = window.setTimeout(() => setAnswered(true), 650);
+      return () => window.clearTimeout(id);
+    }
+  }, [inView, chars, answered, reduced]);
+
+  return (
+    <motion.div
+      ref={ref}
+      aria-hidden="true"
+      className="xc-vignette"
+      data-phase={answered ? "ready" : "typing"}
+      initial={reduced ? false : { opacity: 0, y: 26 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.9, ease: easeSpace, delay: 0.95 }}
+    >
+      <div className="xc-vignette-head">
+        <span>Request · A. Karimova</span>
+        <Sparkles className="size-3" />
+      </div>
+      <p className="xc-vignette-body">
+        {VIGNETTE_PROMPT.slice(0, chars)}
+        <span className="xc-vignette-caret" />
+      </p>
+      <div className="xc-vignette-foot">
+        <span className="xc-vignette-reply">
+          <Check className="size-3" />
+          Pact: +230 or 4 weeks free
+        </span>
+        <span>2m</span>
+      </div>
+    </motion.div>
+  );
+}
+
 function CompactReports({ progress }: { progress: MotionValue<number> }) {
   const poses = [
     { left: "22%", top: "4%", rotate: 5, z: 3 },
@@ -242,6 +299,7 @@ export function Hero() {
     <section
       ref={ref}
       id="top"
+      data-scene
       className="relative flex flex-col overflow-x-clip pt-[env(safe-area-inset-top)] md:min-h-svh md:overflow-clip"
       onMouseMove={(event) => {
         if (reduced) return;
@@ -341,6 +399,7 @@ export function Hero() {
           {HERO_PLATES.map((plate, i) => (
             <Plate key={plate.school} plate={plate} pose={PLATE_POSE[i]} progress={scrollYProgress} index={i} />
           ))}
+          <HeroVignette />
         </motion.div>
       </div>
       <WindowPeek progress={scrollYProgress} />

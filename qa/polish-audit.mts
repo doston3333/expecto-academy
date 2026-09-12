@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 import { mkdirSync } from "node:fs";
 
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const BASE = "http://127.0.0.1:5173/?qa=1";
+const BASE = process.env.QA_BASE ?? "http://127.0.0.1:5173/?qa=1";
 const OUT = "qa/polish/";
 mkdirSync(OUT, { recursive: true });
 

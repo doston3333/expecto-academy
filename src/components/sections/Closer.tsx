@@ -243,6 +243,7 @@ export function Closer() {
         id="enroll"
         aria-label="Enroll"
         className="relative overflow-hidden border-t border-cream/10 bg-hall py-24 text-cream sm:py-32"
+        data-nav-dark
       >
         <HallAtmosphere compact={compact} />
         <div className="relative mx-auto max-w-[1240px] px-5 md:px-8">
@@ -258,6 +259,8 @@ export function Closer() {
       id="enroll"
       aria-label="Enroll"
       className="relative h-[150svh] border-t border-cream/10 bg-hall text-cream md:h-[190svh]"
+      data-scene
+      data-nav-dark
     >
       <div className="cinema-stage sticky top-0 flex min-h-svh items-center overflow-hidden">
         <HallAtmosphere compact={compact} />
