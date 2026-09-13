@@ -13,6 +13,7 @@ import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from 
 
 /** Keeps anchored sections clear of the fixed bar — mirrors `scroll-padding-top`. */
 const NAV_OFFSET = 88;
+const NAV_OFFSET_LG = 104;
 
 const DRAWER_NUMERALS = ["I", "II", "III", "IV", "V"] as const;
 
@@ -98,7 +99,8 @@ export function Navbar() {
     const el = document.querySelector<HTMLElement>(href);
     if (!el) return;
     history.replaceState(null, "", href);
-    const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET);
+    const offset = window.innerWidth >= 1024 ? NAV_OFFSET_LG : NAV_OFFSET;
+    const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - offset);
     if (reduced) {
       window.scrollTo(0, top);
     } else if (lenis) {
@@ -175,7 +177,7 @@ export function Navbar() {
         <div
           className={cn(
             "relative z-[60] mx-auto flex w-full max-w-[1240px] items-center justify-between px-5 transition-[height] duration-500 ease-[cubic-bezier(0.22,0.68,0.35,1)] md:px-8",
-            scrolled ? "h-16" : "h-[4.5rem]",
+            scrolled ? "h-16 lg:h-20" : "h-[4.5rem] lg:h-24",
           )}
         >
           <a
@@ -184,10 +186,10 @@ export function Navbar() {
             className="group relative z-10 flex min-h-11 items-center gap-2.5"
             onClick={(event) => onNavClick(event, "#top")}
           >
-            <Logo className="h-10 transition-transform duration-500 ease-out group-hover:scale-105 sm:h-11" />
+            <Logo className="h-10 transition-transform duration-500 ease-out group-hover:scale-105 sm:h-11 lg:h-12" />
             <span
               className={cn(
-                "text-[0.95rem] font-medium tracking-[-0.02em] transition-colors duration-500",
+                "text-[0.95rem] font-medium tracking-[-0.02em] transition-colors duration-500 lg:text-[1.05rem]",
                 dark ? "text-cream" : "text-forest-deep",
               )}
             >
@@ -197,7 +199,7 @@ export function Navbar() {
 
           <nav
             aria-label="Primary"
-            className="absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 lg:flex"
+            className="absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 lg:flex"
           >
             {NAV_LINKS.map((link, i) => (
               <a
@@ -206,14 +208,14 @@ export function Navbar() {
                 aria-current={i === active ? "true" : undefined}
                 onClick={(event) => onNavClick(event, link.href)}
                 className={cn(
-                  "relative inline-flex min-h-11 items-center rounded-full px-4 text-[0.84rem] font-medium tracking-[0.01em] transition-colors duration-300",
+                  "relative inline-flex min-h-12 items-center rounded-full px-[1.15rem] text-[0.93rem] font-medium tracking-[0.01em] transition-colors duration-300",
                   dark
                     ? i === active
                       ? "text-cream"
-                      : "text-cream/60 hover:text-cream"
+                      : "text-cream/75 hover:text-cream"
                     : i === active
                       ? "text-forest-deep"
-                      : "text-forest/55 hover:text-forest-deep",
+                      : "text-forest-deep/65 hover:text-forest-deep",
                 )}
               >
                 {i === active ? (
@@ -222,7 +224,7 @@ export function Navbar() {
                       aria-hidden="true"
                       className={cn(
                         "absolute inset-0 rounded-full border",
-                        dark ? "border-cream/15 bg-cream/10" : "border-forest/10 bg-forest/[0.07]",
+                        dark ? "border-cream/25 bg-cream/[0.15]" : "border-forest/20 bg-forest/[0.10]",
                       )}
                     />
                   ) : (
@@ -231,7 +233,7 @@ export function Navbar() {
                       layoutId="nav-active-pill"
                       className={cn(
                         "absolute inset-0 rounded-full border",
-                        dark ? "border-cream/15 bg-cream/10" : "border-forest/10 bg-forest/[0.07]",
+                        dark ? "border-cream/25 bg-cream/[0.15]" : "border-forest/20 bg-forest/[0.10]",
                       )}
                       transition={{ type: "spring", stiffness: 400, damping: 32 }}
                     />
@@ -257,7 +259,7 @@ export function Navbar() {
             <MagneticButton
               href={TELEGRAM_URL}
               external
-              className="min-w-0 px-3.5 max-[360px]:hidden sm:px-4"
+              className="min-w-0 px-3.5 max-[360px]:hidden sm:px-4 lg:h-12 lg:px-5 lg:text-[0.95rem]"
             >
               Get Sorted
             </MagneticButton>

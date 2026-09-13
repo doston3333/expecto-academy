@@ -19,7 +19,8 @@ export function useOverDark(): boolean {
             if (chapter?.dataset.peek !== "true") return false;
           }
           const rect = el.getBoundingClientRect();
-          return rect.top <= 76 && rect.bottom > 0;
+          const limit = window.innerWidth >= 1024 ? 100 : 76;
+          return rect.top <= limit && rect.bottom > 0;
         },
       );
       setDark(over);
