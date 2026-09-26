@@ -1,41 +1,53 @@
-@import "@fontsource/cormorant-garamond/500.css";
-@import "@fontsource/cormorant-garamond/400-italic.css";
+@import "@fontsource/fraunces/300.css";
+@import "@fontsource/fraunces/400.css";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/300-italic.css";
+@import "@fontsource/fraunces/400-italic.css";
 @import "@fontsource/instrument-sans/400.css";
 @import "@fontsource/instrument-sans/500.css";
 @import "@fontsource/instrument-sans/600.css";
-@import "@fontsource/instrument-sans/400-italic.css";
+@import "@fontsource/caveat/500.css";
 @import "tailwindcss";
-@import "./cinema.css";
+@import "./site/site.css";
 
 @theme {
-  --font-display: "Cormorant Garamond", Palatino, "Iowan Old Style", serif;
+  --font-serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-hand: "Caveat", "Segoe Script", cursive;
   --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
 
-  --color-cream: #f8f3e6;
-  --color-cream-2: #efe5d0;
-  --color-cream-3: #e4d6b8;
-  --color-forest: #1a6f4a;
-  --color-forest-deep: #1c4a36;
-  --color-forest-soft: #1e7a52;
-  --color-hall: #215c42;
-  --color-moss: #267048;
-  --color-sage: #c8e4c0;
-  --color-muted: #3a634c;
-  --color-line: #ddd0b8;
-
-  --color-aurelion: #b33828;
-  --color-veridian: #1c7a48;
-  --color-noctis: #3d62c2;
-  --color-amberfell: #e4b82a;
-  --color-aurelion-metal: #e0b45c;
-  --color-veridian-metal: #c8d2d6;
-  --color-noctis-metal: #d4a06a;
-  --color-amberfell-metal: #5c4518;
+  --color-paper: #f4eee2;
+  --color-paper-2: #ece4d3;
+  --color-paper-3: #e0d4bd;
+  --color-ink: #16212b;
+  --color-ink-2: #2b3945;
+  --color-ink-soft: #5d6873;
+  --color-ink-faint: #8f959a;
+  --color-gold: #a8762e;
+  --color-gold-2: #d4a95e;
+  --color-gold-3: #efdcb0;
+  --color-night: #0b131b;
+  --color-night-2: #111c26;
+  --color-clay: #b4553b;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-space: cubic-bezier(0.22, 0.68, 0.35, 1);
-  --shadow-window: 0 20px 70px color-mix(in srgb, var(--color-forest) 8%, transparent),
-    0 2px 8px color-mix(in srgb, var(--color-forest) 4%, transparent);
+  --ease-film: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* The four houses — secondary accents. Base shades are for text on paper, `-fill`
+   for stripes and marks on paper, `-2` for anything on night. */
+@theme static {
+  --color-gryffindor: #8e1f17;
+  --color-gryffindor-fill: #a3261c;
+  --color-gryffindor-2: #d0493b;
+  --color-slytherin: #1c5a3a;
+  --color-slytherin-fill: #22683f;
+  --color-slytherin-2: #53a176;
+  --color-ravenclaw: #1f3c78;
+  --color-ravenclaw-fill: #274a8f;
+  --color-ravenclaw-2: #7497dc;
+  --color-hufflepuff: #9c7208;
+  --color-hufflepuff-fill: #e2aa25;
+  --color-hufflepuff-2: #ecb939;
 }
 
 .sr-only {
@@ -51,23 +63,19 @@
 }
 
 html {
-  scroll-behavior: auto;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 5rem;
   color-scheme: light;
   overflow-x: clip;
-  overscroll-behavior-y: contain;
-  scrollbar-color: color-mix(in srgb, var(--color-forest) 28%, transparent) transparent;
+  scrollbar-color: color-mix(in srgb, var(--color-ink) 30%, transparent) transparent;
   scrollbar-width: thin;
 }
 
 body {
   margin: 0;
   min-height: 100svh;
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
   font-family: var(--font-sans);
-  background: var(--color-cream);
-  color: var(--color-forest-deep);
+  background: var(--color-paper);
+  color: var(--color-ink);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -79,19 +87,15 @@ body {
   overflow-x: clip;
 }
 
-/* Sticky cinema stages — compositor layer, no layout. */
-.cinema-stage {
-  transform: translateZ(0);
-}
-
 ::selection {
-  background: var(--color-amberfell);
-  color: var(--color-forest-deep);
+  background: var(--color-gold-3);
+  color: var(--color-ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-forest);
+  outline: 2px solid var(--color-gold);
   outline-offset: 3px;
+  border-radius: 6px;
 }
 
 a,
@@ -99,220 +103,17 @@ button {
   cursor: pointer;
 }
 
-button:disabled {
-  cursor: not-allowed;
-}
-
 h1,
-h2 {
+h2,
+h3 {
   text-wrap: balance;
 }
 
-footer a:visited {
-  color: var(--color-sage);
-}
-
-.skip-link {
-  position: absolute;
-  left: 1rem;
-  top: -4rem;
-  z-index: 100;
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  background: var(--color-forest);
-  color: var(--color-cream);
-  padding: 0.65rem 1.1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  border-radius: 9999px;
-}
-
-.skip-link:focus {
-  top: 1rem;
-}
-
-.font-display {
-  font-family: var(--font-display);
-}
-
-/* Great-hall embers — slow drifting motes. Reduced motion zeroes them. */
-@keyframes ember-drift {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0;
-  }
-  15% {
-    opacity: var(--ember-opacity, 0.45);
-  }
-  85% {
-    opacity: var(--ember-opacity, 0.45);
-  }
-  100% {
-    transform: translate3d(var(--ember-x, 14px), -120px, 0);
-    opacity: 0;
-  }
-}
-
-@keyframes candle-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes candle-flicker {
-  0%,
-  100% {
-    transform: scaleY(1) scaleX(1);
-    opacity: 0.95;
-  }
-  30% {
-    transform: scaleY(1.14) scaleX(0.9);
-    opacity: 1;
-  }
-  60% {
-    transform: scaleY(0.92) scaleX(1.06);
-    opacity: 0.82;
-  }
-}
-
-@keyframes star-twinkle {
-  0%,
-  100% {
-    opacity: 0.28;
-  }
-  50% {
-    opacity: 0.9;
-  }
-}
-
-/* Wand sparks — born at the cursor, drift up, die fast */
-@keyframes spark-fade {
-  0% {
-    opacity: 0.9;
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--spark-x, 10px), -22px) scale(0.2);
-  }
-}
-
-/* Hero scroll cue — a mote sliding down a thread */
-@keyframes scroll-cue {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(280%);
-  }
-}
-
-/* Fanned hero plates — a slow idle breath on an inner wrapper so it never
-   fights the scroll-driven transforms on the plate itself. */
-@keyframes plate-breathe {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-  50% {
-    transform: translate3d(0, -5px, 0);
-  }
-}
-.plate-breathe {
-  animation: plate-breathe 7.5s ease-in-out infinite;
-}
-
-.window-lift {
-  box-shadow: var(--shadow-window);
-}
-
-/* Paper grain — one inline turbulence tile over the whole page, no image assets */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 70;
-  pointer-events: none;
-  opacity: 0.028;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.site-nav-backdrop {
-  pointer-events: none;
-  position: fixed;
-  inset-inline: 0;
-  top: 0;
-  z-index: 40;
-  height: 7rem;
-  background: color-mix(in srgb, var(--color-cream-3) 45%, transparent);
-  backdrop-filter: blur(20px) saturate(1.08);
-  -webkit-backdrop-filter: blur(20px) saturate(1.08);
-  mask-image: linear-gradient(180deg, #000 0, rgb(0 0 0 / 0.92) 38%, transparent);
-  transition: height 0.5s var(--ease-space), background-color 0.5s ease;
-}
-.site-nav-backdrop--dark {
-  background: color-mix(in srgb, var(--color-hall) 62%, transparent);
-}
-
-.site-nav-backdrop--compact {
-  height: 5.75rem;
-}
-
-/* PC bar — taller chrome, deeper parchment tint so it reads over bright sections. */
-@media (min-width: 1024px) {
-  html {
-    scroll-padding-top: 6.5rem;
-  }
-
-  .site-nav-backdrop {
-    height: 9.25rem;
-    background: color-mix(in srgb, var(--color-cream-3) 74%, var(--color-forest-deep) 12%);
-  }
-
-  .site-nav-backdrop--dark {
-    background: color-mix(in srgb, var(--color-hall) 82%, transparent);
-  }
-
-  .site-nav-backdrop--compact {
-    height: 7.25rem;
-  }
-}
-
-/* Phones: skip the SVG noise filter (GPU poison) and the nav blur.
-   Kept after the base rules so these overrides actually win the cascade. */
-@media (max-width: 767.98px), (pointer: coarse) {
-  body::after {
-    display: none;
-  }
-
-  .site-nav-backdrop {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    mask-image: none;
-    height: calc(4.5rem + env(safe-area-inset-top));
-    background: var(--color-cream);
-  }
-
-  .site-nav-backdrop--dark {
-    background: color-mix(in srgb, var(--color-hall) 94%, var(--color-cream) 6%);
-  }
-
-  .site-nav-backdrop--compact {
-    height: calc(4rem + env(safe-area-inset-top));
-  }
+p {
+  text-wrap: pretty;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   *,
   *::before,
   *::after {

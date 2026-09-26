@@ -1357,3 +1357,346 @@ html[data-visible="false"] .xc-page * {
 .xc-page[data-cinema="off"] .xc-vignette {
   display: none;
 }
+
+
+/* --- LETTER FLOOD — the owl-post storm --------------------------------
+   A storm night over the school's towers (moon, cloud banks, rain,
+   lightning), the wind-blown swarm (preserve-3d depth), drawn-SVG
+   envelopes with a peeking letter slip, and the unfolded sheet.
+   rAF writes transforms; these rules only paint paper and weather. */
+
+/* --- the sky --------------------------------------------------------- */
+
+/* A real storm photograph (NOAA, public domain) — the sky the post
+   flies through. Slow drift keeps it alive. */
+.xc-flood-skyimg {
+  position: absolute;
+  inset: -4%;
+  z-index: 0;
+  width: 108%;
+  height: 108%;
+  object-fit: cover;
+  animation: xcSkyDrift 80s ease-in-out infinite alternate;
+}
+@keyframes xcSkyDrift {
+  from {
+    transform: translate3d(-1.2%, -0.8%, 0) scale(1.02);
+  }
+  to {
+    transform: translate3d(1.2%, 0.6%, 0) scale(1.06);
+  }
+}
+
+/* Indigo tone + vignette over the photograph. */
+.xc-flood-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(120% 70% at 50% 30%, transparent 45%, rgba(4, 7, 16, 0.5) 100%),
+    linear-gradient(180deg, rgba(6, 10, 22, 0.5) 0%, rgba(8, 13, 28, 0.12) 34%, rgba(8, 13, 28, 0.34) 72%, rgba(4, 7, 16, 0.72) 100%);
+}
+.xc-flood-sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 240px rgba(2, 5, 12, 0.85);
+}
+
+/* Rain — two falling streak layers, faint until lightning hits. */
+.xc-flood-rain {
+  position: absolute;
+  inset: -12%;
+  z-index: 40;
+  background: repeating-linear-gradient(
+    102deg,
+    transparent 0 9px,
+    rgba(176, 196, 240, 0.055) 9px 10px
+  );
+  animation: xcRain 0.9s linear infinite;
+  pointer-events: none;
+}
+.xc-flood-rain.r2 {
+  background: repeating-linear-gradient(
+    100deg,
+    transparent 0 17px,
+    rgba(176, 196, 240, 0.04) 17px 18px
+  );
+  animation-duration: 1.6s;
+}
+@keyframes xcRain {
+  to {
+    transform: translate3d(-1.8%, 7%, 0);
+  }
+}
+
+/* The towers — the school's silhouette along the bottom edge. */
+.xc-flood-towers {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: clamp(90px, 16vh, 170px);
+}
+.xc-flood-towers g:last-child rect {
+  animation: xcWin 4.4s ease-in-out infinite alternate;
+}
+@keyframes xcWin {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 0.95;
+  }
+}
+
+/* Lightning — a white-violet wash over everything + the bolt itself. */
+.xc-flood-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 55;
+  background:
+    radial-gradient(130% 42% at 50% -12%, rgba(214, 206, 255, 0.42), transparent 62%),
+    linear-gradient(180deg, rgba(190, 184, 255, 0.22), rgba(190, 184, 255, 0.04) 45%, transparent 70%);
+  mix-blend-mode: screen;
+  animation: xcFlash 0.75s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes xcFlash {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  18% {
+    opacity: 0.25;
+  }
+  30% {
+    opacity: 0.95;
+  }
+  55% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.xc-flood-bolt {
+  position: absolute;
+  top: -2%;
+  width: 16%;
+  height: 62%;
+  z-index: 56;
+  animation: xcBolt 0.75s ease-out forwards;
+  filter: drop-shadow(0 0 14px rgba(190, 170, 255, 0.8));
+  pointer-events: none;
+}
+@keyframes xcBolt {
+  0% {
+    opacity: 0;
+  }
+  7% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.3;
+  }
+  32% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* --- the swarm --------------------------------------------------------
+   The letters are one WebGL draw call on this canvas; DOM only keeps
+   the four hit buttons that ride the sealed postbags. */
+
+.xc-flood-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.xc-flood-hits {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+.xc-flood-hit {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 132px;
+  height: 90px;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 7px;
+  pointer-events: auto;
+  cursor: pointer;
+  will-change: transform;
+}
+.xc-flood-hit:focus-visible {
+  outline: 2px solid var(--color-sage);
+  outline-offset: 5px;
+}
+
+/* The tab — the letter inside, sticking out of the envelope's top edge. */
+.xc-flood-tab {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 18px);
+  width: 118%;
+  padding: 5px 9px 6px;
+  border-radius: 2.5px 2.5px 0 0;
+  background: linear-gradient(180deg, #fcf7e8, #f1e6c8);
+  box-shadow:
+    inset 0 0 0 1px rgba(28, 74, 54, 0.14),
+    0 -3px 10px rgba(2, 6, 14, 0.45);
+  transform: translateX(-50%) rotate(-1.6deg);
+  transition: transform 0.4s var(--ease-space);
+  pointer-events: none;
+  text-align: left;
+}
+.xc-flood-hit:hover .xc-flood-tab,
+.xc-flood-hit:focus-visible .xc-flood-tab {
+  transform: translateX(-50%) translateY(-7px) rotate(-1.6deg);
+}
+.xc-flood-tab .pk-line {
+  display: block;
+  font-family: var(--font-hand);
+  font-size: 13.5px;
+  line-height: 1.12;
+  color: #3d4a68;
+  white-space: nowrap;
+}
+.xc-flood-tab .pk-score {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 9px;
+  letter-spacing: 0.02em;
+}
+.xc-flood-tab .pk-score s {
+  color: rgba(58, 99, 76, 0.6);
+  font-weight: 500;
+}
+.xc-flood-tab .pk-score b {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* --- the caught envelope (DOM, drawn SVG — the hero moment) ------------ */
+
+.xc-flood-env {
+  position: relative;
+  width: 128px;
+  height: 82px;
+}
+.xc-flood-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Paper tooth — one shared noise tile over every face. */
+.xc-flood-env::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+/* Inked address on sealed postbags. */
+.xc-ink {
+  font-family: var(--font-hand);
+  font-size: 13px;
+  fill: #33415e;
+  opacity: 0.75;
+  letter-spacing: 0.02em;
+}
+
+/* The wax crack — driven by .is-open / .is-cracked. */
+.xc-seal-l,
+.xc-seal-r {
+  transition: transform 0.4s var(--ease-space);
+}
+.is-cracked .xc-seal-l {
+  transform: translate(-2.2px, 1px) rotate(-7deg);
+}
+.is-cracked .xc-seal-r {
+  transform: translate(2.2px, 1.4px) rotate(6deg);
+}
+
+/* The caught envelope — a real cover photograph, twine + wax overlaid. */
+.xc-flood-bigenv {
+  width: 128px;
+  height: 82px;
+}
+.xc-bigenv-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow:
+    0 18px 40px rgba(2, 5, 12, 0.6),
+    0 2px 8px rgba(2, 5, 12, 0.4);
+}
+.xc-bigenv-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+.xc-bigenv-ov {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.xc-flood-bigenv.is-open .xc-seal-l {
+  transform: translate(-9px, 4px) rotate(-16deg);
+}
+.xc-flood-bigenv.is-open .xc-seal-r {
+  transform: translate(9px, 5px) rotate(13deg);
+}
+
+/* Warm bleed behind the unfolded sheet. */
+.xc-flood-bleed {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(760px, 110vw);
+  height: min(560px, 80vh);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(232, 183, 61, 0.22), transparent 72%);
+  mix-blend-mode: screen;
+}
+
+/* --- the sheet ---------------------------------------------------------- */
+
+.xc-flood-sheet {
+  position: relative;
+  border-radius: 6px;
+  border: 1px solid rgba(28, 74, 54, 0.14);
+  background:
+    linear-gradient(transparent calc(33.4% - 0.5px), rgba(28, 74, 54, 0.05) 33.4%, transparent calc(33.4% + 0.5px)),
+    linear-gradient(transparent calc(66.7% - 0.5px), rgba(28, 74, 54, 0.05) 66.7%, transparent calc(66.7% + 0.5px)),
+    linear-gradient(168deg, #faf5e6 0%, #f2e8cf 100%);
+}

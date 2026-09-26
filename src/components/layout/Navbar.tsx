@@ -15,7 +15,7 @@ import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from 
 const NAV_OFFSET = 88;
 const NAV_OFFSET_LG = 104;
 
-const DRAWER_NUMERALS = ["I", "II", "III", "IV", "V"] as const;
+const DRAWER_NUMERALS = ["I", "II", "III", "IV", "V", "VI"] as const;
 
 function useScrolled(): boolean {
   const [scrolled, setScrolled] = useState(false);

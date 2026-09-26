@@ -10,6 +10,74 @@ export const NAV_LINKS = [
   { href: "#faq", label: "FAQ" },
 ] as const;
 
+/** Portraits of the tutors. Fill `name`, `role`, and `bio` when the copy arrives. */
+export interface FacultyMember {
+  id: string;
+  name?: string;
+  role?: string;
+  bio?: string;
+}
+
+export const FACULTY: readonly FacultyMember[] = [
+  {
+    id: "01",
+    name: "Sarvar",
+    role: "Tutor",
+    bio: "A 1550 — 760 Reading and Writing, 790 Math — with IELTS 8.0 and an A in A Level Math. One year of teaching.",
+  },
+  { id: "02" },
+  { id: "03" },
+];
+
+export interface FameReport {
+  name: string;
+  score: number;
+  rw: number;
+  math: number;
+}
+
+/** The sheet at the end of the hall. */
+export const FAME_END: FameReport = { name: "Sarvar", score: 1550, rw: 760, math: 790 };
+
+/** Sixteen reports down each wall, nearest first. */
+export const FAME_LEFT: readonly FameReport[] = [
+  { name: "Dilnoza R.", score: 1480, rw: 740, math: 740 },
+  { name: "Madina T.", score: 1390, rw: 680, math: 710 },
+  { name: "Azizbek N.", score: 1510, rw: 740, math: 770 },
+  { name: "Sevara K.", score: 1440, rw: 700, math: 740 },
+  { name: "Bekzod A.", score: 1320, rw: 640, math: 680 },
+  { name: "Kamola S.", score: 1470, rw: 720, math: 750 },
+  { name: "Jasur M.", score: 1540, rw: 760, math: 780 },
+  { name: "Nilufar Y.", score: 1410, rw: 690, math: 720 },
+  { name: "Sardor H.", score: 1360, rw: 660, math: 700 },
+  { name: "Dilshod R.", score: 1490, rw: 730, math: 760 },
+  { name: "Mohira I.", score: 1430, rw: 710, math: 720 },
+  { name: "Akmal B.", score: 1520, rw: 750, math: 770 },
+  { name: "Ziyoda P.", score: 1380, rw: 670, math: 710 },
+  { name: "Sherzod U.", score: 1460, rw: 710, math: 750 },
+  { name: "Feruza L.", score: 1330, rw: 650, math: 680 },
+  { name: "Bobur Q.", score: 1500, rw: 730, math: 770 },
+];
+
+export const FAME_RIGHT: readonly FameReport[] = [
+  { name: "Timur K.", score: 1520, rw: 760, math: 760 },
+  { name: "Malika A.", score: 1410, rw: 680, math: 730 },
+  { name: "Javlon S.", score: 1360, rw: 640, math: 720 },
+  { name: "Anvar D.", score: 1450, rw: 700, math: 750 },
+  { name: "Shahzoda E.", score: 1480, rw: 720, math: 760 },
+  { name: "Ulugbek G.", score: 1310, rw: 630, math: 680 },
+  { name: "Nigora V.", score: 1420, rw: 700, math: 720 },
+  { name: "Rustam C.", score: 1530, rw: 760, math: 770 },
+  { name: "Lola F.", score: 1370, rw: 660, math: 710 },
+  { name: "Oybek J.", score: 1490, rw: 740, math: 750 },
+  { name: "Gulnoza A.", score: 1340, rw: 650, math: 690 },
+  { name: "Miraziz T.", score: 1460, rw: 700, math: 760 },
+  { name: "Diyora S.", score: 1400, rw: 680, math: 720 },
+  { name: "Islom K.", score: 1510, rw: 740, math: 770 },
+  { name: "Nodira E.", score: 1350, rw: 650, math: 700 },
+  { name: "Jahongir M.", score: 1440, rw: 690, math: 750 },
+];
+
 export const HERO_PLATES = [
   { houseId: "aurelion" as const, score: "1480", school: "AKFA", award: "Full tuition" },
   { houseId: "veridian" as const, score: "1520", school: "NewUU", award: "100% merit" },
