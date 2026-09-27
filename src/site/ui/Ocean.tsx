@@ -29,7 +29,7 @@ interface Line {
 }
 
 const PALETTE = {
-  day: { bg: "#f4eee2", ink: "22,33,43", gold: "168,118,46", goldSoft: "239,220,176", paper: "#f7f2e8" },
+  day: { bg: "#fcf9f2", ink: "22,33,43", gold: "168,118,46", goldSoft: "239,220,176", paper: "#fffdf9" },
   night: { bg: "#0b131b", ink: "236,228,211", gold: "212,169,94", goldSoft: "239,220,176", paper: "#0b131b" },
 } as const;
 

@@ -38,7 +38,7 @@ function PlanCard({ plan, currency, index }: { plan: (typeof PLANS)[number]; cur
         onMouseMove={spotlight}
         className={cn(
           "group relative flex h-full flex-col overflow-hidden rounded-[28px] border p-7 transition-transform duration-700 ease-[var(--ease-out-expo)] hover:-translate-y-1.5 md:p-9",
-          dark ? "border-gold/40 bg-ink text-paper shadow-[0_50px_100px_-40px_rgb(22_33_43/0.6)] md:pb-12" : "border-ink/10 bg-[#fbf8f2] text-ink",
+          dark ? "border-gold/40 bg-gryffindor-night text-paper shadow-[0_50px_100px_-40px_rgb(90_20_16/0.6)] md:pb-12" : "border-ink/10 bg-card text-ink",
         )}
       >
         <span
@@ -99,7 +99,7 @@ function PlanCard({ plan, currency, index }: { plan: (typeof PLANS)[number]; cur
 export function Tuition() {
   const [currency, setCurrency] = useState<Currency>("uzs");
   return (
-    <section id="pricing" aria-label="Tuition" className="bg-paper pb-28 md:pb-40">
+    <section id="pricing" aria-label="Tuition" className="bg-gryffindor-wash py-28 md:py-40">
       <div className="mx-auto max-w-[1320px] px-5 md:px-10">
         <div className="grid gap-8 md:grid-cols-12 md:items-end">
           <div className="md:col-span-7">
@@ -107,7 +107,7 @@ export function Tuition() {
             <RevealLines
               as="h2"
               className="display mt-6 text-[clamp(2.4rem,5vw,4.6rem)]"
-              lines={["Choose how much", <em key="hi" className="text-gold">help you want.</em>]}
+              lines={["Choose how much", <em key="hi" className="text-gryffindor">help you want.</em>]}
             />
           </div>
           <div className="flex flex-col gap-6 md:col-span-5 md:items-end">
@@ -116,7 +116,7 @@ export function Tuition() {
                 Every plan starts with the diagnostic. The score pact applies from Scholar up.
               </p>
             </FadeUp>
-            <div role="radiogroup" aria-label="Currency" className="inline-flex self-start rounded-full border border-ink/10 bg-[#fbf8f2] p-1 md:self-end">
+            <div role="radiogroup" aria-label="Currency" className="inline-flex self-start rounded-full border border-ink/10 bg-card p-1 md:self-end">
               {(["uzs", "usd"] as const).map((c) => (
                 <button
                   key={c}

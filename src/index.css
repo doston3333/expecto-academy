@@ -15,9 +15,10 @@
   --font-hand: "Caveat", "Segoe Script", cursive;
   --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
 
-  --color-paper: #f4eee2;
-  --color-paper-2: #ece4d3;
-  --color-paper-3: #e0d4bd;
+  --color-paper: #fcf9f2;
+  --color-paper-2: #f5efe2;
+  --color-paper-3: #eadfc8;
+  --color-card: #fffdf9;
   --color-ink: #16212b;
   --color-ink-2: #2b3945;
   --color-ink-soft: #5d6873;
@@ -48,6 +49,13 @@
   --color-hufflepuff: #9c7208;
   --color-hufflepuff-fill: #e2aa25;
   --color-hufflepuff-2: #ecb939;
+
+  /* Section washes and the one house-colored night. */
+  --color-gryffindor-wash: #fbefea;
+  --color-slytherin-wash: #ecf4ee;
+  --color-ravenclaw-wash: #edf1f9;
+  --color-hufflepuff-wash: #fcf5de;
+  --color-gryffindor-night: #5a1410;
 }
 
 .sr-only {

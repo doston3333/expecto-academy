@@ -123,7 +123,7 @@ export function Nav() {
               rel="noreferrer"
               className={cn(
                 "hidden h-11 items-center rounded-full px-5 text-[0.86rem] font-medium transition-colors duration-300 sm:inline-flex",
-                dark ? "bg-paper text-ink hover:bg-gold-3" : "bg-ink text-paper hover:bg-gold",
+                dark ? "bg-paper text-ink hover:bg-gold-3" : "bg-gryffindor text-paper hover:bg-gold",
               )}
             >
               Get Sorted

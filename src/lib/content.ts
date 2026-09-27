@@ -5,17 +5,19 @@ export const NEXT_COHORT = new Date("2026-09-08T09:00:00+05:00");
 export const NAV_LINKS = [
   { href: "#film", label: "How it works" },
   { href: "#method", label: "Method" },
+  { href: "#teachers", label: "Teachers" },
   { href: "#stories", label: "Results" },
   { href: "#pricing", label: "Tuition" },
   { href: "#faq", label: "FAQ" },
 ] as const;
 
-/** Portraits of the tutors. Fill `name`, `role`, and `bio` when the copy arrives. */
+/** The tutors. A teacher appears on the page once `name` is filled in. */
 export interface FacultyMember {
   id: string;
   name?: string;
   role?: string;
   bio?: string;
+  sat?: { total: number; rw: number; math: number };
 }
 
 export const FACULTY: readonly FacultyMember[] = [
@@ -24,6 +26,7 @@ export const FACULTY: readonly FacultyMember[] = [
     name: "Sarvar",
     role: "Tutor",
     bio: "A 1550 — 760 Reading and Writing, 790 Math — with IELTS 8.0 and an A in A Level Math. One year of teaching.",
+    sat: { total: 1550, rw: 760, math: 790 },
   },
   { id: "02" },
   { id: "03" },

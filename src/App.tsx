@@ -13,6 +13,7 @@ import { Pact } from "@/site/Pact";
 import { Proof } from "@/site/Proof";
 import { Results } from "@/site/Results";
 import { Statement } from "@/site/Statement";
+import { Teachers } from "@/site/Teachers";
 import { Tuition } from "@/site/Tuition";
 import { Worth } from "@/site/Worth";
 import { BoilFilters } from "@/site/ui/primitives";
@@ -48,6 +49,7 @@ function Page() {
           <Film />
           <Statement lead="The test doesn’t change." highlight="Your score can." eyebrow="Chapter II · the method" />
           <Method />
+          <Teachers />
           <Pact />
           <Results />
           <Worth />

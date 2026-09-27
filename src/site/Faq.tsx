@@ -20,7 +20,19 @@ function Item({ q, a, open, onToggle, index }: { q: string; a: string; open: boo
           <span className={cn("flex-1 font-serif text-[1.2rem] leading-snug font-light tracking-[-0.01em] transition-colors duration-300 md:text-[1.45rem]", open ? "text-ink" : "text-ink-2 group-hover:text-ink")}>
             {q}
           </span>
-          <span className={cn("relative grid size-9 shrink-0 place-items-center rounded-full border transition-colors duration-500", open ? "border-ink bg-ink text-paper" : "border-ink/15 text-ink")} aria-hidden="true">
+          <span
+            className={cn("relative grid size-9 shrink-0 place-items-center rounded-full border transition-colors duration-500", open ? "text-paper" : "border-ink/15 text-ink")}
+            style={
+              open
+                ? {
+                    backgroundColor: house(index).fill,
+                    borderColor: house(index).fill,
+                    color: house(index).id === "hufflepuff" ? "var(--color-ink)" : undefined,
+                  }
+                : undefined
+            }
+            aria-hidden="true"
+          >
             <span className="absolute h-px w-3 bg-current" />
             <motion.span className="absolute h-3 w-px bg-current" animate={{ rotate: open ? 90 : 0, opacity: open ? 0 : 1 }} transition={{ duration: 0.4, ease: EASE }} />
           </span>
@@ -56,7 +68,7 @@ export function Faq() {
             <RevealLines
               as="h2"
               className="display mt-6 text-[clamp(2.4rem,4.4vw,4rem)]"
-              lines={["Questions we hear", <em key="hi" className="text-gold">every week.</em>]}
+              lines={["Questions we hear", <em key="hi" className="text-slytherin">every week.</em>]}
             />
             <FadeUp delay={0.2}>
               <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="link-draw mt-8 inline-flex items-center gap-2 pb-0.5 text-[0.92rem] text-ink">

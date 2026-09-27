@@ -36,7 +36,7 @@ export function Worth() {
               </p>
             </FadeUp>
 
-            <FadeUp delay={0.25} className="mt-12 rounded-[26px] border border-ink/10 bg-[#fbf8f2] p-6 md:p-8">
+            <FadeUp delay={0.25} className="mt-12 rounded-[26px] border border-ink/10 bg-card p-6 md:p-8">
               <div className="flex items-end justify-between gap-4">
                 <label htmlFor={inputId} className="text-[0.7rem] font-medium tracking-[0.18em] text-ink-soft uppercase">
                   Your score

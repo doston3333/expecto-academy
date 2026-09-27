@@ -2,7 +2,7 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { OATH_RIDER, OATH_TERMS } from "@/lib/content";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { DrawPath, Eyebrow, FadeUp, HOUSE, HouseRibbon, RevealLines, Star } from "./ui/primitives";
+import { DrawPath, Eyebrow, FadeUp, HouseRibbon, RevealLines, Star } from "./ui/primitives";
 
 const SIGNATURE =
   "M8 36 C 30 8, 44 6, 50 24 C 54 36, 40 44, 52 40 C 70 34, 78 12, 92 18 C 104 23, 96 40, 110 36 C 128 30, 138 14, 152 20 C 162 24, 158 38, 172 34 C 188 29, 198 22, 212 26";
@@ -34,14 +34,14 @@ export function Pact() {
   const y = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [140, 0]);
 
   return (
-    <section id="oath" aria-label="The score pact" data-theme="dark" className="relative overflow-hidden bg-night py-28 text-paper md:py-44">
+    <section id="oath" aria-label="The score pact" data-theme="dark" className="relative overflow-hidden bg-gryffindor-night py-28 text-paper md:py-44">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/3 left-1/2 size-[70rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgb(212_169_94/0.14),transparent_60%)]"
+        className="pointer-events-none absolute top-1/3 left-1/2 size-[70rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgb(212_169_94/0.2),transparent_60%)]"
       />
       <div className="relative mx-auto grid max-w-[1320px] gap-16 px-5 md:grid-cols-12 md:items-center md:gap-10 md:px-10">
         <div className="md:col-span-5">
-          <Eyebrow color={HOUSE.slytherin.bright}>The score pact</Eyebrow>
+          <Eyebrow className="text-gold-2">The score pact</Eyebrow>
           <RevealLines
             as="h2"
             className="display mt-6 text-[clamp(2.5rem,4.4vw,4.4rem)]"

@@ -28,7 +28,7 @@ function WindowFrame({ breadcrumb, children, className }: { breadcrumb: string; 
   return (
     <div
       className={cn(
-        "relative flex flex-col overflow-hidden rounded-[22px] border border-ink/10 bg-[#fbf8f2] shadow-[0_50px_100px_-50px_rgb(22_33_43/0.45),0_2px_6px_rgb(22_33_43/0.04)] md:rounded-[28px]",
+        "relative flex flex-col overflow-hidden rounded-[22px] border border-ink/10 bg-card shadow-[0_50px_100px_-50px_rgb(22_33_43/0.45),0_2px_6px_rgb(22_33_43/0.04)] md:rounded-[28px]",
         className,
       )}
     >
@@ -55,7 +55,7 @@ function FilmIntro() {
           <RevealLines
             as="h2"
             className="display mt-6 text-[clamp(2.6rem,6.4vw,6rem)]"
-            lines={["Watch the score", <em key="hi" className="text-gold">get built.</em>]}
+            lines={["Watch the score", <em key="hi" className="text-gryffindor">get built.</em>]}
           />
         </div>
         <FadeUp className="md:col-span-4" delay={0.2}>

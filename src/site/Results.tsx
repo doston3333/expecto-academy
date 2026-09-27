@@ -30,7 +30,7 @@ function Letter({ t, index }: { t: Testimonial; index: number }) {
   const h = house(index);
   return (
     <FadeUp delay={(index % 2) * 0.12} className={cn("relative", TILT[index % TILT.length])}>
-      <article className="relative rounded-[4px] bg-[#fbf8f2] px-6 pt-9 pb-7 shadow-[0_40px_70px_-40px_rgb(22_33_43/0.45),0_1px_0_rgb(22_33_43/0.06)] md:px-10 md:pt-12 md:pb-9">
+      <article className="relative rounded-[4px] bg-card px-6 pt-9 pb-7 shadow-[0_40px_70px_-40px_rgb(22_33_43/0.45),0_1px_0_rgb(22_33_43/0.06)] md:px-10 md:pt-12 md:pb-9">
         <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 rounded-t-[4px]" style={{ backgroundColor: h.fill }} />
         <Seal index={index} />
 
@@ -90,7 +90,7 @@ function Slip({ r, top, delay, play }: { r: FameReport; top: boolean; delay: num
       transition={{ duration: 0.6, ease: EASE, delay }}
       className={cn(
         "flex items-center justify-center gap-2 rounded-[3px] border px-1.5 py-1.5 md:justify-between md:px-3 md:py-2",
-        top ? "border-gold/50 bg-gold-3" : "border-ink/10 bg-[#fbf8f2]",
+        top ? "border-gold/50 bg-gold-3" : "border-ink/10 bg-card",
       )}
     >
       <span className="font-serif text-[0.8rem] tnum md:text-[1rem]">{r.score}</span>
@@ -176,11 +176,11 @@ function Register() {
 
 export function Results() {
   return (
-    <section id="stories" aria-label="Results" className="bg-paper-2 py-28 md:py-40">
+    <section id="stories" aria-label="Results" className="bg-hufflepuff-wash py-28 md:py-40">
       <div className="mx-auto max-w-[1320px] px-5 md:px-10">
         <div className="grid gap-6 md:grid-cols-12 md:items-end">
           <div className="md:col-span-7">
-            <Eyebrow color={HOUSE.ravenclaw.deep}>Letters home</Eyebrow>
+            <Eyebrow color={HOUSE.hufflepuff.deep}>Letters home</Eyebrow>
             <RevealLines
               as="h2"
               className="display mt-6 text-[clamp(2.6rem,6vw,5.6rem)]"

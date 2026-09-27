@@ -28,7 +28,7 @@ export function Proof() {
         <div className="grid gap-14 md:grid-cols-3 md:gap-8">
           {STATS.map((stat, i) => (
             <FadeUp key={stat.label} delay={i * 0.12} className="relative">
-              <p className="display text-[clamp(4rem,9vw,8.4rem)] text-ink">
+              <p className="display text-[clamp(4rem,9vw,8.4rem)]" style={{ color: house(i).deep }}>
                 <span className="text-gold">{stat.prefix}</span>
                 <Counter to={stat.value} duration={2.4} delay={0.15 + i * 0.12} />
                 <span className="text-gold">{stat.suffix}</span>

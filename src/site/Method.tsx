@@ -4,7 +4,7 @@ import { DrawPath, Eyebrow, FadeUp, house, HOUSE, RevealLines, Star } from "./ui
 function EveningIcon() {
   return (
     <>
-      <DrawPath d="M92 8 C 80 11, 76 27, 86 35 C 94 41, 106 37, 110 29 C 98 33, 88 23, 92 8 Z" className="text-gold" stroke="currentColor" strokeWidth="1.8" />
+      <DrawPath d="M92 8 C 80 11, 76 27, 86 35 C 94 41, 106 37, 110 29 C 98 33, 88 23, 92 8 Z" className="text-(--accent)" stroke="currentColor" strokeWidth="1.8" />
       <DrawPath d="M37 40 a7 7 0 1 1 -14 0 a7 7 0 1 1 14 0" stroke="currentColor" strokeWidth="1.6" delay={0.3} duration={0.8} />
       <DrawPath d="M59 36 a7 7 0 1 1 -14 0 a7 7 0 1 1 14 0" stroke="currentColor" strokeWidth="1.6" delay={0.45} duration={0.8} />
       <DrawPath d="M81 40 a7 7 0 1 1 -14 0 a7 7 0 1 1 14 0" stroke="currentColor" strokeWidth="1.6" delay={0.6} duration={0.8} />
@@ -20,8 +20,8 @@ function MocksIcon() {
       <DrawPath d="M44 8 L90 13 L85 70 L40 65 Z" stroke="currentColor" strokeWidth="1.4" opacity={0.5} />
       <DrawPath d="M28 14 L74 14 L74 72 L28 72 Z" stroke="currentColor" strokeWidth="1.6" delay={0.25} />
       <DrawPath d="M36 26 H64 M36 34 H60 M36 42 H66 M36 50 H52" stroke="currentColor" strokeWidth="1.4" delay={0.6} />
-      <DrawPath d="M38 60 l5 5 l11 -12" className="text-gold" stroke="currentColor" strokeWidth="2" delay={1.1} duration={0.6} />
-      <DrawPath d="M96 36 v18 M88 45 h16" className="text-gold" stroke="currentColor" strokeWidth="2" delay={1.3} duration={0.5} />
+      <DrawPath d="M38 60 l5 5 l11 -12" className="text-(--accent)" stroke="currentColor" strokeWidth="2" delay={1.1} duration={0.6} />
+      <DrawPath d="M96 36 v18 M88 45 h16" className="text-(--accent)" stroke="currentColor" strokeWidth="2" delay={1.3} duration={0.5} />
     </>
   );
 }
@@ -31,7 +31,7 @@ function MentorIcon() {
     <>
       <DrawPath d="M18 10 H66 L78 22 V72 H18 Z M66 10 V22 H78" stroke="currentColor" strokeWidth="1.6" />
       <DrawPath d="M28 30 H60 M28 38 H56" stroke="currentColor" strokeWidth="1.4" delay={0.4} />
-      <DrawPath d="M28 54 l6 6 l12 -14" className="text-gold" stroke="currentColor" strokeWidth="2" delay={0.8} duration={0.6} />
+      <DrawPath d="M28 54 l6 6 l12 -14" className="text-(--accent)" stroke="currentColor" strokeWidth="2" delay={0.8} duration={0.6} />
       <DrawPath d="M68 70 L102 34 L110 41 L76 76 L66 78 Z M96 40 L104 47" stroke="currentColor" strokeWidth="1.6" delay={1} />
     </>
   );
@@ -41,14 +41,14 @@ const ICONS = [EveningIcon, MocksIcon, MentorIcon];
 
 export function Method() {
   return (
-    <section id="method" aria-label="The method" className="bg-paper pt-10 pb-28 md:pb-40">
+    <section id="method" aria-label="The method" className="bg-ravenclaw-wash pt-24 pb-28 md:pt-32 md:pb-40">
       <div className="mx-auto max-w-[1320px] px-5 md:px-10">
         <div className="max-w-3xl">
           <Eyebrow color={HOUSE.ravenclaw.deep}>The method</Eyebrow>
           <RevealLines
             as="h2"
             className="display mt-6 text-[clamp(2.4rem,5.4vw,5rem)]"
-            lines={["Three things that", <em key="hi" className="text-gold">move a score.</em>]}
+            lines={["Three things that", <em key="hi" className="text-ravenclaw">move a score.</em>]}
           />
         </div>
 
@@ -56,7 +56,7 @@ export function Method() {
           {METHOD_PILLARS.map((pillar, i) => {
             const Icon = ICONS[i % ICONS.length];
             return (
-              <FadeUp key={pillar.n} delay={i * 0.12} className="group relative flex flex-col bg-paper p-7 transition-colors duration-700 hover:bg-[#f8f4ec] md:p-10">
+              <FadeUp key={pillar.n} delay={i * 0.12} className="group relative flex flex-col bg-card p-7 transition-colors duration-700 hover:bg-white md:p-10">
                 <span
                   aria-hidden="true"
                   className="absolute inset-x-0 top-0 h-1 origin-top transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-y-[2]"
@@ -64,7 +64,7 @@ export function Method() {
                 />
                 <div className="flex items-start justify-between">
                   <span className="font-serif text-[0.95rem] tnum" style={{ color: house(i).deep }}>{pillar.n}</span>
-                  <svg viewBox="0 0 120 80" className="boil h-24 w-36 text-ink transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-1 md:h-32 md:w-48" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" style={{ ["--accent" as string]: house(i).fill }} className="boil h-24 w-36 text-ink transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-1 md:h-32 md:w-48" aria-hidden="true">
                     <Icon />
                   </svg>
                 </div>
