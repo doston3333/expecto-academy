@@ -16,8 +16,10 @@ export interface FacultyMember {
   id: string;
   name?: string;
   role?: string;
+  school?: string;
   bio?: string;
-  sat?: { total: number; rw: number; math: number };
+  /** Up to three headline facts, shown as chips. */
+  highlights?: readonly { label: string; value: string }[];
 }
 
 export const FACULTY: readonly FacultyMember[] = [
@@ -25,11 +27,35 @@ export const FACULTY: readonly FacultyMember[] = [
     id: "01",
     name: "Sarvar",
     role: "Tutor",
-    bio: "A 1550 — 760 Reading and Writing, 790 Math — with IELTS 8.0 and an A in A Level Math. One year of teaching.",
-    sat: { total: 1550, rw: 760, math: 790 },
+    bio: "760 in Reading and Writing, 790 in Math. One year of teaching.",
+    highlights: [
+      { label: "SAT", value: "1550" },
+      { label: "IELTS", value: "8.0" },
+      { label: "A Level Math", value: "A" },
+    ],
   },
-  { id: "02" },
-  { id: "03" },
+  {
+    id: "02",
+    name: "Kattabek",
+    role: "Tutor",
+    school: "Yonsei University",
+    highlights: [
+      { label: "SAT", value: "1570" },
+      { label: "IELTS", value: "7.5" },
+      { label: "A Level Math", value: "A*" },
+    ],
+  },
+  {
+    id: "03",
+    name: "Kamoliddin Siddiqov",
+    role: "IELTS and SAT tutor",
+    school: "Inha University, Korea",
+    bio: "18 years old. Studies at Inha University in Korea on a full scholarship.",
+    highlights: [
+      { label: "Students taught", value: "400+" },
+      { label: "Scholarship", value: "100%" },
+    ],
+  },
 ];
 
 export interface FameReport {

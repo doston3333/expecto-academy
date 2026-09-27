@@ -2,7 +2,9 @@ import { FACULTY, type FacultyMember } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { Eyebrow, FadeUp, house, HOUSE, RevealLines } from "./ui/primitives";
 
-const TEACHERS = FACULTY.filter((t): t is FacultyMember & { name: string } => Boolean(t.name));
+type Teacher = FacultyMember & { name: string };
+
+const TEACHERS = FACULTY.filter((t): t is Teacher => Boolean(t.name));
 
 const SHIELD = "M4 4 H60 V38 C60 57 46 69 32 76 C18 69 4 57 4 38 Z";
 
@@ -20,31 +22,33 @@ function Crest({ name, index }: { name: string; index: number }) {
   );
 }
 
-const SCORE_CHIPS = [
-  { key: "total", label: "SAT total", tone: "bg-hufflepuff-wash text-hufflepuff" },
-  { key: "rw", label: "Reading & Writing", tone: "bg-ravenclaw-wash text-ravenclaw" },
-  { key: "math", label: "Math", tone: "bg-gryffindor-wash text-gryffindor" },
+const CHIP_TONES = [
+  "bg-hufflepuff-wash text-hufflepuff",
+  "bg-ravenclaw-wash text-ravenclaw",
+  "bg-gryffindor-wash text-gryffindor",
 ] as const;
 
-function TeacherCard({ t, index }: { t: FacultyMember & { name: string }; index: number }) {
+function TeacherCard({ t, index }: { t: Teacher; index: number }) {
   const h = house(index + 1);
+  const highlights = (t.highlights ?? []).slice(0, CHIP_TONES.length);
+  const meta = [t.role, t.school].filter(Boolean).join(" · ");
   return (
-    <FadeUp delay={0.1 + index * 0.1}>
-      <article className="relative overflow-hidden rounded-[22px] border border-ink/10 bg-card p-6 shadow-[0_30px_60px_-40px_rgb(22_33_43/0.35)] md:p-8">
+    <FadeUp delay={0.1 + index * 0.1} className="h-full">
+      <article className="relative h-full overflow-hidden rounded-[22px] border border-ink/10 bg-card p-6 shadow-[0_30px_60px_-40px_rgb(22_33_43/0.35)] md:p-8">
         <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1.5" style={{ backgroundColor: h.fill }} />
         <div className="flex items-center gap-5">
           <Crest name={t.name} index={index} />
-          <div>
+          <div className="min-w-0">
             <h3 className="font-serif text-[2rem] leading-none font-light tracking-[-0.03em] md:text-[2.4rem]">{t.name}</h3>
-            {t.role ? <p className="mt-2 text-[0.9rem] text-ink-soft">{t.role}</p> : null}
+            {meta ? <p className="mt-2 text-[0.9rem] text-ink-soft">{meta}</p> : null}
           </div>
         </div>
-        {t.sat ? (
-          <dl className="mt-7 grid grid-cols-3 gap-2">
-            {SCORE_CHIPS.map((chip) => (
-              <div key={chip.key} className={cn("flex flex-col-reverse gap-1.5 rounded-2xl px-2 py-3.5 text-center", chip.tone)}>
-                <dt className="text-[0.7rem] leading-tight text-ink-soft">{chip.label}</dt>
-                <dd className="display text-[1.9rem] tnum md:text-[2.2rem]">{t.sat?.[chip.key]}</dd>
+        {highlights.length ? (
+          <dl className="mt-7 grid gap-2" style={{ gridTemplateColumns: `repeat(${highlights.length}, minmax(0, 1fr))` }}>
+            {highlights.map((c, i) => (
+              <div key={c.label} className={cn("flex flex-col-reverse gap-1.5 rounded-2xl px-2 py-3.5 text-center", CHIP_TONES[i])}>
+                <dt className="text-[0.7rem] leading-tight text-ink-soft">{c.label}</dt>
+                <dd className="display text-[1.9rem] tnum md:text-[2.2rem]">{c.value}</dd>
               </div>
             ))}
           </dl>
@@ -59,22 +63,31 @@ export function Teachers() {
   if (TEACHERS.length === 0) return null;
   return (
     <section id="teachers" aria-label="Teachers" className="bg-paper py-28 md:py-40">
-      <div className="mx-auto grid max-w-[1320px] gap-12 px-5 md:grid-cols-12 md:gap-10 md:px-10">
-        <div className="md:col-span-5">
-          <Eyebrow color={HOUSE.slytherin.deep}>The teachers</Eyebrow>
-          <RevealLines
-            as="h2"
-            className="display mt-6 text-[clamp(2.4rem,5vw,4.6rem)]"
-            lines={["The other side", <em key="hi" className="text-slytherin">of the desk.</em>]}
-          />
-          <FadeUp delay={0.15}>
-            <p className="mt-6 max-w-md text-[1rem] leading-relaxed text-ink-soft">
+      <div className="mx-auto max-w-[1320px] px-5 md:px-10">
+        <div className="grid gap-6 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-7">
+            <Eyebrow color={HOUSE.slytherin.deep}>The teachers</Eyebrow>
+            <RevealLines
+              as="h2"
+              className="display mt-6 text-[clamp(2.4rem,5vw,4.6rem)]"
+              lines={["The other side", <em key="hi" className="text-slytherin">of the desk.</em>]}
+            />
+          </div>
+          <FadeUp delay={0.15} className="md:col-span-4 md:col-start-9">
+            <p className="max-w-md text-[1rem] leading-relaxed text-ink-soft">
               Small evening groups on Tashkent time. The person across from you reads every mock and stays until the
               score moves.
             </p>
           </FadeUp>
         </div>
-        <div className={cn("grid content-start gap-5 md:col-span-6 md:col-start-7", TEACHERS.length > 1 && "lg:grid-cols-2")}>
+        <div
+          className={cn(
+            "mt-14 grid gap-5 md:mt-20",
+            TEACHERS.length === 1 && "max-w-xl",
+            TEACHERS.length >= 2 && "md:grid-cols-2",
+            TEACHERS.length >= 3 && "lg:grid-cols-3",
+          )}
+        >
           {TEACHERS.map((t, i) => (
             <TeacherCard key={t.id} t={t} index={i} />
           ))}
