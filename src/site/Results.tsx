@@ -1,9 +1,6 @@
-import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import { FAME_END, FAME_LEFT, FAME_RIGHT, TELEGRAM_URL, TESTIMONIALS, type FameReport } from "@/lib/content";
+import { SCORE_REPORTS, TELEGRAM_URL, TESTIMONIALS, type ScoreReport } from "@/lib/content";
 import { cn } from "@/lib/cn";
-import { motion, useInView } from "motion/react";
-import { useRef } from "react";
-import { Button, DrawPath, EASE, Eyebrow, FadeUp, house, HOUSE, RevealLines, Star } from "./ui/primitives";
+import { Button, DrawPath, Eyebrow, FadeUp, house, HOUSE, RevealLines, Star } from "./ui/primitives";
 
 type Testimonial = (typeof TESTIMONIALS)[number];
 
@@ -70,100 +67,73 @@ function Letter({ t, index }: { t: Testimonial; index: number }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* The register — every report, stacked by score                       */
+/* Real score reports                                                  */
 /* ------------------------------------------------------------------ */
 
-const BANDS = [1300, 1350, 1400, 1450, 1500, 1550] as const;
-const REPORTS: FameReport[] = [...FAME_LEFT, ...FAME_RIGHT, FAME_END];
-const COLUMNS = BANDS.map((min, i) => {
-  const max = BANDS[i + 1] ?? Number.POSITIVE_INFINITY;
-  return { min, reports: REPORTS.filter((r) => r.score >= min && r.score < max).sort((a, b) => a.score - b.score) };
-});
-const TALLEST = COLUMNS.reduce((best, c, i) => (c.reports.length > COLUMNS[best].reports.length ? i : best), 0);
+const LOWEST = Math.min(...SCORE_REPORTS.map((r) => r.total));
+const PERFECT_MATH = SCORE_REPORTS.filter((r) => r.math === 800).length;
 
-function Slip({ r, top, delay, play }: { r: FameReport; top: boolean; delay: number; play: boolean }) {
-  const reduced = usePrefersReducedMotion();
+function Section({ label, value }: { label: string; value: number }) {
+  const perfect = value === 800;
   return (
-    <motion.li
-      initial={reduced ? false : { opacity: 0, y: -14 }}
-      animate={play ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 0.6, ease: EASE, delay }}
-      className={cn(
-        "flex items-center justify-center gap-2 rounded-[3px] border px-1.5 py-1.5 md:justify-between md:px-3 md:py-2",
-        top ? "border-gold/50 bg-gold-3" : "border-ink/10 bg-card",
-      )}
-    >
-      <span className="font-serif text-[0.8rem] tnum md:text-[1rem]">{r.score}</span>
-      <span className="hidden truncate text-[0.74rem] text-ink-soft md:inline">
-        {top ? (
-          <span className="inline-flex items-center gap-1.5">
-            <Star size={9} className="text-gold" />
-            {r.name}
-          </span>
-        ) : (
-          r.name
-        )}
-      </span>
-    </motion.li>
+    <div className="flex flex-col-reverse justify-end gap-0.5">
+      <dt className="text-[0.7rem] leading-snug text-ink-soft">{label}</dt>
+      <dd className={cn("inline-flex items-center gap-1 font-serif text-[1.1rem] tnum md:text-[1.2rem]", perfect && "text-gryffindor")}>
+        {value}
+        {perfect ? <Star size={10} className="text-gold" /> : null}
+      </dd>
+    </div>
   );
 }
 
-function Register() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
-  const reduced = usePrefersReducedMotion();
-  const play = reduced || inView;
+function ReportCard({ r, index }: { r: ScoreReport; index: number }) {
+  const h = house(index);
+  return (
+    <FadeUp as="li" delay={(index % 5) * 0.06} y={16} className="h-full">
+      <article className="relative flex h-full flex-col overflow-hidden rounded-[12px] border border-ink/10 bg-card p-4 shadow-[0_24px_40px_-32px_rgb(22_33_43/0.4)] md:p-5">
+        <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1" style={{ backgroundColor: h.fill }} />
+        <p className="text-[0.72rem] text-ink-soft">{r.date ? `Digital SAT · ${r.date}` : "Digital SAT"}</p>
+        <p className="display mt-2 text-[2.6rem] leading-none tnum md:text-[3rem]">
+          <span className="sr-only">Total </span>
+          {r.total}
+        </p>
+        <dl className="mt-4 grid grid-cols-2 gap-2 border-t border-ink/10 pt-3">
+          <Section label="Reading & Writing" value={r.rw} />
+          <Section label="Math" value={r.math} />
+        </dl>
+        {r.note ? (
+          <p className="hand mt-3 text-[1.05rem] leading-tight md:text-[1.15rem]" style={{ color: h.deep }}>
+            {r.note}
+          </p>
+        ) : null}
+      </article>
+    </FadeUp>
+  );
+}
 
+function Reports() {
   return (
     <div className="mt-28 md:mt-40">
       <div className="grid gap-6 md:grid-cols-12 md:items-end">
         <div className="md:col-span-6">
-          <h3 className="display text-[clamp(2rem,3.6vw,3.2rem)]">Every report from last cohort.</h3>
+          <h3 className="display text-[clamp(2rem,3.6vw,3.2rem)]">Real score reports.</h3>
         </div>
         <FadeUp className="md:col-span-5 md:col-start-8">
           <p className="max-w-md text-[0.98rem] leading-relaxed text-ink-soft">
-            All {REPORTS.length} Digital SAT results, stacked by score. The highest is {FAME_END.name}’s {FAME_END.score}.
+            {SCORE_REPORTS.length} official College Board results from our students, names removed. Every one is {LOWEST} or
+            higher, and {PERFECT_MATH} are a perfect 800 in Math.
           </p>
         </FadeUp>
       </div>
 
-      <div ref={ref} className="mt-14 md:mt-20">
-        <div className="flex items-end gap-1.5 md:gap-4">
-          {COLUMNS.map((col, c) => (
-            <div key={col.min} className="flex min-w-0 flex-1 flex-col">
-              {c === TALLEST ? (
-                <motion.p
-                  aria-hidden="true"
-                  initial={reduced ? false : { opacity: 0 }}
-                  animate={play ? { opacity: 1 } : undefined}
-                  transition={{ duration: 0.6, ease: EASE, delay: 1.2 }}
-                  className="mb-1.5 rounded-[3px] border border-dashed border-ink/30 py-1 text-center md:py-1.5"
-                >
-                  <span className="hand text-[1rem] leading-none text-gryffindor md:text-[1.3rem]">yours?</span>
-                </motion.p>
-              ) : null}
-              <ul aria-label={`Scores from ${col.min}`} className="flex flex-col-reverse gap-1.5">
-                {col.reports.map((r, i) => (
-                  <Slip key={r.name} r={r} top={r === FAME_END} play={play} delay={c * 0.07 + i * 0.06} />
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <svg viewBox="0 0 1000 12" preserveAspectRatio="none" className="boil mt-3 h-3 w-full text-ink" aria-hidden="true">
-          <DrawPath d="M2 7 C 250 3, 500 10, 998 5" stroke="currentColor" strokeWidth="1.6" play={play} duration={1.1} />
-        </svg>
-        <div className="mt-2 flex gap-1.5 md:gap-4" aria-hidden="true">
-          {COLUMNS.map((col, c) => (
-            <p key={col.min} className="flex-1 text-center text-[0.68rem] text-ink-soft tnum md:text-[0.78rem]">
-              {c === COLUMNS.length - 1 ? col.min : `${col.min}+`}
-            </p>
-          ))}
-        </div>
-      </div>
+      <ul className="mt-14 grid grid-cols-2 gap-3 md:mt-20 md:grid-cols-3 md:gap-4 lg:grid-cols-5">
+        {SCORE_REPORTS.map((r, i) => (
+          <ReportCard key={`${r.total}-${r.rw}-${r.math}`} r={r} index={i} />
+        ))}
+      </ul>
 
       <FadeUp className="mt-14 flex flex-col items-start gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
-        <p className="font-serif text-[1.3rem] font-light text-ink-2 italic md:text-[1.5rem]">The next report on this pile could be yours.</p>
+        <p className="font-serif text-[1.3rem] font-light text-ink-2 italic md:text-[1.5rem]">The next report here could be yours.</p>
         <Button href={TELEGRAM_URL} external>
           Get Sorted
         </Button>
@@ -200,7 +170,7 @@ export function Results() {
           ))}
         </div>
 
-        <Register />
+        <Reports />
       </div>
     </section>
   );

@@ -58,6 +58,29 @@ export const FACULTY: readonly FacultyMember[] = [
   },
 ];
 
+/** Official College Board results from students, names removed. Highest first. */
+export interface ScoreReport {
+  total: number;
+  rw: number;
+  math: number;
+  /** Month of the sitting, when the report shows it. */
+  date?: string;
+  note?: string;
+}
+
+export const SCORE_REPORTS: readonly ScoreReport[] = [
+  { total: 1500, rw: 700, math: 800, date: "Mar 2025" },
+  { total: 1500, rw: 710, math: 790, date: "May 2025" },
+  { total: 1490, rw: 760, math: 730, date: "Mar 2026" },
+  { total: 1480, rw: 680, math: 800, date: "Mar 2025" },
+  { total: 1470, rw: 690, math: 780, note: "+170 since the last sitting" },
+  { total: 1470, rw: 680, math: 790, date: "Jun 2025" },
+  { total: 1460, rw: 660, math: 800, date: "Sep + Nov 2025", note: "superscore" },
+  { total: 1450, rw: 670, math: 780, date: "May 2025" },
+  { total: 1440, rw: 650, math: 790, date: "Jun 2025" },
+  { total: 1430, rw: 730, math: 700, date: "Jun 2026" },
+];
+
 export interface FameReport {
   name: string;
   score: number;
