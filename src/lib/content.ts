@@ -33,7 +33,7 @@ export const FACULTY: readonly FacultyMember[] = [
     id: "01",
     name: "Sarvar Madaminov",
     role: "Tutor",
-    school: "KAIST",
+    school: "KAIST University, Korea",
     bio: "760 in Reading and Writing, 790 in Math. One year of teaching experience.",
     house: "hufflepuff",
     highlights: [
@@ -77,8 +77,8 @@ export const FACULTY: readonly FacultyMember[] = [
     house: "slytherin",
     founder: true,
     highlights: [
-      { label: "IELTS", value: "7.5" },
       { label: "SAT", value: "1480" },
+      { label: "IELTS", value: "7.5" },
       { label: "Teaching", value: "1 year" },
     ],
   },
