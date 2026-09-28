@@ -11,6 +11,9 @@ export const NAV_LINKS = [
   { href: "#faq", label: "FAQ" },
 ] as const;
 
+/** House wash behind a mentor card. */
+export type FacultyHouse = "gryffindor" | "slytherin" | "ravenclaw" | "hufflepuff";
+
 /** The tutors. A teacher appears on the page once `name` is filled in. */
 export interface FacultyMember {
   id: string;
@@ -20,14 +23,19 @@ export interface FacultyMember {
   bio?: string;
   /** Up to three headline facts, shown as chips. */
   highlights?: readonly { label: string; value: string }[];
+  house: FacultyHouse;
+  /** Founders sit on the top row. */
+  founder?: boolean;
 }
 
 export const FACULTY: readonly FacultyMember[] = [
   {
     id: "01",
-    name: "Sarvar",
+    name: "Sarvar Madaminov",
     role: "Tutor",
-    bio: "760 in Reading and Writing, 790 in Math. One year of teaching.",
+    school: "KAIST",
+    bio: "760 in Reading and Writing, 790 in Math. One year of teaching experience.",
+    house: "hufflepuff",
     highlights: [
       { label: "SAT", value: "1550" },
       { label: "IELTS", value: "8.0" },
@@ -39,6 +47,7 @@ export const FACULTY: readonly FacultyMember[] = [
     name: "Kattabek",
     role: "Tutor",
     school: "Yonsei University",
+    house: "ravenclaw",
     highlights: [
       { label: "SAT", value: "1570" },
       { label: "IELTS", value: "7.5" },
@@ -48,12 +57,28 @@ export const FACULTY: readonly FacultyMember[] = [
   {
     id: "03",
     name: "Kamoliddin Siddiqov",
-    role: "IELTS and SAT tutor",
+    role: "Founder",
     school: "Inha University, Korea",
-    bio: "18 years old. Studies at Inha University in Korea on a full scholarship.",
+    bio: "Four years of teaching. Founder of Expecto Academy.",
+    house: "gryffindor",
+    founder: true,
     highlights: [
       { label: "Students taught", value: "400+" },
-      { label: "Scholarship", value: "100%" },
+      { label: "Teaching", value: "4 years" },
+    ],
+  },
+  {
+    id: "04",
+    name: "Mohinur Qayumova",
+    role: "Founder",
+    school: "Inha University, Korea",
+    bio: "One year of teaching experience.",
+    house: "slytherin",
+    founder: true,
+    highlights: [
+      { label: "IELTS", value: "7.5" },
+      { label: "SAT", value: "1480" },
+      { label: "Teaching", value: "1 year" },
     ],
   },
 ];

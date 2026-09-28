@@ -1,16 +1,25 @@
-import { FACULTY, type FacultyMember } from "@/lib/content";
+import { FACULTY, type FacultyHouse, type FacultyMember } from "@/lib/content";
 import { cn } from "@/lib/cn";
-import { Eyebrow, FadeUp, house, HOUSE, RevealLines } from "./ui/primitives";
+import { Eyebrow, FadeUp, HOUSE, RevealLines } from "./ui/primitives";
 
 type Teacher = FacultyMember & { name: string };
 
 const TEACHERS = FACULTY.filter((t): t is Teacher => Boolean(t.name));
+const FOUNDERS = TEACHERS.filter((t) => t.founder);
+const MENTORS = TEACHERS.filter((t) => !t.founder);
 
 const SHIELD = "M4 4 H60 V38 C60 57 46 69 32 76 C18 69 4 57 4 38 Z";
 
+const CARD_WASH: Record<FacultyHouse, string> = {
+  gryffindor: "bg-gryffindor-wash",
+  slytherin: "bg-slytherin-wash",
+  ravenclaw: "bg-ravenclaw-wash",
+  hufflepuff: "bg-hufflepuff-wash",
+};
+
 /** A house shield with the teacher's initial, in place of a portrait. */
-function Crest({ name, index }: { name: string; index: number }) {
-  const h = house(index + 1);
+function Crest({ name, houseId }: { name: string; houseId: FacultyHouse }) {
+  const h = HOUSE[houseId];
   return (
     <svg viewBox="0 0 64 80" className="h-20 w-16 shrink-0 drop-shadow-[0_10px_14px_rgb(22_33_43/0.22)] md:h-24 md:w-[4.8rem]" aria-hidden="true">
       <path d={SHIELD} style={{ fill: h.deep }} />
@@ -29,15 +38,15 @@ const CHIP_TONES = [
 ] as const;
 
 function TeacherCard({ t, index }: { t: Teacher; index: number }) {
-  const h = house(index + 1);
+  const h = HOUSE[t.house];
   const highlights = (t.highlights ?? []).slice(0, CHIP_TONES.length);
   const meta = [t.role, t.school].filter(Boolean).join(" · ");
   return (
     <FadeUp delay={0.1 + index * 0.1} className="h-full">
-      <article className="relative h-full overflow-hidden rounded-[22px] border border-ink/10 bg-card p-6 shadow-[0_30px_60px_-40px_rgb(22_33_43/0.35)] md:p-8">
+      <article className={cn("relative h-full overflow-hidden rounded-[22px] border border-ink/10 p-6 shadow-[0_30px_60px_-40px_rgb(22_33_43/0.35)] md:p-8", CARD_WASH[t.house])}>
         <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1.5" style={{ backgroundColor: h.fill }} />
         <div className="flex items-center gap-5">
-          <Crest name={t.name} index={index} />
+          <Crest name={t.name} houseId={t.house} />
           <div className="min-w-0">
             <h3 className="font-serif text-[2rem] leading-none font-light tracking-[-0.03em] md:text-[2.4rem]">{t.name}</h3>
             {meta ? <p className="mt-2 text-[0.9rem] text-ink-soft">{meta}</p> : null}
@@ -80,17 +89,17 @@ export function Teachers() {
             </p>
           </FadeUp>
         </div>
-        <div
-          className={cn(
-            "mt-14 grid gap-5 md:mt-20",
-            TEACHERS.length === 1 && "max-w-xl",
-            TEACHERS.length >= 2 && "md:grid-cols-2",
-            TEACHERS.length >= 3 && "lg:grid-cols-3",
-          )}
-        >
-          {TEACHERS.map((t, i) => (
-            <TeacherCard key={t.id} t={t} index={i} />
-          ))}
+        <div className="mt-14 flex flex-col gap-5 md:mt-20">
+          <div className="mx-auto grid w-full max-w-4xl gap-5 md:grid-cols-2">
+            {FOUNDERS.map((t, i) => (
+              <TeacherCard key={t.id} t={t} index={i} />
+            ))}
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {MENTORS.map((t, i) => (
+              <TeacherCard key={t.id} t={t} index={FOUNDERS.length + i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
