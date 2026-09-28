@@ -46,7 +46,8 @@ export const FACULTY: readonly FacultyMember[] = [
     id: "02",
     name: "Kattabek",
     role: "Tutor",
-    school: "Yonsei University",
+    school: "Yonsei University, Korea",
+    bio: "800 in Math, 770 in Reading and Writing. One year of teaching experience.",
     house: "ravenclaw",
     highlights: [
       { label: "SAT", value: "1570" },
@@ -70,7 +71,7 @@ export const FACULTY: readonly FacultyMember[] = [
   {
     id: "04",
     name: "Mohinur Qayumova",
-    role: "Founder",
+    role: "Tutor",
     school: "Inha University, Korea",
     bio: "One year of teaching experience.",
     house: "slytherin",
