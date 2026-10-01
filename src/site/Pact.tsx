@@ -63,7 +63,7 @@ export function Pact() {
             <div className="absolute inset-3 rounded-[3px] border border-gold/30 md:inset-4" aria-hidden="true" />
             <div className="relative">
               <p className="text-center text-[0.64rem] font-medium tracking-[0.22em] text-ink-soft uppercase">
-                Expecto Academy · Scholar and Headmaster's Circle
+                Expecto Academy
               </p>
               <h3 className="mt-5 text-center font-serif text-[2.2rem] font-light tracking-[-0.03em] italic md:text-[2.8rem]">
                 The score pact
