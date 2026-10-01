@@ -14,7 +14,6 @@ import { Proof } from "@/site/Proof";
 import { Results } from "@/site/Results";
 import { Statement } from "@/site/Statement";
 import { Teachers } from "@/site/Teachers";
-import { Tuition } from "@/site/Tuition";
 import { Worth } from "@/site/Worth";
 import { BoilFilters } from "@/site/ui/primitives";
 import { ReactLenis } from "lenis/react";
@@ -53,13 +52,6 @@ function Page() {
           <Pact />
           <Results />
           <Worth />
-          <Statement
-            lead="Do the"
-            highlight="math."
-            eyebrow="Chapter V · tuition"
-            sub="A 1400+ is often the difference between paying full price and paying nothing."
-          />
-          <Tuition />
           <Faq />
           <Closer />
         </main>

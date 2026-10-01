@@ -8,7 +8,6 @@ export const NAV_LINKS = [
   { href: "#method", label: "Method" },
   { href: "#teachers", label: "Teachers" },
   { href: "#stories", label: "Results" },
-  { href: "#pricing", label: "Tuition" },
   { href: "#faq", label: "FAQ" },
 ] as const;
 
@@ -327,8 +326,7 @@ export const CHAPTERS = [
   { numeral: "II", label: "Method", href: "#method" },
   { numeral: "III", label: "The oath", href: "#oath" },
   { numeral: "IV", label: "Letters", href: "#stories" },
-  { numeral: "V", label: "Tuition", href: "#pricing" },
-  { numeral: "VI", label: "Enroll", href: "#enroll" },
+  { numeral: "V", label: "Enroll", href: "#enroll" },
 ] as const;
 
 /* ------------------------------------------------------------------ */
@@ -410,58 +408,6 @@ export const TESTIMONIALS = [
 ] as const;
 
 /* ------------------------------------------------------------------ */
-/* Tuition                                                             */
-/* ------------------------------------------------------------------ */
-
-export const PLANS = [
-  {
-    id: "apprentice",
-    name: "Apprentice",
-    priceUzs: "2,900,000",
-    priceUsd: 230,
-    blurb: "Self-paced mocks and homework for students who already know how to study.",
-    featured: false,
-    includes: [
-      "Diagnostic test and placement",
-      "6 full Digital SAT mocks",
-      "Homework that adapts to your misses",
-      "Score reports and error logs",
-      "Student community on Telegram",
-    ],
-  },
-  {
-    id: "scholar",
-    name: "Scholar",
-    priceUzs: "5,900,000",
-    priceUsd: 465,
-    blurb: "The full program: live evening classes, a named mentor, and the score pact.",
-    featured: true,
-    includes: [
-      "Everything in Apprentice",
-      "Live evening classes, Tashkent time",
-      "10+ full mocks, including gauntlet week",
-      "A named mentor and weekly reviews",
-      "+150 score pact — miss it, get 4 weeks free",
-    ],
-  },
-  {
-    id: "headmaster",
-    name: "Headmaster's Circle",
-    priceUzs: "9,900,000",
-    priceUsd: 780,
-    blurb: "Private tutoring plus hands-on help turning your score into a funded application.",
-    featured: false,
-    includes: [
-      "Everything in Scholar",
-      "One-on-one sessions twice a week",
-      "Scholarship shortlist matched to your score",
-      "Essay and application review",
-      "Priority seat for the next cohort",
-    ],
-  },
-] as const;
-
-/* ------------------------------------------------------------------ */
 /* FAQ                                                                 */
 /* ------------------------------------------------------------------ */
 
@@ -484,7 +430,7 @@ export const FAQS = [
   },
   {
     q: "What is the score pact?",
-    a: "On Scholar and Headmaster's Circle we set a target gain from your diagnostic, in writing. If you do the homework, sit the mocks, and still miss it, you get four more weeks of classes free.",
+    a: "We set a target gain from your diagnostic, in writing. If you do the homework, sit the mocks, and still miss it, you get four more weeks of classes free.",
   },
   {
     q: "I am not in Tashkent. Can I still join?",
