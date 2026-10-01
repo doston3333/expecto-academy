@@ -1,0 +1,15 @@
+/* Full-viewport gallery. The canvas is the room. */
+
+.fame-stage {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background: #101816;
+}
+
+.fame-stage canvas,
+.fame-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
