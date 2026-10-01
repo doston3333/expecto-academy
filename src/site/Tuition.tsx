@@ -1,8 +1,8 @@
-import { PLANS, TELEGRAM_URL } from "@/lib/content";
+import { PLANS } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { AnimatePresence, motion } from "motion/react";
 import { useState, type MouseEvent } from "react";
-import { Button, EASE, Eyebrow, FadeUp, HOUSE, RevealLines } from "./ui/primitives";
+import { EASE, EnrollButton, Eyebrow, FadeUp, HOUSE, RevealLines } from "./ui/primitives";
 
 type Currency = "uzs" | "usd";
 
@@ -88,9 +88,9 @@ function PlanCard({ plan, currency, index }: { plan: (typeof PLANS)[number]; cur
           ))}
         </ul>
 
-        <Button href={TELEGRAM_URL} external variant={dark ? "paper" : "ghost"} className="relative mt-10 w-full">
+        <EnrollButton variant={dark ? "paper" : "ink"} className="relative mt-10 w-full">
           Enroll — {plan.name}
-        </Button>
+        </EnrollButton>
       </article>
     </FadeUp>
   );

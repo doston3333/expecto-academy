@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 import { useLenis } from "lenis/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, type MouseEvent } from "react";
-import { EASE, EASE_FILM, house, HouseRibbon } from "./ui/primitives";
+import { EASE, EASE_FILM, EnrollButton, house, HouseRibbon, TelegramMark } from "./ui/primitives";
 import { INTRO_DELAY } from "./Intro";
 
 const SECTION_IDS = NAV_LINKS.map((l) => l.href.slice(1));
@@ -89,7 +89,7 @@ export function Nav() {
           <a href="#top" onClick={(e) => go(e, "#top")} className="flex items-center gap-2.5" aria-label="Expecto Academy home">
             <img src="/logo.png" alt="" width={40} height={32} className="h-7 w-auto md:h-8" />
             <span className="font-serif text-[1.15rem] tracking-[-0.02em]">
-              Expecto <span className="italic opacity-60">Academy</span>
+              Expecto <span className="hidden italic opacity-60 min-[420px]:inline">Academy</span>
             </span>
           </a>
           <ul className="hidden items-center gap-1 lg:flex">
@@ -122,11 +122,15 @@ export function Nav() {
               target="_blank"
               rel="noreferrer"
               className={cn(
-                "hidden h-11 items-center rounded-full px-5 text-[0.86rem] font-medium transition-colors duration-300 sm:inline-flex",
-                dark ? "bg-paper text-ink hover:bg-gold-3" : "bg-gryffindor text-paper hover:bg-gold",
+                "inline-flex h-11 items-center gap-2 rounded-full px-3.5 text-[0.84rem] font-semibold tracking-[-0.01em] transition-[background-color,box-shadow,color] duration-300 sm:h-12 sm:px-5 sm:text-[0.9rem]",
+                dark
+                  ? "bg-gold-2 text-ink shadow-[0_10px_28px_-10px_rgb(212_169_94/0.8)] hover:bg-gold-3"
+                  : "bg-gryffindor text-paper shadow-[0_12px_28px_-10px_rgb(142_31_23/0.65)] hover:bg-gold",
               )}
             >
-              Get Sorted
+              <TelegramMark size={16} />
+              <span className="sm:hidden">Enroll</span>
+              <span className="hidden sm:inline">Enroll on Telegram</span>
             </a>
             <button
               type="button"
@@ -188,14 +192,7 @@ export function Nav() {
                 </li>
               ))}
             </ul>
-            <a
-              href={TELEGRAM_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn--paper mt-10 w-full"
-            >
-              Get Sorted on Telegram
-            </a>
+            <EnrollButton className="btn--paper mt-10 w-full min-h-14 text-[1.05rem]" />
           </motion.div>
         ) : null}
       </AnimatePresence>

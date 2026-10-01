@@ -1,5 +1,5 @@
 import { useMotionPreferenceControl } from "@/hooks/motionPreference";
-import { EMAIL, NAV_LINKS, TELEGRAM_URL } from "@/lib/content";
+import { EMAIL, NAV_LINKS, TELEGRAM_HANDLE, TELEGRAM_URL } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { HouseRibbon } from "./ui/primitives";
 
@@ -58,7 +58,7 @@ export function Footer() {
             <ul className="mt-5 space-y-1 text-[0.92rem]">
               <li>
                 <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="link-draw inline-flex min-h-10 items-center text-paper/75 hover:text-paper">
-                  Telegram — @expectoacademy
+                  Telegram — {TELEGRAM_HANDLE}
                 </a>
               </li>
               <li>

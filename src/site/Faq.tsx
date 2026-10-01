@@ -1,8 +1,8 @@
-import { FAQS, TELEGRAM_URL } from "@/lib/content";
+import { FAQS } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { AnimatePresence, motion } from "motion/react";
 import { useId, useState } from "react";
-import { EASE, Eyebrow, FadeUp, house, HOUSE, RevealLines } from "./ui/primitives";
+import { EASE, EnrollButton, Eyebrow, FadeUp, house, HOUSE, RevealLines } from "./ui/primitives";
 
 function Item({ q, a, open, onToggle, index }: { q: string; a: string; open: boolean; onToggle: () => void; index: number }) {
   const id = useId();
@@ -71,9 +71,7 @@ export function Faq() {
               lines={["Questions we hear", <em key="hi" className="text-slytherin">every week.</em>]}
             />
             <FadeUp delay={0.2}>
-              <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="link-draw mt-8 inline-flex items-center gap-2 pb-0.5 text-[0.92rem] text-ink">
-                Telegram — @expectoacademy
-              </a>
+              <EnrollButton className="mt-8" />
             </FadeUp>
           </div>
         </div>

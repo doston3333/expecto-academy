@@ -1,10 +1,10 @@
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import { TELEGRAM_URL } from "@/lib/content";
+import { TELEGRAM_HANDLE } from "@/lib/content";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { INTRO_DELAY } from "./Intro";
 import { Ocean } from "./ui/Ocean";
-import { Button, DrawPath, EASE, FadeUp, HouseGradient, HOUSES, RevealLines, Star, useSvgId } from "./ui/primitives";
+import { Button, DrawPath, EASE, EnrollButton, FadeUp, HouseGradient, HOUSES, RevealLines, Star, useSvgId } from "./ui/primitives";
 
 export function Hero() {
   const reduced = usePrefersReducedMotion();
@@ -98,13 +98,16 @@ export function Hero() {
               just get you in. <span className="text-ink">It gets you funded.</span>
             </p>
           </FadeUp>
-          <FadeUp immediate delay={d + 0.52} className="flex flex-wrap items-center gap-3">
-            <Button href={TELEGRAM_URL} external>
-              Get Sorted
-            </Button>
-            <Button href="#film" variant="ghost" arrow={false}>
-              See how it works
-            </Button>
+          <FadeUp immediate delay={d + 0.52} className="flex flex-col items-start gap-3">
+            <div className="flex w-full flex-wrap items-center gap-3">
+              <EnrollButton className="min-h-14 w-full px-7 text-[1.05rem] sm:w-auto" />
+              <Button href="#film" variant="ghost" arrow={false} className="w-full sm:w-auto">
+                See how it works
+              </Button>
+            </div>
+            <p className="text-[0.82rem] text-ink-soft">
+              Opens Telegram · {TELEGRAM_HANDLE}
+            </p>
           </FadeUp>
         </div>
       </motion.div>

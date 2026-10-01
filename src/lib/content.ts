@@ -1,4 +1,5 @@
-export const TELEGRAM_URL = "https://t.me/expectoacademy";
+export const TELEGRAM_URL = "https://t.me/Expecto_Academy";
+export const TELEGRAM_HANDLE = "@Expecto_Academy";
 export const EMAIL = "hello@expecto.academy";
 export const NEXT_COHORT = new Date("2026-09-08T09:00:00+05:00");
 

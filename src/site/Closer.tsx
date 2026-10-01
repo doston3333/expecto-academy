@@ -1,7 +1,7 @@
-import { EMAIL, NEXT_COHORT, TELEGRAM_URL } from "@/lib/content";
+import { EMAIL, NEXT_COHORT, TELEGRAM_HANDLE } from "@/lib/content";
 import { useEffect, useState } from "react";
 import { Ocean } from "./ui/Ocean";
-import { Button, Eyebrow, FadeUp, house, RevealLines } from "./ui/primitives";
+import { EnrollButton, Eyebrow, FadeUp, house, RevealLines } from "./ui/primitives";
 
 function computeCountdown(target: Date) {
   const diff = target.getTime() - Date.now();
@@ -61,10 +61,9 @@ export function Closer() {
             </div>
           )}
         </FadeUp>
-        <FadeUp delay={0.45} className="mt-10 flex flex-col items-center gap-5">
-          <Button href={TELEGRAM_URL} external variant="paper" className="min-h-14 px-8 text-[1rem]">
-            Enroll on Telegram
-          </Button>
+        <FadeUp delay={0.45} className="mt-12 flex flex-col items-center gap-4">
+          <EnrollButton variant="paper" className="min-h-16 px-10 text-[1.12rem] shadow-[0_20px_50px_-16px_rgb(212_169_94/0.9)]" />
+          <p className="text-[0.82rem] text-paper/55">Opens Telegram · {TELEGRAM_HANDLE}</p>
           <a href={`mailto:${EMAIL}`} className="link-draw pb-0.5 text-[0.88rem] text-paper/60 hover:text-paper">
             {EMAIL}
           </a>

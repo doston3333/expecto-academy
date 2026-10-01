@@ -1,4 +1,5 @@
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { TELEGRAM_URL } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { animate, motion, useInView, type Transition } from "motion/react";
 import { useEffect, useId, useRef, useState, type ComponentProps, type CSSProperties, type ReactNode } from "react";
@@ -244,6 +245,14 @@ function Arrow() {
   );
 }
 
+export function TelegramMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M21.94 4.19c.23-.95-.64-1.7-1.55-1.32L2.3 10.2c-.97.4-.9 1.8.1 2.1l4.7 1.47 1.8 5.73c.26.82 1.3 1.07 1.9.46l2.6-2.64 4.86 3.58c.8.59 1.94.16 2.16-.82l3.52-15.89ZM8.4 13.16l9.3-5.74c.17-.1.35.12.22.27l-7.5 8.08-.3 3.3-1.72-5.91Z" />
+    </svg>
+  );
+}
+
 export function Button({
   href,
   children,
@@ -271,6 +280,31 @@ export function Button({
           <Arrow />
         </span>
       ) : null}
+    </a>
+  );
+}
+
+export function EnrollButton({
+  variant = "ink",
+  className,
+  children = "Enroll on Telegram",
+}: {
+  variant?: "ink" | "ghost" | "paper" | "line-light";
+  className?: string;
+  children?: ReactNode;
+}) {
+  return (
+    <a
+      href={TELEGRAM_URL}
+      target="_blank"
+      rel="noreferrer"
+      className={cn("btn pr-2.5", `btn--${variant}`, className)}
+    >
+      <TelegramMark />
+      <span>{children}</span>
+      <span className="btn-arrow">
+        <Arrow />
+      </span>
     </a>
   );
 }

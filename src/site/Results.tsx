@@ -1,6 +1,6 @@
-import { SCORE_REPORTS, TELEGRAM_URL, TESTIMONIALS, type ScoreReport } from "@/lib/content";
+import { SCORE_REPORTS, TESTIMONIALS, type ScoreReport } from "@/lib/content";
 import { cn } from "@/lib/cn";
-import { Button, DrawPath, Eyebrow, FadeUp, house, HOUSE, RevealLines, Star } from "./ui/primitives";
+import { DrawPath, EnrollButton, Eyebrow, FadeUp, house, HOUSE, RevealLines, Star } from "./ui/primitives";
 
 type Testimonial = (typeof TESTIMONIALS)[number];
 
@@ -134,9 +134,7 @@ function Reports() {
 
       <FadeUp className="mt-14 flex flex-col items-start gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
         <p className="font-serif text-[1.3rem] font-light text-ink-2 italic md:text-[1.5rem]">The next report here could be yours.</p>
-        <Button href={TELEGRAM_URL} external>
-          Get Sorted
-        </Button>
+        <EnrollButton />
       </FadeUp>
     </div>
   );
