@@ -1,0 +1,26 @@
+# Traefik (Dokploy) dynamic config: /etc/dokploy/traefik/dynamic/expecto-api.yml
+# Needs DNS: A record api.expecto-academy.uz -> the server's IP, before it is activated.
+http:
+  routers:
+    expecto-api-web:
+      rule: "Host(`api.expecto-academy.uz`) && !PathPrefix(`/.well-known/acme-challenge`)"
+      service: expecto-api
+      middlewares:
+        - redirect-to-https
+      entryPoints:
+        - web
+    expecto-api-websecure:
+      rule: Host(`api.expecto-academy.uz`)
+      service: expecto-api
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: api.expecto-academy.uz
+  services:
+    expecto-api:
+      loadBalancer:
+        servers:
+          - url: http://172.17.0.1:8790
+        passHostHeader: true

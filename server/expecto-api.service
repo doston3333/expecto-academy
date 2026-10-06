@@ -3,16 +3,17 @@ Description=Expecto Academy booking API
 After=network.target
 
 [Service]
-WorkingDirectory=/opt/expecto-academy
-ExecStart=/usr/bin/node server/index.mjs
+WorkingDirectory=/opt/expecto-api
+ExecStart=/opt/node-v22/bin/node --disable-warning=ExperimentalWarning server/index.mjs
 EnvironmentFile=/etc/expecto-api.env
 Restart=always
 RestartSec=3
 User=expecto
 # Hardening
+UMask=0077
 NoNewPrivileges=true
 ProtectSystem=strict
-ReadWritePaths=/opt/expecto-academy/data
+ReadWritePaths=/var/lib/expecto-api
 PrivateTmp=true
 
 [Install]

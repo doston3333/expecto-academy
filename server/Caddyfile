@@ -1,4 +1,0 @@
-# HTTPS reverse proxy (Caddy gets and renews the certificate automatically).
-api.expecto-academy.uz {
-	reverse_proxy 127.0.0.1:8787
-}

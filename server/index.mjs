@@ -155,8 +155,9 @@ const server = createServer(async (req, res) => {
   if (req.method !== "POST") return send(res, 405, { error: "method not allowed" }, cors);
   if (origin && !cors["Access-Control-Allow-Origin"]) return send(res, 403, { error: "origin not allowed" }, cors);
 
-  // Behind Caddy/nginx the client address arrives in X-Forwarded-For.
-  const ip = (req.headers["x-forwarded-for"] ?? req.socket.remoteAddress ?? "").toString().split(",")[0].trim();
+  // Behind one trusted proxy (Traefik/Caddy) the proxy appends the real client address to X-Forwarded-For.
+  // Read the LAST entry: anything before it was supplied by the client and can be forged.
+  const ip = (req.headers["x-forwarded-for"] ?? req.socket.remoteAddress ?? "").toString().split(",").at(-1).trim();
   if (limited(ip)) return send(res, 429, { error: "too many requests" }, cors);
 
   let body;
