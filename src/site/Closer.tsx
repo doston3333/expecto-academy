@@ -1,4 +1,4 @@
-import { EMAIL, NEXT_COHORT, TELEGRAM_HANDLE } from "@/lib/content";
+import { EMAIL, NEXT_COHORT } from "@/lib/content";
 import { useEffect, useState } from "react";
 import { Ocean } from "./ui/Ocean";
 import { EnrollButton, Eyebrow, FadeUp, house, RevealLines } from "./ui/primitives";
@@ -62,8 +62,8 @@ export function Closer() {
           )}
         </FadeUp>
         <FadeUp delay={0.45} className="mt-12 flex flex-col items-center gap-4">
-          <EnrollButton variant="paper" className="min-h-16 px-10 text-[1.12rem] shadow-[0_20px_50px_-16px_rgb(212_169_94/0.9)]" />
-          <p className="text-[0.82rem] text-paper/55">Opens Telegram · {TELEGRAM_HANDLE}</p>
+          <EnrollButton source="closer" variant="paper" className="min-h-16 px-10 text-[1.12rem] shadow-[0_20px_50px_-16px_rgb(212_169_94/0.9)]" />
+          <p className="text-[0.82rem] text-paper/55">Takes a minute · we’ll get back to you fast</p>
           <a href={`mailto:${EMAIL}`} className="link-draw pb-0.5 text-[0.88rem] text-paper/60 hover:text-paper">
             {EMAIL}
           </a>

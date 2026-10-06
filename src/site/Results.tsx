@@ -134,7 +134,7 @@ function Reports() {
 
       <FadeUp className="mt-14 flex flex-col items-start gap-5 md:mt-20 md:flex-row md:items-center md:justify-between">
         <p className="font-serif text-[1.3rem] font-light text-ink-2 italic md:text-[1.5rem]">The next report here could be yours.</p>
-        <EnrollButton />
+        <EnrollButton source="results" />
       </FadeUp>
     </div>
   );

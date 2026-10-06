@@ -71,7 +71,7 @@ export function Faq() {
               lines={["Questions we hear", <em key="hi" className="text-slytherin">every week.</em>]}
             />
             <FadeUp delay={0.2}>
-              <EnrollButton className="mt-8" />
+              <EnrollButton source="faq" className="mt-8" />
             </FadeUp>
           </div>
         </div>

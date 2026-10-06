@@ -1,6 +1,6 @@
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import { TELEGRAM_URL } from "@/lib/content";
 import { cn } from "@/lib/cn";
+import { useBooking } from "../bookingContext";
 import { animate, motion, useInView, type Transition } from "motion/react";
 import { useEffect, useId, useRef, useState, type ComponentProps, type CSSProperties, type ReactNode } from "react";
 
@@ -284,28 +284,36 @@ export function Button({
   );
 }
 
+/** The main call to action: opens the booking dialog. */
 export function EnrollButton({
   variant = "ink",
   className,
-  children = "Enroll on Telegram",
+  children = "Book a session",
+  source = "cta",
+  onClick,
 }: {
   variant?: "ink" | "ghost" | "paper" | "line-light";
   className?: string;
   children?: ReactNode;
+  /** Which button was pressed, sent along with the booking. */
+  source?: string;
+  onClick?: () => void;
 }) {
+  const booking = useBooking();
   return (
-    <a
-      href={TELEGRAM_URL}
-      target="_blank"
-      rel="noreferrer"
+    <button
+      type="button"
+      onClick={() => {
+        onClick?.();
+        booking.open(source);
+      }}
       className={cn("btn pr-2.5", `btn--${variant}`, className)}
     >
-      <TelegramMark />
       <span>{children}</span>
       <span className="btn-arrow">
         <Arrow />
       </span>
-    </a>
+    </button>
   );
 }
 

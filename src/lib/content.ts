@@ -8,6 +8,7 @@ export const NAV_LINKS = [
   { href: "#method", label: "Method" },
   { href: "#teachers", label: "Teachers" },
   { href: "#stories", label: "Results" },
+  { href: "#pricing", label: "Pricing" },
   { href: "#faq", label: "FAQ" },
 ] as const;
 
@@ -404,6 +405,39 @@ export const TESTIMONIALS = [
     award: "Merit scholarship",
     quote:
       "I was not ready for an eight-week sprint. They gave me a longer runway and made me walk it every night.",
+  },
+] as const;
+
+/* ------------------------------------------------------------------ */
+/* Pricing                                                             */
+/* ------------------------------------------------------------------ */
+
+export const PLANS = [
+  {
+    id: "standard",
+    name: "Standard",
+    badge: "For most students",
+    price: "770,000",
+    blurb: "Our lead teacher’s course, live practice every week, and an AI platform that never closes.",
+    includes: [
+      { title: "Recorded video lessons", note: "Taught by our lead teacher" },
+      { title: "Live sessions, 6 times a week", note: "With a teaching assistant" },
+      { title: "AI platform, 24/7", note: "Practice and support whenever you need it" },
+    ],
+  },
+  {
+    id: "premium",
+    name: "Premium",
+    badge: "Dedicated support",
+    price: "1,170,000",
+    blurb: "Your main mentor in the room, and a personal plan for getting into a top university abroad.",
+    includes: [
+      { title: "Everything in Standard" },
+      { title: "Live sessions with your main mentor" },
+      { title: "Admission support", note: "Getting into top universities abroad" },
+      { title: "Extracurricular coaching", note: "Advice and help building a profile that stands out" },
+      { title: "Dedicated, personal support" },
+    ],
   },
 ] as const;
 

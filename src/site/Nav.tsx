@@ -1,9 +1,10 @@
-import { NAV_LINKS, TELEGRAM_URL } from "@/lib/content";
+import { NAV_LINKS } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { useLenis } from "lenis/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, type MouseEvent } from "react";
-import { EASE, EASE_FILM, EnrollButton, house, HouseRibbon, TelegramMark } from "./ui/primitives";
+import { useBooking } from "./bookingContext";
+import { EASE, EASE_FILM, EnrollButton, house, HouseRibbon } from "./ui/primitives";
 import { INTRO_DELAY } from "./Intro";
 
 const SECTION_IDS = NAV_LINKS.map((l) => l.href.slice(1));
@@ -14,6 +15,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
   const lenis = useLenis();
+  const booking = useBooking();
 
   useEffect(() => {
     let raf = 0;
@@ -117,10 +119,9 @@ export function Nav() {
             ))}
           </ul>
           <div className="flex items-center gap-1.5">
-            <a
-              href={TELEGRAM_URL}
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
+              onClick={() => booking.open("nav")}
               className={cn(
                 "inline-flex h-11 items-center gap-2 rounded-full px-3.5 text-[0.84rem] font-semibold tracking-[-0.01em] transition-[background-color,box-shadow,color] duration-300 sm:h-12 sm:px-5 sm:text-[0.9rem]",
                 dark
@@ -128,10 +129,9 @@ export function Nav() {
                   : "bg-gryffindor text-paper shadow-[0_12px_28px_-10px_rgb(142_31_23/0.65)] hover:bg-gold",
               )}
             >
-              <TelegramMark size={16} />
-              <span className="sm:hidden">Enroll</span>
-              <span className="hidden sm:inline">Enroll on Telegram</span>
-            </a>
+              <span className="sm:hidden">Book</span>
+              <span className="hidden sm:inline">Book a session</span>
+            </button>
             <button
               type="button"
               onClick={() => setOpen(true)}
@@ -192,7 +192,7 @@ export function Nav() {
                 </li>
               ))}
             </ul>
-            <EnrollButton className="btn--paper mt-10 w-full min-h-14 text-[1.05rem]" />
+            <EnrollButton source="menu" onClick={() => setOpen(false)} className="btn--paper mt-10 w-full min-h-14 text-[1.05rem]" />
           </motion.div>
         ) : null}
       </AnimatePresence>

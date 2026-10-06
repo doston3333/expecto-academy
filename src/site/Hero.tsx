@@ -1,5 +1,4 @@
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import { TELEGRAM_HANDLE } from "@/lib/content";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { INTRO_DELAY } from "./Intro";
@@ -100,13 +99,13 @@ export function Hero() {
           </FadeUp>
           <FadeUp immediate delay={d + 0.52} className="flex flex-col items-start gap-3">
             <div className="flex w-full flex-wrap items-center gap-3">
-              <EnrollButton className="min-h-14 w-full px-7 text-[1.05rem] sm:w-auto" />
+              <EnrollButton source="hero" className="min-h-14 w-full px-7 text-[1.05rem] sm:w-auto" />
               <Button href="#film" variant="ghost" arrow={false} className="w-full sm:w-auto">
                 See how it works
               </Button>
             </div>
             <p className="text-[0.82rem] text-ink-soft">
-              Opens Telegram · {TELEGRAM_HANDLE}
+              Takes a minute · we’ll get back to you fast
             </p>
           </FadeUp>
         </div>
