@@ -1,0 +1,19 @@
+[Unit]
+Description=Expecto Academy booking API
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/expecto-academy
+ExecStart=/usr/bin/node server/index.mjs
+EnvironmentFile=/etc/expecto-api.env
+Restart=always
+RestartSec=3
+User=expecto
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/expecto-academy/data
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
