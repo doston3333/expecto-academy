@@ -44,19 +44,6 @@ export const FACULTY: readonly FacultyMember[] = [
     ],
   },
   {
-    id: "02",
-    name: "Kattabek",
-    role: "Tutor",
-    school: "Yonsei University, Korea",
-    bio: "800 in Math, 770 in Reading and Writing. One year of teaching experience.",
-    house: "ravenclaw",
-    highlights: [
-      { label: "SAT", value: "1570" },
-      { label: "IELTS", value: "7.5" },
-      { label: "A Level Math", value: "A*" },
-    ],
-  },
-  {
     id: "03",
     name: "Kamoliddin Siddiqov",
     role: "Founder",

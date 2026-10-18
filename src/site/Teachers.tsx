@@ -95,7 +95,7 @@ export function Teachers() {
               <TeacherCard key={t.id} t={t} index={i} />
             ))}
           </div>
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className={cn("grid gap-5 md:grid-cols-2", MENTORS.length === 1 && "mx-auto w-full max-w-4xl md:grid-cols-1 md:max-w-[calc((56rem-1.25rem)/2)]")}>
             {MENTORS.map((t, i) => (
               <TeacherCard key={t.id} t={t} index={FOUNDERS.length + i} />
             ))}
