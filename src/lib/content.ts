@@ -151,7 +151,7 @@ export const HERO_PLATES = [
   { houseId: "amberfell" as const, score: "1360", school: "INHA", award: "Merit band" },
 ] as const;
 
-export const PROOF = "1,200+ students taught · +210 average gain · 340+ scholarships won";
+export const PROOF = "500+ students taught · 320+ average gain · 120+ scholarships won";
 
 /* ------------------------------------------------------------------ */
 /* The film — beats keyed to the sticky Bluebook window                */
@@ -443,7 +443,7 @@ export const FAQS = [
   },
   {
     q: "How fast can I raise my score?",
-    a: "Fast-track is eight weeks for students who already have a foundation. Math and verbal intensives run ten. Average gain is +210. Your diagnostic decides the plan, not a sales script.",
+    a: "Fast-track is eight weeks for students who already have a foundation. Math and verbal intensives run ten. Average gain is 320+ points. Your diagnostic decides the plan, not a sales script.",
   },
   {
     q: "What language are classes in?",

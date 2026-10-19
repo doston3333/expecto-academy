@@ -140,7 +140,7 @@ export function Universities() {
         </div>
         <p className="mt-6 text-[0.78rem] text-muted" data-reveal>
           Thresholds shift each admissions cycle — we verify this table with every cohort.
-          340+ scholarships won at these institutions so far.
+          120+ scholarships won at these institutions so far.
         </p>
       </div>
     </section>

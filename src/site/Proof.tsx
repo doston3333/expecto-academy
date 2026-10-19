@@ -44,7 +44,7 @@ export function Proof() {
 
       <div className="mt-24 md:mt-32">
         <FadeUp className="mx-auto mb-8 max-w-[1320px] px-5 md:px-10">
-          <p className="eyebrow">340+ scholarships won at these institutions so far</p>
+          <p className="eyebrow">120+ scholarships won at these institutions so far</p>
         </FadeUp>
         <div className="marquee-host fade-x overflow-hidden border-y border-ink/10 py-7 md:py-9">
           <div className="marquee" style={{ ["--marquee-duration" as string]: "70s" }}>

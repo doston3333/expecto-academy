@@ -128,7 +128,7 @@ export function Worth() {
             })}
           </ul>
           <p className="mt-6 text-[0.8rem] leading-relaxed text-ink-faint">
-            Thresholds shift each admissions cycle — we verify this table with every cohort. 340+
+            Thresholds shift each admissions cycle — we verify this table with every cohort. 120+
             scholarships won at these institutions so far.
           </p>
         </div>
