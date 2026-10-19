@@ -1,14 +1,19 @@
 // Expecto Academy booking API. No dependencies — needs Node 22.13+ (built-in node:sqlite).
 //   POST /api/bookings   store a booking request
 //   GET  /api/health     liveness check
+//
+// A booking is never kept in one place only. Each one is first appended (and fsynced) to a
+// JSON-lines journal next to the database, then inserted into SQLite, then sent to Telegram.
+// Any one of the three is enough to recover it; see replay.mjs.
 import { DatabaseSync } from "node:sqlite";
 import { createServer } from "node:http";
-import { mkdirSync } from "node:fs";
-import { dirname } from "node:path";
+import { closeSync, fsyncSync, mkdirSync, openSync, writeSync } from "node:fs";
+import { dirname, join } from "node:path";
 
 const PORT = Number(process.env.PORT ?? 8787);
 const HOST = process.env.HOST ?? "127.0.0.1";
 const DB_PATH = process.env.DB_PATH ?? "./data/bookings.db";
+const JOURNAL_PATH = process.env.JOURNAL_PATH ?? join(dirname(DB_PATH), "bookings.jsonl");
 const ORIGINS = (process.env.ALLOWED_ORIGINS ?? "https://expecto-academy.uz,https://www.expecto-academy.uz")
   .split(",")
   .map((o) => o.trim())
@@ -19,28 +24,48 @@ const RATE_LIMIT = 8; // bookings per IP per hour
 const MAX_BODY = 8 * 1024;
 
 mkdirSync(dirname(DB_PATH), { recursive: true });
-const db = new DatabaseSync(DB_PATH);
-db.exec("PRAGMA journal_mode = WAL");
-db.exec(`
-  CREATE TABLE IF NOT EXISTS bookings (
-    id                 INTEGER PRIMARY KEY AUTOINCREMENT,
-    created_at         TEXT NOT NULL,
-    name               TEXT NOT NULL,
-    school             TEXT NOT NULL,
-    grade              TEXT NOT NULL,
-    english_level      TEXT NOT NULL,
-    contact_preference TEXT NOT NULL,
-    telegram           TEXT NOT NULL,
-    phone              TEXT NOT NULL,
-    source             TEXT NOT NULL,
-    page               TEXT NOT NULL,
-    status             TEXT NOT NULL DEFAULT 'new'
-  )
-`);
-const insert = db.prepare(`
-  INSERT INTO bookings (created_at, name, school, grade, english_level, contact_preference, telegram, phone, source, page)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-`);
+mkdirSync(dirname(JOURNAL_PATH), { recursive: true });
+
+// If the database cannot be opened, keep serving: bookings still reach the journal and Telegram.
+let db = null;
+let insert = null;
+try {
+  db = new DatabaseSync(DB_PATH);
+  db.exec("PRAGMA journal_mode = WAL");
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS bookings (
+      id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+      created_at         TEXT NOT NULL,
+      name               TEXT NOT NULL,
+      school             TEXT NOT NULL,
+      grade              TEXT NOT NULL,
+      english_level      TEXT NOT NULL,
+      contact_preference TEXT NOT NULL,
+      telegram           TEXT NOT NULL,
+      phone              TEXT NOT NULL,
+      source             TEXT NOT NULL,
+      page               TEXT NOT NULL,
+      status             TEXT NOT NULL DEFAULT 'new'
+    )
+  `);
+  insert = db.prepare(`
+    INSERT INTO bookings (created_at, name, school, grade, english_level, contact_preference, telegram, phone, source, page)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+} catch (err) {
+  console.error("database unavailable, running on journal + telegram only:", err);
+}
+
+/** Append one line and fsync it, so it survives a crash right after we answer. */
+function journal(entry) {
+  const fd = openSync(JOURNAL_PATH, "a", 0o600);
+  try {
+    writeSync(fd, `${JSON.stringify(entry)}\n`);
+    fsyncSync(fd);
+  } finally {
+    closeSync(fd);
+  }
+}
 
 const GRADES = ["9", "10", "11", "12", "Graduated"];
 const LEVELS = ["Beginner", "Intermediate", "Advanced", "Not sure"];
@@ -88,8 +113,9 @@ setInterval(() => {
   for (const [ip, times] of hits) if (times.every((t) => now - t >= 3_600_000)) hits.delete(ip);
 }, 600_000).unref();
 
-async function notify(b) {
-  if (!TG_TOKEN || !TG_CHAT) return;
+/** Sends the booking to Telegram. Resolves true when Telegram accepted it. */
+async function notify(b, warning) {
+  if (!TG_TOKEN || !TG_CHAT) return false;
   const how = b.pref === "call" ? "📞 CALL" : "💬 TELEGRAM";
   const text = [
     `New booking — ${how}`,
@@ -98,6 +124,7 @@ async function notify(b) {
     `Phone: ${b.phone}`,
     b.telegram ? `Telegram: ${b.telegram}` : null,
     `From: ${b.source}`,
+    warning ? `\n⚠️ ${warning}` : null,
   ]
     .filter(Boolean)
     .join("\n");
@@ -109,8 +136,10 @@ async function notify(b) {
       signal: AbortSignal.timeout(8000),
     });
     if (!res.ok) console.error("telegram notify failed:", res.status);
+    return res.ok;
   } catch (err) {
     console.error("telegram notify failed:", err.message);
+    return false;
   }
 }
 
@@ -146,7 +175,7 @@ const server = createServer(async (req, res) => {
     : {};
   const { pathname } = new URL(req.url ?? "/", "http://x");
 
-  if (pathname === "/api/health") return send(res, 200, { ok: true }, cors);
+  if (pathname === "/api/health") return send(res, 200, { ok: true, db: Boolean(insert) }, cors);
   if (pathname !== "/api/bookings") return send(res, 404, { error: "not found" }, cors);
   if (req.method === "OPTIONS") {
     res.writeHead(204, cors);
@@ -171,17 +200,42 @@ const server = createServer(async (req, res) => {
   const b = validate(body);
   if (typeof b === "string") return send(res, 422, { error: "invalid", field: b }, cors);
 
+  const createdAt = new Date().toISOString();
+  let journaled = false;
   try {
-    const { lastInsertRowid } = insert.run(new Date().toISOString(), b.name, b.school, b.grade, b.level, b.pref, b.telegram, b.phone, b.source, b.page);
-    void notify(b);
-    send(res, 201, { ok: true, id: Number(lastInsertRowid) }, cors);
+    journal({ created_at: createdAt, ...b });
+    journaled = true;
+  } catch (err) {
+    console.error("journal write failed:", err);
+  }
+
+  let id = null;
+  try {
+    if (!insert) throw new Error("database unavailable");
+    id = Number(insert.run(createdAt, b.name, b.school, b.grade, b.level, b.pref, b.telegram, b.phone, b.source, b.page).lastInsertRowid);
   } catch (err) {
     console.error("insert failed:", err);
-    send(res, 500, { error: "server error" }, cors);
   }
+
+  const warning =
+    id === null && !journaled
+      ? "Database AND backup log failed. This message is the only copy."
+      : id === null
+        ? "Database write failed. Saved in the backup log; run replay.mjs once the database is fixed."
+        : !journaled
+          ? "Backup log write failed (saved in the database)."
+          : null;
+
+  if (id !== null || journaled) {
+    void notify(b, warning);
+    return send(res, 201, { ok: true, id }, cors);
+  }
+  // Nothing on disk took it. If Telegram does, the booking is still safe; otherwise let the page retry.
+  if (await notify(b, warning)) return send(res, 201, { ok: true, id: null }, cors);
+  send(res, 500, { error: "server error" }, cors);
 });
 
 server.listen(PORT, HOST, () => console.log(`booking api on http://${HOST}:${PORT} → ${DB_PATH}`));
 for (const sig of ["SIGINT", "SIGTERM"]) {
-  process.on(sig, () => server.close(() => (db.close(), process.exit(0))));
+  process.on(sig, () => server.close(() => (db?.close(), process.exit(0))));
 }

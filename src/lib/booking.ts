@@ -123,11 +123,24 @@ export async function submitBooking(form: BookingForm, source: string, signal?: 
     throw new BookingUnavailableError("No lead endpoint configured");
   }
 
-  const res = await fetch(ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify(payload),
-    signal,
-  });
-  if (!res.ok) throw new Error(`Booking request failed (${res.status})`);
+  // A dropped connection or a server hiccup should not cost us the lead: retry before giving up.
+  // Only network errors and 5xx are retried; a 4xx means the request itself was rejected.
+  const delays = [1000, 3000];
+  for (let attempt = 0; ; attempt++) {
+    let res: Response | null = null;
+    try {
+      res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+        signal,
+      });
+    } catch (err) {
+      if ((err as Error).name === "AbortError" || attempt >= delays.length) throw err;
+    }
+    if (res?.ok) return;
+    if (res && (res.status < 500 || attempt >= delays.length)) throw new Error(`Booking request failed (${res.status})`);
+    await new Promise((resolve) => window.setTimeout(resolve, delays[attempt]));
+    if (signal?.aborted) throw new DOMException("Aborted", "AbortError");
+  }
 }
