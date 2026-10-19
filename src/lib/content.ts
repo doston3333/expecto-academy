@@ -304,6 +304,18 @@ export const UNIVERSITY_INDEX = [
   { school: "Westminster (WIUT)", band: "Merit award", threshold: "1300+" },
 ] as const;
 
+/** Top universities in Korea. No published SAT thresholds, so each row points to us on Telegram. */
+export const KOREA_UNIVERSITIES = [
+  { school: "Seoul National University", city: "Seoul" },
+  { school: "KAIST", city: "Daejeon" },
+  { school: "Yonsei University", city: "Seoul" },
+  { school: "Korea University", city: "Seoul" },
+  { school: "POSTECH", city: "Pohang" },
+  { school: "Sungkyunkwan University", city: "Seoul" },
+  { school: "Hanyang University", city: "Seoul" },
+  { school: "INHA University", city: "Incheon" },
+] as const;
+
 /* ------------------------------------------------------------------ */
 /* Chapters — the book spine                                           */
 /* ------------------------------------------------------------------ */

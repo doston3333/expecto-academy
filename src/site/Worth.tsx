@@ -1,4 +1,4 @@
-import { UNIVERSITY_INDEX } from "@/lib/content";
+import { KOREA_UNIVERSITIES, TELEGRAM_HANDLE, TELEGRAM_URL, UNIVERSITY_INDEX } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { AnimatePresence, motion } from "motion/react";
 import { useId, useState } from "react";
@@ -131,6 +131,35 @@ export function Worth() {
             Thresholds shift each admissions cycle — we verify this table with every cohort. 120+
             scholarships won at these institutions so far.
           </p>
+
+          <FadeUp className="mt-16 md:mt-20">
+            <h3 className="font-serif text-[1.8rem] leading-tight font-light tracking-[-0.02em] md:text-[2.2rem]">
+              Top universities in <em className="text-gold">Korea</em>
+            </h3>
+            <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-ink-soft">
+              Our teachers studied at KAIST, Yonsei and INHA. Message us to plan your application.
+            </p>
+          </FadeUp>
+          <ul className="mt-8 divide-y divide-ink/10 border-y border-ink/10">
+            {KOREA_UNIVERSITIES.map((row, i) => (
+              <FadeUp as="li" key={row.school} delay={i * 0.04} y={14}>
+                <div className="flex items-center gap-5 py-5 md:py-6">
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-serif text-[1.2rem] font-light tracking-[-0.01em] md:text-[1.4rem]">{row.school}</p>
+                    <p className="mt-0.5 text-[0.8rem] text-ink-soft">{row.city}</p>
+                  </div>
+                  <a
+                    href={TELEGRAM_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="shrink-0 rounded-full border border-ink/15 px-3.5 py-1.5 text-[0.82rem] font-medium text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                  >
+                    {TELEGRAM_HANDLE}
+                  </a>
+                </div>
+              </FadeUp>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
