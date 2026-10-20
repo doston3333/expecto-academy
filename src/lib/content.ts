@@ -1,7 +1,7 @@
 export const TELEGRAM_URL = "https://t.me/Expecto_Admin";
 export const TELEGRAM_HANDLE = "@Expecto_Admin";
 export const EMAIL = "hello@expecto.academy";
-export const NEXT_COHORT = new Date("2026-09-08T09:00:00+05:00");
+export const NEXT_COHORT = new Date("2026-10-01T09:00:00+05:00");
 
 export const NAV_LINKS = [
   { href: "#film", label: "How it works" },
@@ -205,7 +205,7 @@ export const FILM_BEATS: readonly FilmBeat[] = [
     index: "06",
     kicker: "Enrolled",
     title: "Your seat is waiting",
-    body: "First class 8 September, 19:00 Tashkent time. Bring your diagnostic — we start where you are weakest.",
+    body: "First class in October, 19:00 Tashkent time. Bring your diagnostic — we start where you are weakest.",
     breadcrumb: "Telegram · Expecto",
   },
 ];
@@ -247,7 +247,7 @@ export const SCHOLARSHIP_ROWS = [
 export const TELEGRAM_MESSAGES = [
   {
     from: "Expecto Academy",
-    text: "You're in. First class 8 Sep, 19:00 Tashkent.",
+    text: "You're in. First class in October, 19:00 Tashkent.",
     time: "18:42",
     mine: false,
   },

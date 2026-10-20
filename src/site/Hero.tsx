@@ -65,7 +65,7 @@ export function Hero() {
                 <span key={h.id} className="size-2 rounded-full" style={{ backgroundColor: h.fill }} />
               ))}
             </span>
-            Digital SAT · next cohort 8 Sep
+            Digital SAT · next cohort October
           </span>
         </FadeUp>
 
