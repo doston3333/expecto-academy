@@ -9,7 +9,10 @@ const JOURNAL_PATH = process.env.JOURNAL_PATH ?? join(dirname(DB_PATH), "booking
 const BACKUP_DIR = process.env.BACKUP_DIR ?? join(dirname(DB_PATH), "backups");
 const KEEP_DAYS = 30;
 const TG_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TG_CHAT = process.env.TELEGRAM_CHAT_ID;
+const TG_CHATS = (process.env.TELEGRAM_CHAT_ID ?? "")
+  .split(",")
+  .map((c) => c.trim())
+  .filter(Boolean);
 
 const stamp = new Date().toISOString().slice(0, 10);
 mkdirSync(BACKUP_DIR, { recursive: true });
@@ -37,16 +40,16 @@ for (const name of readdirSync(BACKUP_DIR)) {
 
 console.log(`backed up ${count} bookings to ${BACKUP_DIR}`);
 
-if (TG_TOKEN && TG_CHAT) {
-  for (const file of files) {
+if (TG_TOKEN) {
+  for (const chat of TG_CHATS) for (const file of files) {
     const form = new FormData();
-    form.set("chat_id", TG_CHAT);
+    form.set("chat_id", chat);
     form.set("disable_notification", "true");
     if (file === dbCopy) form.set("caption", `Nightly backup · ${count} bookings`);
     form.set("document", new Blob([readFileSync(file)]), basename(file));
     const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendDocument`, { method: "POST", body: form });
     if (!res.ok) {
-      console.error(`telegram upload failed for ${basename(file)}: ${res.status}`);
+      console.error(`telegram upload of ${basename(file)} to ${chat} failed: ${res.status}`);
       process.exitCode = 1;
     }
   }

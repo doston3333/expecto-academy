@@ -15,7 +15,7 @@ Receives the landing page's booking form and stores it in SQLite. No dependencie
 | `PORT` / `HOST` | `8787` / `127.0.0.1` | keep HOST on loopback behind the proxy |
 | `DB_PATH` | `./data/bookings.db` | |
 | `ALLOWED_ORIGINS` | `https://expecto-academy.uz,https://www.expecto-academy.uz` | comma-separated CORS list |
-| `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | unset | optional — pings a chat the moment a booking arrives |
+| `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | unset | optional — pings each chat the moment a booking arrives. Several chats: comma-separated IDs (each person must press Start on the bot first) |
 
 ## Deploy (the old VPS, behind Dokploy's Traefik)
 

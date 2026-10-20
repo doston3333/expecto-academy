@@ -19,7 +19,11 @@ const ORIGINS = (process.env.ALLOWED_ORIGINS ?? "https://expecto-academy.uz,http
   .map((o) => o.trim())
   .filter(Boolean);
 const TG_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TG_CHAT = process.env.TELEGRAM_CHAT_ID;
+// One or more chats, comma-separated. Every chat gets every booking.
+const TG_CHATS = (process.env.TELEGRAM_CHAT_ID ?? "")
+  .split(",")
+  .map((c) => c.trim())
+  .filter(Boolean);
 const RATE_LIMIT = 8; // bookings per IP per hour
 const MAX_BODY = 8 * 1024;
 
@@ -113,9 +117,9 @@ setInterval(() => {
   for (const [ip, times] of hits) if (times.every((t) => now - t >= 3_600_000)) hits.delete(ip);
 }, 600_000).unref();
 
-/** Sends the booking to Telegram. Resolves true when Telegram accepted it. */
+/** Sends the booking to every Telegram chat. Resolves true when at least one chat got it. */
 async function notify(b, warning) {
-  if (!TG_TOKEN || !TG_CHAT) return false;
+  if (!TG_TOKEN || TG_CHATS.length === 0) return false;
   const how = b.pref === "call" ? "📞 CALL" : "💬 TELEGRAM";
   const text = [
     `New booking — ${how}`,
@@ -128,19 +132,24 @@ async function notify(b, warning) {
   ]
     .filter(Boolean)
     .join("\n");
-  try {
-    const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: TG_CHAT, text }),
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) console.error("telegram notify failed:", res.status);
-    return res.ok;
-  } catch (err) {
-    console.error("telegram notify failed:", err.message);
-    return false;
-  }
+  const sent = await Promise.all(
+    TG_CHATS.map(async (chat) => {
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: chat, text }),
+          signal: AbortSignal.timeout(8000),
+        });
+        if (!res.ok) console.error(`telegram notify to ${chat} failed:`, res.status);
+        return res.ok;
+      } catch (err) {
+        console.error(`telegram notify to ${chat} failed:`, err.message);
+        return false;
+      }
+    }),
+  );
+  return sent.some(Boolean);
 }
 
 function send(res, status, data, cors) {
