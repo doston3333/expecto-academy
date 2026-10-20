@@ -417,17 +417,19 @@ export const PLANS = [
     name: "Standard",
     badge: "For most students",
     price: "770,000",
-    blurb: "Our lead teacher’s course, live practice every week, and an AI platform that never closes.",
+    blurb: "Two main teachers and a teaching assistant, live practice every week, and help whenever you need it.",
     includes: [
-      { title: "Recorded video lessons", note: "Taught by our lead teacher" },
+      { title: "2 main teachers and 1 teaching assistant" },
+      { title: "Recorded video lessons", note: "Taught by our main teachers" },
       { title: "Live sessions, 6 times a week", note: "With a teaching assistant" },
-      { title: "AI platform, 24/7", note: "Practice and support whenever you need it" },
+      { title: "AI platform, 24/7", note: "Practice whenever you want" },
+      { title: "Dedicated 24/7 support" },
     ],
   },
   {
     id: "premium",
     name: "Premium",
-    badge: "Dedicated support",
+    badge: "Admission support",
     price: "1,170,000",
     blurb: "Your main mentor in the room, and a personal plan for getting into a top university abroad.",
     includes: [
@@ -435,7 +437,7 @@ export const PLANS = [
       { title: "Live sessions with your main mentor" },
       { title: "Admission support", note: "Getting into top universities abroad" },
       { title: "Extracurricular coaching", note: "Advice and help building a profile that stands out" },
-      { title: "Dedicated, personal support" },
+      { title: "Dedicated 24/7 support" },
     ],
   },
 ] as const;
