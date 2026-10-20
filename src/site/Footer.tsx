@@ -1,5 +1,5 @@
 import { useMotionPreferenceControl } from "@/hooks/motionPreference";
-import { EMAIL, NAV_LINKS, TELEGRAM_HANDLE, TELEGRAM_URL } from "@/lib/content";
+import { NAV_LINKS, TELEGRAM_HANDLE, TELEGRAM_URL } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { HouseRibbon } from "./ui/primitives";
 
@@ -61,11 +61,6 @@ export function Footer() {
                   Telegram — {TELEGRAM_HANDLE}
                 </a>
               </li>
-              <li>
-                <a href={`mailto:${EMAIL}`} className="link-draw inline-flex min-h-10 items-center text-paper/75 hover:text-paper">
-                  {EMAIL}
-                </a>
-              </li>
               <li className="inline-flex min-h-10 items-center text-paper/50">Tashkent, Uzbekistan</li>
             </ul>
           </div>
@@ -76,7 +71,6 @@ export function Footer() {
         <p className="text-center font-serif text-[clamp(5rem,24vw,22rem)] leading-[0.8] font-light tracking-[-0.05em] text-transparent italic [-webkit-text-stroke:1px_rgb(236_228_211/0.16)]">
           Expecto
         </p>
-        <p className="mt-8 text-center font-serif text-[0.95rem] tracking-[0.08em] text-gold-2/80 italic md:mt-10">Per numerum, sedes.</p>
       </div>
 
       <div className="mx-auto flex max-w-[1320px] flex-col items-center justify-between gap-2 px-5 py-8 text-[0.78rem] text-paper/45 md:flex-row md:px-10">

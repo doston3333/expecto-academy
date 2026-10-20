@@ -150,7 +150,6 @@ export function Hero() {
               <Star key={h.id} size={13} style={{ color: h.fill }} />
             ))}
           </span>
-          <span className="font-serif text-sm text-ink-soft italic">Per numerum, sedes.</span>
         </FadeUp>
       </div>
     </section>
