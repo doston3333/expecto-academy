@@ -352,7 +352,7 @@ export const METHOD_PILLARS = [
 ] as const;
 
 export const METHOD_SUPPORT = [
-  "Homework built from your own error log",
+  "Full control of homework: every submission checked and followed up, so no one is left to drift",
   "Bluebook format only — we do not teach the old paper test",
   "Score pact: miss your agreed gain and four extra weeks are on us",
 ] as const;
