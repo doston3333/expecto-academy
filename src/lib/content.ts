@@ -423,6 +423,7 @@ export const PLANS = [
       { title: "Recorded video lessons", note: "Taught by our main teachers" },
       { title: "Live sessions, 6 times a week", note: "With a teaching assistant" },
       { title: "AI platform, 24/7", note: "Practice whenever you want" },
+      { title: "Full control of homework", note: "Every submission checked and followed up, so no one falls behind" },
       { title: "Dedicated 24/7 support" },
     ],
   },
